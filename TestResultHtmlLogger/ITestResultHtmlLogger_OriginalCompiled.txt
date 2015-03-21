@@ -1,0 +1,65 @@
+﻿    public interface ITestResultHtmlLogger_OriginalCompiled
+    {
+        // Used by Assertion functions
+	    int SetRunStatus();
+	
+        // Headers in test scripts
+	    int LogHeader(string headerMessage);
+	    int LogKeyValue(string Key, string value);
+	    int LogSubHeader(string subHeaderMessage);
+	    int Log(string message);
+
+        // Functions in models/adapters
+	    int LogFunctionEnter(LogLevel logLevel, string nameOfReturnType, string functionName, string[] args, object[] argValues);
+	    int LogFunctionExit(LogLevel logLevel, string functionName, object returnValue);
+
+        // Properties in models/adapters
+	    int LogGet(LogLevel logLevel, string callingProperty, object getValue);
+	    int LogLet(LogLevel logLevel, string callingProperty, object setValue);
+	    int LogSet(LogLevel logLevel, string callingProperty, object setValue);
+
+        // normal logging functions - testscripts/models/adapters
+	    int LogError(string message);
+	    int Error(string message);
+	    int LogWarning(string message);
+	    int Warning(string message);
+	    int LogInfo(string message);
+	    int Info(string message);
+	    int LogDebug(string message);
+	    int Debug(string message);
+
+        // normal logging functions - models and adapters
+	    int LogTrace(string message);
+	    int Trace(string message);        
+	    int LogInternal(string message);
+	    int Internal(string message);
+
+        // used solely by Assert functions
+	    int LogPass(string message);
+	    int Pass(string testStepName, string message);
+	    int LogFail(string message);
+	    int Fail(string testStepName, string message);
+
+        // scrrenshots - used by testscripts
+	    int LogAllWindows(LogLevel logLevel, string message);
+	    int LogScreenshot(LogLevel logLevel, string message);
+	    int LogImage(LogLevel logLevel, string imageFile, string message);
+
+        // how long time since last - any performance issues?
+	    int CheckTime();
+	    int LogPerformanceAlert(int elapsedTime);
+
+        // dump an AutomationIdentification object
+        int LogAutomationIdObject(LogLevel logLevel, object automationIdObj, string message);
+
+        int CurrentLogLevel{ get; set; }
+	    int Init(string logFileName);
+
+        // Have we logged a Error or Fail? 
+	    int ErrorOrFail();
+	    int BuildArchiveLogFilePath{ get; set; }
+	    int CloseLogFile();
+	    int ArchiveThisLogFile();
+
+	    int LocalLogFileName { get; set; }
+    }
