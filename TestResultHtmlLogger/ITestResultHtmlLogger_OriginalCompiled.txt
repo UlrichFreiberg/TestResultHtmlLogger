@@ -1,4 +1,8 @@
-﻿    public interface ITestResultHtmlLogger_OriginalCompiled
+﻿This was the compiled interface I recogned ...
+
+I decided to splitt up the class and interfaces into partial class implementation...
+
+    public interface ITestResultHtmlLogger_OriginalCompiled
     {
         // Used by Assertion functions
 	    int SetRunStatus();
