@@ -21,11 +21,10 @@ namespace TestResultHtmlLogger
             }
             
             messageIdString = string.Format("m{0}", messageId++);
-            LogLevelString = "TODO:LogLevelString";
+            LogLevelString = Enum.GetName(typeof(LogLevel), logLevel);
             CheckForPerformanceAlert();
 
             // TODO need some info from LogFunctionEnter/Exit, to set the indentation right
-
             IndentString = "";
 
             switch (logLevel)
@@ -39,7 +38,7 @@ namespace TestResultHtmlLogger
 
                 default:
                     HtmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, LogLevelString);
-                    HtmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", "TODO:TimeStamp");
+                    HtmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", TimeOfLastMessage);
                     HtmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", LogLevelString);
                     HtmlLine += String.Format("    <div class=\"el pad\">{0}</div>\n", IndentString);
                     HtmlLine += String.Format("    <div class=\"el msg\">{0}</div>\n", Message);
@@ -48,6 +47,7 @@ namespace TestResultHtmlLogger
             }
 
             logFileHandle.Write(HtmlLine);
+            logFileHandle.Flush();
             return HtmlLine.Length;
         }
 
@@ -153,7 +153,7 @@ namespace TestResultHtmlLogger
 
         public int LogKeyValue(string key, string value, string message)
         {
-            var TempNeedsToBeReworkedMessage = string.Format("KEYVALUE - Message=[{0}], Key=[{1}], Value=[{2}]", message, key, value);
+            var TempNeedsToBeReworkedMessage = string.Format("Message=[{0}], Key=[{1}], Value=[{2}]", message, key, value);
 
             return LogOneHtmlMessage(LogLevel.KeyValue, TempNeedsToBeReworkedMessage);
         }

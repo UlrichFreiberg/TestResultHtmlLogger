@@ -11,7 +11,7 @@ namespace TestResultHtmlLogger
     {
         ~TestResultHtmlLogger()
         {
-            logFileHandle.Close();
+            //logFileHandle.Close();
         }
 
         public LogConfiguration Configuration = new LogConfiguration();
@@ -85,7 +85,7 @@ namespace TestResultHtmlLogger
                 AddLoglevelToRunReport = new Dictionary<LogLevel, bool>();
                 NumberOfLoglevelMessages = new Dictionary<LogLevel, int>();
 
-                foreach(LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
+                foreach (LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
                 {
                     NumberOfLoglevelMessages.Add(loglevel, 0);
                     AddLoglevelToRunReport.Add(loglevel, true);
@@ -143,7 +143,14 @@ namespace TestResultHtmlLogger
         /// <returns></returns>
         string GetJavaScript()
         {
-            throw new NotImplementedException();
+            String RetVal;
+            var styleSheet = Properties.Resources.ResourceManager.GetObject("logger");
+
+            RetVal = "\n<script>";
+            RetVal += styleSheet.ToString();
+            RetVal += "\n</script>\n";
+
+            return RetVal;
         }
 
         /// <summary>
@@ -152,7 +159,14 @@ namespace TestResultHtmlLogger
         /// <returns></returns>
         string GetStyleSheet()
         {
-            throw new NotImplementedException();
+            String RetVal;
+            var styleSheet = Properties.Resources.ResourceManager.GetObject("style");
+
+            RetVal = "\n<style>";
+            RetVal += styleSheet.ToString();
+            RetVal += "\n</style>\n";
+
+            return RetVal;
         }
 
         /// <summary>
@@ -193,10 +207,13 @@ namespace TestResultHtmlLogger
             HtmlLine += "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";
             HtmlLine += "    <meta http-equiv=\"Content-Language\" content=\"en\">\n";
             HtmlLine += "    <title>Ulrich Og Kasper</title>\n";
+            HtmlLine += GetStyleSheet();
             HtmlLine += "  </head>\n";
             HtmlLine += "  <body>\n";
+            HtmlLine += GetJavaScript();
 
             logFileHandle.Write(HtmlLine);
+            logFileHandle.Flush();
             return true;
         }
 
@@ -208,6 +225,7 @@ namespace TestResultHtmlLogger
             HtmlLine += "</html>\n";
 
             logFileHandle.Write(HtmlLine);
+            logFileHandle.Flush();
             return true;
         }
 

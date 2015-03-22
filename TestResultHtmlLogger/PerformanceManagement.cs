@@ -16,6 +16,7 @@ namespace TestResultHtmlLogger
         public void CheckForPerformanceAlert()
         {
             var ElapsedTime = DateTime.Now - TimeOfLastMessage;
+            TimeOfLastMessage = DateTime.Now;
 
             if (ElapsedTime.Seconds > Configuration.AlertLongInterval)
             {
