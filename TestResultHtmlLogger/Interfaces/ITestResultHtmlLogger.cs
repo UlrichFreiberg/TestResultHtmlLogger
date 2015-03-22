@@ -12,6 +12,17 @@ namespace TestResultHtmlLogger
         Info,
         Debug,
         Trace,
-        Internal
+        Internal,
+
+        // some internal loglevels
+        Header,
+        SubHeader,
+
+        // TestResults
+        Pass,
+        Fail,
+
+        // Level used to log keyvalues like OS, URL, VersionInfo etc...
+        KeyValue
     }
 }

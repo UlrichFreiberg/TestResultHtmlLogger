@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,79 +9,209 @@ namespace TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ILogfileManagement
     {
-        // reads in the JavaScript functions for the logfile buttons etc
+        ~TestResultHtmlLogger()
+        {
+            logFileHandle.Close();
+        }
+
+        public LogConfiguration Configuration = new LogConfiguration();
+
+        StreamWriter logFileHandle;
+
+        /// <summary>
+        /// Do we log for a given loglevel?
+        /// </summary>
+        Dictionary<LogLevel, Boolean> AddLoglevelToRunReport;
+
+        /// <summary>
+        /// NumberOfLoglevelMessages - to the finishing TestStatus
+        /// </summary>
+        Dictionary<LogLevel, int> NumberOfLoglevelMessages;
+
+        /// <summary>
+        /// Logging disabled until LogFile property is set. />
+        /// </summary>
+        public Boolean LogToFile { get; set; }
+
+        /// <summary>
+        /// If logfile exists overwrite it.
+        /// </summary>
+        Boolean OverwriteLogFile { get; set; }
+
+        /// <summary>
+        /// Details about Environment, Test Agent (the current machine - OS, versions of Software), Date
+        /// </summary>
+        Dictionary<string, string> LogInfoDetails;
+
+        /// <summary>
+        /// Title
+        /// </summary>
+        string LogTitle { get; set; }
+
+        string mLogFileName;
+        /// <summary>
+        /// Path to the resulting logfile
+        /// </summary>
+        string LogFileName
+        {
+            get
+            {
+                return mLogFileName;
+            }
+            set
+            {
+                mLogFileName = value;
+                BeginHtmlLogFile(LogFileName);
+            }
+        }
+
+        LogLevel mLogLevel;
+        /// <summary>
+        /// What level should the logger accept logging for. Lower levels than this will be ignored - as "trace" will be ignored is level is set to "debug"
+        /// </summary>
+        LogLevel LogLevel
+        {
+            get
+            {
+                return mLogLevel;
+            }
+
+            set
+            {
+                mLogLevel = value;
+                TimeOfLastMessage = DateTime.Now;
+
+                //TODO: Should go to a contructor
+                AddLoglevelToRunReport = new Dictionary<LogLevel, bool>();
+                NumberOfLoglevelMessages = new Dictionary<LogLevel, int>();
+
+                foreach(LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
+                {
+                    NumberOfLoglevelMessages.Add(loglevel, 0);
+                    AddLoglevelToRunReport.Add(loglevel, true);
+                }
+
+                switch (value)
+                {
+                    case LogLevel.Error:
+                        AddLoglevelToRunReport[LogLevel.Warning] = false;
+                        AddLoglevelToRunReport[LogLevel.Info] = false;
+                        AddLoglevelToRunReport[LogLevel.Debug] = false;
+                        AddLoglevelToRunReport[LogLevel.Trace] = false;
+                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        break;
+                    case LogLevel.Warning:
+                        AddLoglevelToRunReport[LogLevel.Info] = false;
+                        AddLoglevelToRunReport[LogLevel.Debug] = false;
+                        AddLoglevelToRunReport[LogLevel.Trace] = false;
+                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        break;
+                    case LogLevel.Info:
+                        AddLoglevelToRunReport[LogLevel.Debug] = false;
+                        AddLoglevelToRunReport[LogLevel.Trace] = false;
+                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        break;
+                    case LogLevel.Debug:
+                        AddLoglevelToRunReport[LogLevel.Trace] = false;
+                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        break;
+                    case LogLevel.Trace:
+                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        break;
+                    case LogLevel.Internal:
+                        break;
+                    default:
+                        // logError
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// If the logfile should be archived - to where should it be archived
+        /// </summary>
+        string ArchiveDirecory { get; set; }
+
+        /// <summary>
+        /// Should we archive the logfile
+        /// </summary>
+        Boolean ArchiveLogFile { get; set; }
+
+        /// <summary>
+        ///   reads in the JavaScript functions for the logfile buttons etc
+        /// </summary>
+        /// <returns></returns>
         string GetJavaScript()
         {
             throw new NotImplementedException();
         }
 
-        // reads in the CSS 
+        /// <summary>
+        ///   reads in the CSS 
+        /// </summary>
+        /// <returns></returns>
         string GetStyleSheet()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="FileName"></param>
+        /// <returns></returns>
         Boolean BeginHtmlLogFile(string FileName)
         {
-            throw new NotImplementedException();
+            String HtmlLine;
+
+            if (logFileHandle != null)
+            {
+                logFileHandle.Close();
+            }
+
+            logFileHandle = new StreamWriter(LogFileName);
+
+            /*  if value is nullOrEmpty we want to close the file
+             *       Close the currently opened log file.
+             *       LogToFile = False
+             *       LogFileName = String.Empty
+             *       return
+             * endif
+             *  
+             * Normalize value filename
+             * if new file, then close the old file 
+             * open new file - respect the overwritefileflag
+             * 
+                 
+             * LogToFile = True
+            */
+
+            HtmlLine = "<!DOCTYPE html>\n";
+            HtmlLine += "<html lang=\"en\" class=\"\">\n";
+            HtmlLine += "  <head>\n";
+            HtmlLine += "    <meta charset='utf-8'>\n";
+            HtmlLine += "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";
+            HtmlLine += "    <meta http-equiv=\"Content-Language\" content=\"en\">\n";
+            HtmlLine += "    <title>Ulrich Og Kasper</title>\n";
+            HtmlLine += "  </head>\n";
+            HtmlLine += "  <body>\n";
+
+            logFileHandle.Write(HtmlLine);
+            return true;
         }
 
         Boolean EndHtmlLogFile()
         {
-            throw new NotImplementedException();
-        }
+            String HtmlLine;
 
-        int IncrementMessageCount()
-        {
-            throw new NotImplementedException();
-        }
+            HtmlLine = "  </body>\n";
+            HtmlLine += "</html>\n";
 
-        int IncrementPassCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        int IncrementFailCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        int IncrementErrorCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        int IncrementWarnCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        int IncrementInfoCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        int IncrementDebugCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        int IncrementTraceCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        int IncrementInternalCount()
-        {
-            throw new NotImplementedException();
+            logFileHandle.Write(HtmlLine);
+            return true;
         }
 
         int IncrementImgCount()
-        {
-            throw new NotImplementedException();
-        }
-
-        int IncrementKeyValue()
         {
             throw new NotImplementedException();
         }
@@ -89,25 +220,51 @@ namespace TestResultHtmlLogger
         public int BuildArchiveLogFilePath { get; set; }
         public int LocalLogFileName { get; set; }
 
-        int ILogfileManagement.Init(string logFileName)
+        /// <summary>
+        /// Initialise a logger
+        /// </summary>
+        /// <param name="logFileName"></param>
+        /// <returns></returns>
+        public Boolean Init(string logFileName)
         {
-            throw new NotImplementedException();
+            OverwriteLogFile = Configuration.OverwriteLogFile;
+            TestName = "TestName_Not_Set";
+            LogToFile = Configuration.LogToFile;
+            LogTitle = Configuration.LogTitle;
+            LogLevel = Configuration.LogLevel;
+            LogFileName = Configuration.LogFileName;
+
+            LogKeyValue("Environment", "TODO_ENVIRONMENT", "Configuration.EnvironmentName");
+            LogKeyValue("OS", "TODO_Windows OS", "");
+            LogKeyValue("InstDir", "TODO_InstDir", "TODO_InstDir");
+            LogKeyValue("ResultDir", "TODO_ResultDir", "TODO_ResultDir");
+            LogKeyValue("Controller", "TODO_Controller", "TODO_Controller");
+            LogKeyValue("Hostname", "TODO_Hostname", "TODO_Hostname");
+            LogKeyValue("TestDir", "TODO_TestDir", "TODO_TestDir");
+            LogKeyValue("Test Iteration", "TODO_Test Iteration", "TODO_Test Iteration");
+            LogKeyValue("Testname", "TODO_Testname", "TODO_Testname");
+            LogKeyValue("Date", DateTime.Now.ToShortDateString(), "");
+
+            //LogFileName = NewLogFileName
+
+            LogTrace(String.Format("Log Initiated at [{0}]", LogFileName));
+            return true;
         }
 
         // =============================================================
         // Have we logged a Error or Fail? 
         // =============================================================
-        int ILogfileManagement.ErrorOrFail()
+        public int ErrorOrFail()
         {
             throw new NotImplementedException();
         }
 
-        int ILogfileManagement.CloseLogFile()
+        public int CloseLogFile()
         {
             throw new NotImplementedException();
         }
 
-        int ILogfileManagement.ArchiveThisLogFile()
+        public int ArchiveThisLogFile()
         {
             throw new NotImplementedException();
         }

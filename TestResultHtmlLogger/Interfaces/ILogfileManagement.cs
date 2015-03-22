@@ -8,7 +8,7 @@ namespace TestResultHtmlLogger
 {
     public interface ILogfileManagement
     {
-        int Init(string logFileName);
+        Boolean Init(string logFileName);
 
         // Have we logged a Error or Fail? 
 	    int ErrorOrFail();

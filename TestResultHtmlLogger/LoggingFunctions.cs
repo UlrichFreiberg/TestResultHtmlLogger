@@ -8,54 +8,102 @@ namespace TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ILoggingFunctions
     {
+        int messageId = 0;
+
+        int LogOneHtmlMessage(LogLevel logLevel, string Message)
+        {
+            string HtmlLine, LogLevelString;
+            string IndentString;
+            string messageIdString;
+
+            if (! AddLoglevelToRunReport[logLevel]) {
+                return -1;
+            }
+            
+            messageIdString = string.Format("m{0}", messageId++);
+            LogLevelString = "TODO:LogLevelString";
+            CheckForPerformanceAlert();
+
+            // TODO need some info from LogFunctionEnter/Exit, to set the indentation right
+
+            IndentString = "";
+
+            switch (logLevel)
+            {
+                case LogLevel.Header:
+                    HtmlLine = string.Format("<div class=\"line logheader\">{0}</div>", Message);
+                    break;
+                case LogLevel.SubHeader:
+                    HtmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>", Message);
+                    break;
+
+                default:
+                    HtmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, LogLevelString);
+                    HtmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", "TODO:TimeStamp");
+                    HtmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", LogLevelString);
+                    HtmlLine += String.Format("    <div class=\"el pad\">{0}</div>\n", IndentString);
+                    HtmlLine += String.Format("    <div class=\"el msg\">{0}</div>\n", Message);
+                    HtmlLine += String.Format("</div>");
+                    break;
+            }
+
+            logFileHandle.Write(HtmlLine);
+            return HtmlLine.Length;
+        }
+
         // =============================================================
         //
         // normal logging functions - testscripts/models/adapters
         //
         // =============================================================
-        int ILoggingFunctions.LogError(string message)
+        public int LogError(string message)
         {
-            throw new NotImplementedException();
+            return LogOneHtmlMessage(LogLevel.Error, message);
         }
 
-        int ILoggingFunctions.Error(string message)
+        public int Error(string message)
         {
-            throw new NotImplementedException();
+            return LogError(message);
         }
 
-        int ILoggingFunctions.LogWarning(string message)
+        public int LogWarning(string message)
         {
-            throw new NotImplementedException();
+            return LogOneHtmlMessage(LogLevel.Warning, message);
         }
 
-        int ILoggingFunctions.Warning(string message)
+        public int Warning(string message)
         {
-            throw new NotImplementedException();
+            return LogWarning(message);
         }
 
-        int ILoggingFunctions.LogInfo(string message)
+        public int LogInfo(string message)
         {
-            throw new NotImplementedException();
+            return LogOneHtmlMessage(LogLevel.Info, message);
         }
 
-        int ILoggingFunctions.Info(string message)
+        public int Info(string message)
         {
-            throw new NotImplementedException();
+            return LogInfo(message);
         }
 
-        int ILoggingFunctions.LogDebug(string message)
+        public int LogDebug(string message)
         {
-            throw new NotImplementedException();
+            return LogOneHtmlMessage(LogLevel.Debug, message);
         }
 
-        int ILoggingFunctions.Debug(string message)
+        public int Debug(string message)
         {
-            throw new NotImplementedException();
+            return LogDebug(message);
         }
 
-        int ILoggingFunctions.LogTrace(string message)
+        public int LogTrace(string message)
         {
-            throw new NotImplementedException();
+            return LogOneHtmlMessage(LogLevel.Trace, message);
+        }
+
+        public int Trace(string message)
+        {
+            return LogTrace(message);
         }
 
         // =============================================================
@@ -63,19 +111,15 @@ namespace TestResultHtmlLogger
         // normal logging functions - models and adapters
         //
         // =============================================================
-        int ILoggingFunctions.Trace(string message)
+
+        public int LogInternal(string message)
         {
-            throw new NotImplementedException();
+            return LogOneHtmlMessage(LogLevel.Trace, message);
         }
 
-        int ILoggingFunctions.LogInternal(string message)
+        public int Internal(string message)
         {
-            throw new NotImplementedException();
-        }
-
-        int ILoggingFunctions.Internal(string message)
-        {
-            throw new NotImplementedException();
+            return LogInternal(message);
         }
 
         // =============================================================
@@ -83,24 +127,35 @@ namespace TestResultHtmlLogger
         // used solely by Assert functions
         //
         // =============================================================
-        int ILoggingFunctions.LogPass(string message)
+        public int LogPass(string testStepName, string message)
         {
-            throw new NotImplementedException();
+            var TempNeedsToBeReworkedMessage = string.Format("PASS - testStepName=[{0}], message=[{1}]", testStepName, message);
+
+            return LogOneHtmlMessage(LogLevel.Pass, TempNeedsToBeReworkedMessage);
         }
 
-        int ILoggingFunctions.Pass(string testStepName, string message)
+        public int Pass(string testStepName, string message)
         {
-            throw new NotImplementedException();
+            return LogPass(testStepName, message);
         }
 
-        int ILoggingFunctions.LogFail(string message)
+        public int LogFail(string testStepName, string message)
         {
-            throw new NotImplementedException();
+            var TempNeedsToBeReworkedMessage = string.Format("FAIL - testStepName=[{0}], message=[{1}]", testStepName, message);
+
+            return LogOneHtmlMessage(LogLevel.Fail, message);
         }
 
-        int ILoggingFunctions.Fail(string testStepName, string message)
+        public int Fail(string testStepName, string message)
         {
-            throw new NotImplementedException();
+            return LogFail(testStepName, message);
+        }
+
+        public int LogKeyValue(string key, string value, string message)
+        {
+            var TempNeedsToBeReworkedMessage = string.Format("KEYVALUE - Message=[{0}], Key=[{1}], Value=[{2}]", message, key, value);
+
+            return LogOneHtmlMessage(LogLevel.KeyValue, TempNeedsToBeReworkedMessage);
         }
     }
 }

@@ -20,7 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -68,6 +68,7 @@
     <Compile Include="Interfaces\ITestScriptHeaders.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LogConfiguration.cs" />
     <Compile Include="LogfileManagement.cs">
       <SubType>Code</SubType>
     </Compile>

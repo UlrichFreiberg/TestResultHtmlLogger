@@ -8,14 +8,31 @@ namespace TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : IPerformanceManagement
     {
+        /// <summary>
+        /// Used for indicating performance issues - if not logging, then something takes a long time:-)
+        /// </summary>
+        DateTime TimeOfLastMessage;
+
+        public void CheckForPerformanceAlert()
+        {
+            var ElapsedTime = DateTime.Now - TimeOfLastMessage;
+
+            if (ElapsedTime.Seconds > Configuration.AlertLongInterval)
+            {
+                LogPerformanceAlert(ElapsedTime.TotalSeconds);
+            }
+        }
+
         // =============================================================
         //
         // how long time since last - any performance issues?
         //
         // =============================================================
-        int IPerformanceManagement.LogPerformanceAlert(int elapsedTime)
+        public int LogPerformanceAlert(double elapsedTime)
         {
-            throw new NotImplementedException();
+            String PerformanceAlert = String.Format("PerfAlert: {0} seconds since last logEntry", elapsedTime);
+
+            return LogWarning(PerformanceAlert);
         }
     }
 }

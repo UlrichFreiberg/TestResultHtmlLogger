@@ -8,6 +8,11 @@ namespace TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ITestScriptHeaders
     {
+        /// <summary>
+        /// Name of Current Test
+        /// </summary>
+        public string TestName { get; set; }
+
         // =============================================================
         //
         // Used by Assertion functions

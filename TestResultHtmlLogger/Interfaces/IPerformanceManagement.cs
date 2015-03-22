@@ -8,8 +8,11 @@ namespace TestResultHtmlLogger
 {
     public interface IPerformanceManagement
     {
-        // how long time since last - any performance issues?
-	    // int CheckTime;
-	    int LogPerformanceAlert(int elapsedTime);
+        /// <summary>
+        /// Check how long time since last - any performance issues?
+        /// </summary>
+        /// <param name="elapsedTime"></param>
+        /// <returns></returns>
+	    int LogPerformanceAlert(double elapsedTime);
     }
 }

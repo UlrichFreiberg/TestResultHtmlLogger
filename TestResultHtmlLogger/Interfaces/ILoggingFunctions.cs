@@ -25,9 +25,11 @@ namespace TestResultHtmlLogger
         int Internal(string message);
 
         // used solely by Assert functions
-        int LogPass(string message);
+        int LogPass(string testStepName, string message);
         int Pass(string testStepName, string message);
-        int LogFail(string message);
+        int LogFail(string testStepName, string message);
         int Fail(string testStepName, string message);
+
+        int LogKeyValue(string key, string value, string message);
     }
 }
