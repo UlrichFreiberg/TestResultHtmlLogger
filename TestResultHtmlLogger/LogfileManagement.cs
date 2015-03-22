@@ -69,7 +69,7 @@ namespace TestResultHtmlLogger
         /// <summary>
         /// What level should the logger accept logging for. Lower levels than this will be ignored - as "trace" will be ignored is level is set to "debug"
         /// </summary>
-        LogLevel LogLevel
+        public LogLevel LogLevel
         {
             get
             {
@@ -146,10 +146,25 @@ namespace TestResultHtmlLogger
             String RetVal;
             var styleSheet = Properties.Resources.ResourceManager.GetObject("logger");
 
-            RetVal = "\n<script>";
+            RetVal = "\n<script type=\"text/javascript\">";
             RetVal += styleSheet.ToString();
             RetVal += "\n</script>\n";
 
+            return RetVal;
+        }
+
+        
+
+        /// <summary>
+        ///   reads in the HTML that constitoes the top LogHeader
+        /// </summary>
+        /// <returns></returns>
+        string GetOpenBody()
+        {
+            String RetVal;
+            var openBody = Properties.Resources.ResourceManager.GetObject("OpenBody");
+
+            RetVal = openBody.ToString();
             return RetVal;
         }
 
@@ -162,7 +177,7 @@ namespace TestResultHtmlLogger
             String RetVal;
             var styleSheet = Properties.Resources.ResourceManager.GetObject("style");
 
-            RetVal = "\n<style>";
+            RetVal = "\n<style type=\"text/css\">";
             RetVal += styleSheet.ToString();
             RetVal += "\n</style>\n";
 
@@ -209,7 +224,7 @@ namespace TestResultHtmlLogger
             HtmlLine += "    <title>Ulrich Og Kasper</title>\n";
             HtmlLine += GetStyleSheet();
             HtmlLine += "  </head>\n";
-            HtmlLine += "  <body>\n";
+            HtmlLine += GetOpenBody();
             HtmlLine += GetJavaScript();
 
             logFileHandle.Write(HtmlLine);

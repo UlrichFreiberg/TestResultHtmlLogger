@@ -1,0 +1,16 @@
+<body onload="loadKeyValueList()">
+  <div id="header">
+    <div id="logo"></div>
+	<h1 id="logtitle">LOGFILETITLE</h1>
+	<p id="generatedbypOvid">Leveret til dig af Ovid</p>
+  <div id="buttons"><button id="passBtn"          value="Skjul" type="button" onclick="toggleLogElements('.pass',  'passBtn',  'Pass')" >Skjul Pass</button>
+  <button id="failBtn"          value="Skjul" type="button" onclick="toggleLogElements('.fail',  'failBtn',  'Fail')" >Skjul Fail</button>
+  <button id="errorBtn"         value="Skjul" type="button" onclick="toggleLogElements('.error', 'errorBtn', 'Error')">Skjul Error</button>
+  <button id="warnBtn"          value="Skjul" type="button" onclick="toggleLogElements('.warning',  'warnBtn',  'Warning')" >Skjul Warn</button>
+  <button id="infoBtn"          value="Vis"   type="button" onclick="toggleLogElements('.info',  'infoBtn',  'Info')" >Vis Info</button>
+  <button id="debugBtn"         value="Vis"   type="button" onclick="toggleLogElements('.debug', 'debugBtn', 'Debug')">Vis Debug</button>
+  <button id="traceBtn"         value="Vis"   type="button" onclick="toggleLogElements('.trace', 'traceBtn', 'Trace')">Vis Trace</button>
+  <button id="internalBtn"      value="Vis"   type="button" onclick="toggleLogElements('.internal', 'internalBtn', 'Internal')">Vis Internal</button>
+  <button id="toggleAllBtn"     value="Vis"   type="button" onclick="toggleAll()">Vis Alt</button>
+  <button id="toggleIndent"     value="Vis"   type="button" onclick="toggleIndent()">Vis Dybde</button>
+  <button id="toggleKeyValues"  value="Vis"   type="button" onclick="toggleKeyValues()">Vis Nøgleværdier</button></div>

@@ -18,6 +18,7 @@ namespace UnitTest
         {
             var MyLogger = new TestResultHtmlLogger.TestResultHtmlLogger();
             MyLogger.Init(@"c:\temp\unittestlogger.html");
+            MyLogger.LogLevel = TestResultHtmlLogger.LogLevel.Internal;
 
             MyLogger.LogError("LogError");
             MyLogger.Error("Error");
@@ -28,18 +29,25 @@ namespace UnitTest
             MyLogger.LogDebug("LogDebug");
             MyLogger.Debug("Debug");
 
-        // normal logging functions - models and adapters
+            // normal logging functions - models and adapters
             MyLogger.LogTrace("LogTrace");
             MyLogger.Trace("Trace");
             MyLogger.LogInternal("LogInternal");
             MyLogger.Internal("Internal");
 
-        // used solely by Assert functions
+            // Header logging functions - testscripts
+            MyLogger.LogSubHeader("LogSubHeader");
+            MyLogger.SubHeader("SubHeader");
+            MyLogger.LogHeader("LogHeader");
+            MyLogger.Header("Header");
+
+            // used solely by Assert functions
             MyLogger.LogPass("testStepName LogPass", "LogPass");
             MyLogger.Pass("testStepName Pass", "Pass");
             MyLogger.LogFail("testStepName LogFail", "LogFail");
             MyLogger.Fail("testStepName Fail", "Fail");
 
-            MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");        }
+            MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
+        }
     }
 }

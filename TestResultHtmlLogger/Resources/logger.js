@@ -87,7 +87,7 @@ function displayAllElements(blockOrNone) {
 	//css('.pass', 'display', blockOrNone);  
 	//css('.fail', 'display', blockOrNone);   
 	css('.error', 'display', blockOrNone);
-	css('.warn', 'display', blockOrNone);
+	css('.warning', 'display', blockOrNone);
 	css('.info', 'display', blockOrNone);
 	css('.debug', 'display', blockOrNone);
 	css('.trace', 'display', blockOrNone);

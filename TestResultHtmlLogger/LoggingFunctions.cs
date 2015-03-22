@@ -37,12 +37,12 @@ namespace TestResultHtmlLogger
                     break;
 
                 default:
-                    HtmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, LogLevelString);
+                    HtmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, LogLevelString.ToLower());
                     HtmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", TimeOfLastMessage);
                     HtmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", LogLevelString);
                     HtmlLine += String.Format("    <div class=\"el pad\">{0}</div>\n", IndentString);
                     HtmlLine += String.Format("    <div class=\"el msg\">{0}</div>\n", Message);
-                    HtmlLine += String.Format("</div>");
+                    HtmlLine += String.Format("</div>\n");
                     break;
             }
 
@@ -108,13 +108,39 @@ namespace TestResultHtmlLogger
 
         // =============================================================
         //
+        // Header logging functions - testscripts
+        //
+        // =============================================================
+
+        public int LogHeader(string message)
+        {
+            return LogOneHtmlMessage(LogLevel.Header, message);
+        }
+
+        public int Header(string message)
+        {
+            return LogHeader(message);
+        }
+
+        public int LogSubHeader(string message)
+        {
+            return LogOneHtmlMessage(LogLevel.SubHeader, message);
+        }
+
+        public int SubHeader(string message)
+        {
+            return LogSubHeader(message);
+        }
+
+        // =============================================================
+        //
         // normal logging functions - models and adapters
         //
         // =============================================================
 
         public int LogInternal(string message)
         {
-            return LogOneHtmlMessage(LogLevel.Trace, message);
+            return LogOneHtmlMessage(LogLevel.Internal, message);
         }
 
         public int Internal(string message)
@@ -129,7 +155,7 @@ namespace TestResultHtmlLogger
         // =============================================================
         public int LogPass(string testStepName, string message)
         {
-            var TempNeedsToBeReworkedMessage = string.Format("PASS - testStepName=[{0}], message=[{1}]", testStepName, message);
+            var TempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
 
             return LogOneHtmlMessage(LogLevel.Pass, TempNeedsToBeReworkedMessage);
         }
@@ -141,9 +167,9 @@ namespace TestResultHtmlLogger
 
         public int LogFail(string testStepName, string message)
         {
-            var TempNeedsToBeReworkedMessage = string.Format("FAIL - testStepName=[{0}], message=[{1}]", testStepName, message);
+            var TempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
 
-            return LogOneHtmlMessage(LogLevel.Fail, message);
+            return LogOneHtmlMessage(LogLevel.Fail, TempNeedsToBeReworkedMessage);
         }
 
         public int Fail(string testStepName, string message)

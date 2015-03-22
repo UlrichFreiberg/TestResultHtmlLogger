@@ -142,6 +142,22 @@ namespace TestResultHtmlLogger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;body onload=&quot;loadKeyValueList()&quot;&gt;
+        ///  &lt;div id=&quot;header&quot;&gt;
+        ///    &lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;
+        ///	&lt;h1 id=&quot;logtitle&quot;&gt;LOGFILETITLE&lt;/h1&gt;
+        ///	&lt;p id=&quot;generatedbypOvid&quot;&gt;Leveret til dig af Ovid&lt;/p&gt;
+        ///  &lt;div id=&quot;buttons&quot;&gt;&lt;button id=&quot;passBtn&quot;          value=&quot;Skjul&quot; type=&quot;button&quot; onclick=&quot;toggleLogElements(&apos;.pass&apos;,  &apos;passBtn&apos;,  &apos;Pass&apos;)&quot; &gt;Skjul Pass&lt;/button&gt;
+        ///  &lt;button id=&quot;failBtn&quot;          value=&quot;Skjul&quot; type=&quot;button&quot; onclick=&quot;toggleLogElements(&apos;.fail&apos;,  &apos;failBtn&apos;,  &apos;Fail&apos;)&quot; &gt;Skjul Fail&lt;/button&gt;
+        ///  &lt;button id=&quot;errorBtn&quot;         value [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OpenBody {
+            get {
+                return ResourceManager.GetString("OpenBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to body {
         ///font-family: verdana;
         ///font-size: 1.0em;
