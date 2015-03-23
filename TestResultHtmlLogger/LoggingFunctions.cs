@@ -30,15 +30,15 @@ namespace TestResultHtmlLogger
             switch (logLevel)
             {
                 case LogLevel.Header:
-                    HtmlLine = string.Format("<div class=\"line logheader\">{0}</div>", Message);
+                    HtmlLine = string.Format("<div class=\"line logheader\">{0}</div>\n", Message);
                     break;
                 case LogLevel.SubHeader:
-                    HtmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>", Message);
+                    HtmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>\n", Message);
                     break;
 
                 default:
                     HtmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, LogLevelString.ToLower());
-                    HtmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", TimeOfLastMessage);
+                    HtmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", TimeOfLastMessage.ToString("HH:mm:ss"));
                     HtmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", LogLevelString);
                     HtmlLine += String.Format("    <div class=\"el pad\">{0}</div>\n", IndentString);
                     HtmlLine += String.Format("    <div class=\"el msg\">{0}</div>\n", Message);
