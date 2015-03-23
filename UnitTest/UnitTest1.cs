@@ -10,16 +10,20 @@ namespace UnitTest
         public void TestMethod_Init()
         {
             var MyLogger = new TestResultHtmlLogger.TestResultHtmlLogger();
+
             MyLogger.Init(@"c:\temp\unittestlogger.html");
         }
+
 
         [TestMethod]
         public void TestMethod_AllLogType()
         {
             var MyLogger = new TestResultHtmlLogger.TestResultHtmlLogger();
+
             MyLogger.Init(@"c:\temp\unittestlogger.html");
             MyLogger.LogLevel = TestResultHtmlLogger.LogLevel.Internal;
 
+            MyLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
             MyLogger.LogError("LogError");
             MyLogger.Error("Error");
             MyLogger.LogWarning("LogWarning");
@@ -48,6 +52,22 @@ namespace UnitTest
             MyLogger.Fail("testStepName Fail", "Fail");
 
             MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
+        }
+
+
+        [TestMethod]
+        public void TestMethod_LotsOfEntries()
+        {
+            var MyLogger = new TestResultHtmlLogger.TestResultHtmlLogger();
+
+            MyLogger.Init(@"c:\temp\unittestlogger.html");
+            MyLogger.LogLevel = TestResultHtmlLogger.LogLevel.Internal;
+
+            MyLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
+            for (int i = 0; i < 75; i++)
+            {
+                MyLogger.LogInfo(String.Format("LogInfo Nr {0}", i));
+            }
         }
     }
 }

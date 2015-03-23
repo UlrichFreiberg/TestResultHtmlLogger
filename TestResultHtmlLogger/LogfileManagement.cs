@@ -146,9 +146,7 @@ namespace TestResultHtmlLogger
             String RetVal;
             var styleSheet = Properties.Resources.ResourceManager.GetObject("logger");
 
-            RetVal = "\n<script type=\"text/javascript\">";
-            RetVal += styleSheet.ToString();
-            RetVal += "\n</script>\n";
+            RetVal = styleSheet.ToString();
 
             return RetVal;
         }
@@ -177,9 +175,7 @@ namespace TestResultHtmlLogger
             String RetVal;
             var styleSheet = Properties.Resources.ResourceManager.GetObject("style");
 
-            RetVal = "\n<style type=\"text/css\">";
-            RetVal += styleSheet.ToString();
-            RetVal += "\n</style>\n";
+            RetVal = styleSheet.ToString();
 
             return RetVal;
         }
@@ -216,16 +212,13 @@ namespace TestResultHtmlLogger
             */
 
             HtmlLine = "<!DOCTYPE html>\n";
-            HtmlLine += "<html lang=\"en\" class=\"\">\n";
+            HtmlLine += "<html>\n";
             HtmlLine += "  <head>\n";
-            HtmlLine += "    <meta charset='utf-8'>\n";
-            HtmlLine += "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n";
-            HtmlLine += "    <meta http-equiv=\"Content-Language\" content=\"en\">\n";
             HtmlLine += "    <title>Ulrich Og Kasper</title>\n";
             HtmlLine += GetStyleSheet();
+            HtmlLine += GetJavaScript();
             HtmlLine += "  </head>\n";
             HtmlLine += GetOpenBody();
-            HtmlLine += GetJavaScript();
 
             logFileHandle.Write(HtmlLine);
             logFileHandle.Flush();

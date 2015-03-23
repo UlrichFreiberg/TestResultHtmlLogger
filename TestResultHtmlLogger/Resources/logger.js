@@ -1,20 +1,20 @@
+<script type="text/javascript">
 var lastAnchor = '';
-
 
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
 }
 
 function toggleKeyValues() {
-	if (document.getElementById("toggleKeyValues").value == "Skjul") {
+	if (document.getElementById("toggleKeyValues").value == "Hide") {
 		css('ul#logfileinfo', 'display', 'none');
-		toggleButton("toggleKeyValues", "Vis", "Vis nøgleværdier");
-	} else if (document.getElementById("toggleKeyValues").value == "Vis") {
+		toggleButton("toggleKeyValues", "Show", "Show KeyValues");
+	} else if (document.getElementById("toggleKeyValues").value == "Show") {
 		var headerHeight = getHeaderHeight();
 		document.getElementById("logfileinfo").style.top = headerHeight + "px";
 		css('ul#logfileinfo', 'display', 'Block');
 		setKeyValuesCenter();
-		toggleButton("toggleKeyValues", "Skjul", "Skjul nøgleværdier");
+		toggleButton("toggleKeyValues", "Hide", "Hide KeyValues");
 	}
 }
 
@@ -43,12 +43,12 @@ function toggleButton(buttonId, Value, Text) {
 }
 
 function toggleLogElements(divElement, buttonId, logElement) {
-	if (document.getElementById(buttonId).value == "Skjul") {
+	if (document.getElementById(buttonId).value == "Hide") {
 		css(divElement, 'display', 'none');
-		toggleButton(buttonId, "Vis", "Vis " + logElement)
-	} else if (document.getElementById(buttonId).value == "Vis") {
+		toggleButton(buttonId, "Show", "Show " + logElement)
+	} else if (document.getElementById(buttonId).value == "Show") {
 		css(divElement, 'display', 'Block');
-		toggleButton(buttonId, "Skjul", "Skjul " + logElement);
+		toggleButton(buttonId, "Hide", "Hide " + logElement);
 	}
 	goToLastAnchor();
 }
@@ -96,38 +96,38 @@ function displayAllElements(blockOrNone) {
 
 function toggleAll() {
 	var buttonId = "toggleAllBtn";
-	if (document.getElementById(buttonId).value == "Skjul") {
+	if (document.getElementById(buttonId).value == "Hide") {
 		displayAllElements('none');
-		toggleButton(buttonId, "Vis", "Vis Alt");
-		//toggleButton("passBtn", "Vis", "Vis Pass") 
-		//toggleButton("failBtn", "Vis", "Vis Fail") 
-		toggleButton("errorBtn", "Vis", "Vis Error");
-		toggleButton("warnBtn", "Vis", "Vis Warn");
-		toggleButton("infoBtn", "Vis", "Vis Info");
-		toggleButton("debugBtn", "Vis", "Vis Debug");
-		toggleButton("traceBtn", "Vis", "Vis Trace");
-		toggleButton("internalBtn", "Vis", "Vis Internal");
-	} else if (document.getElementById(buttonId).value == "Vis") {
+		toggleButton(buttonId, "Show", "Show All");
+		//toggleButton("passBtn", "Show", "Show Pass") 
+		//toggleButton("failBtn", "Show", "Show Fail") 
+		toggleButton("errorBtn", "Show", "Show Error");
+		toggleButton("warnBtn", "Show", "Show Warn");
+		toggleButton("infoBtn", "Show", "Show Info");
+		toggleButton("debugBtn", "Show", "Show Debug");
+		toggleButton("traceBtn", "Show", "Show Trace");
+		toggleButton("internalBtn", "Show", "Show Internal");
+	} else if (document.getElementById(buttonId).value == "Show") {
 		displayAllElements('block')
-		toggleButton(buttonId, "Skjul", "Skjul Alt");
-		toggleButton("passBtn", "Skjul", "Skjul Pass");
-		toggleButton("failBtn", "Skjul", "Skjul Fail");
-		toggleButton("errorBtn", "Skjul", "Skjul Error");
-		toggleButton("warnBtn", "Skjul", "Skjul Warn");
-		toggleButton("infoBtn", "Skjul", "Skjul Info");
-		toggleButton("debugBtn", "Skjul", "Skjul Debug");
-		toggleButton("traceBtn", "Skjul", "Skjul Trace");
-		toggleButton("internalBtn", "Skjul", "Skjul Internal");
+		toggleButton(buttonId, "Hide", "Hide All");
+		toggleButton("passBtn", "Hide", "Hide Pass");
+		toggleButton("failBtn", "Hide", "Hide Fail");
+		toggleButton("errorBtn", "Hide", "Hide Error");
+		toggleButton("warnBtn", "Hide", "Hide Warn");
+		toggleButton("infoBtn", "Hide", "Hide Info");
+		toggleButton("debugBtn", "Hide", "Hide Debug");
+		toggleButton("traceBtn", "Hide", "Hide Trace");
+		toggleButton("internalBtn", "Hide", "Hide Internal");
 	}
 }
 
 function toggleIndent() {
 	var buttonId = "toggleIndent";
-	if (document.getElementById(buttonId).value == "Skjul") {
-		toggleButton(buttonId, "Vis", "Vis Dybde");
+	if (document.getElementById(buttonId).value == "Hide") {
+		toggleButton(buttonId, "Show", "Show Depth");
 		css('div.pad', 'display', 'none');
-	} else if(document.getElementById(buttonId).value == "Vis") {
-		toggleButton(buttonId, "Skjul", "Skjul Dybde");
+	} else if(document.getElementById(buttonId).value == "Show") {
+		toggleButton(buttonId, "Hide", "Hide Depth");
 		css('div.pad', 'display', 'Block');
 	}
 }
@@ -213,8 +213,8 @@ function hideButtonByDisplayCount(buttonSelector, displayCount) {
 
 function updateHeaderWithStatus() {
     var statusText = document.getElementById('runstatus').innerHTML;
-    var currentGenereatedBy = document.getElementById('generatedbyptf').innerHTML;
-    document.getElementById('generatedbyptf').innerHTML = statusText + " - " + currentGenereatedBy;
+    var currentGenereatedBy = document.getElementById('generatedbyovid').innerHTML;
+    document.getElementById('generatedbyovid').innerHTML = statusText + " - " + currentGenereatedBy;
 }
 
 function initButtons() {
@@ -232,3 +232,4 @@ function initButtons() {
     hideButtonByDisplayCount("traceBtn", TraceCount);
     hideButtonByDisplayCount("internalBtn", InternalCount);
 }
+</script>

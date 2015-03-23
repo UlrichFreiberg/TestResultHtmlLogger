@@ -1,16 +1,26 @@
 <body onload="loadKeyValueList()">
-  <div id="header">
-    <div id="logo"></div>
-	<h1 id="logtitle">LOGFILETITLE</h1>
-	<p id="generatedbypOvid">Leveret til dig af Ovid</p>
-  <div id="buttons"><button id="passBtn"          value="Skjul" type="button" onclick="toggleLogElements('.pass',  'passBtn',  'Pass')" >Skjul Pass</button>
-  <button id="failBtn"          value="Skjul" type="button" onclick="toggleLogElements('.fail',  'failBtn',  'Fail')" >Skjul Fail</button>
-  <button id="errorBtn"         value="Skjul" type="button" onclick="toggleLogElements('.error', 'errorBtn', 'Error')">Skjul Error</button>
-  <button id="warnBtn"          value="Skjul" type="button" onclick="toggleLogElements('.warning',  'warnBtn',  'Warning')" >Skjul Warn</button>
-  <button id="infoBtn"          value="Vis"   type="button" onclick="toggleLogElements('.info',  'infoBtn',  'Info')" >Vis Info</button>
-  <button id="debugBtn"         value="Vis"   type="button" onclick="toggleLogElements('.debug', 'debugBtn', 'Debug')">Vis Debug</button>
-  <button id="traceBtn"         value="Vis"   type="button" onclick="toggleLogElements('.trace', 'traceBtn', 'Trace')">Vis Trace</button>
-  <button id="internalBtn"      value="Vis"   type="button" onclick="toggleLogElements('.internal', 'internalBtn', 'Internal')">Vis Internal</button>
-  <button id="toggleAllBtn"     value="Vis"   type="button" onclick="toggleAll()">Vis Alt</button>
-  <button id="toggleIndent"     value="Vis"   type="button" onclick="toggleIndent()">Vis Dybde</button>
-  <button id="toggleKeyValues"  value="Vis"   type="button" onclick="toggleKeyValues()">Vis Nøgleværdier</button></div>
+	<div id="header">
+		<div id="logo"></div>
+		<h1 id="logtitle">LOGFILETITLE</h1>
+		<p id="generatedbypOvid">Leveret til dig af Ovid</p>
+		<div id="buttons">
+			<button id="passBtn"          value="Hide" type="button" onclick="toggleLogElements('.pass',  'passBtn',  'Pass')" >Hide Pass</button>
+			<button id="failBtn"          value="Hide" type="button" onclick="toggleLogElements('.fail',  'failBtn',  'Fail')" >Hide Fail</button>
+			<button id="errorBtn"         value="Hide" type="button" onclick="toggleLogElements('.error', 'errorBtn', 'Error')">Hide Error</button>
+			<button id="warnBtn"          value="Hide" type="button" onclick="toggleLogElements('.warning',  'warnBtn',  'Warning')" >Hide Warn</button>
+			<button id="infoBtn"          value="Show"   type="button" onclick="toggleLogElements('.info',  'infoBtn',  'Info')" >Show Info</button>
+			<button id="debugBtn"         value="Show"   type="button" onclick="toggleLogElements('.debug', 'debugBtn', 'Debug')">Show Debug</button>
+			<button id="traceBtn"         value="Show"   type="button" onclick="toggleLogElements('.trace', 'traceBtn', 'Trace')">Show Trace</button>
+			<button id="internalBtn"      value="Show"   type="button" onclick="toggleLogElements('.internal', 'internalBtn', 'Internal')">Show Internal</button>
+			<button id="toggleAllBtn"     value="Show"   type="button" onclick="toggleAll()">Show All</button>
+			<button id="toggleIndent"     value="Show"   type="button" onclick="toggleIndent()">Show Depth</button>
+			<button id="toggleKeyValues"  value="Show"   type="button" onclick="toggleKeyValues()">Show KeyValues</button>
+		</div>
+		<ul id="logfileinfo">
+			<li><b>Environment: </b><em class="logfileinfovalue" id="Environment">UAT</em></li>
+			<li><b>OS: </b><em class="logfileinfovalue" id="OS">Microsoft Windows 7 Workstation version 6.1.7601</em></li>
+			<li><b>Testname: </b><em class="logfileinfovalue" id="Testname">HardCoded TestName</em></li>
+			<li><b>Date: </b><em class="logfileinfovalue" id="Date">2015-3-20</em></li>
+		</ul>
+	</div>
+	<div id="logfileelements">
