@@ -17,10 +17,6 @@
 			<button id="toggleKeyValues"  value="Show"   type="button" onclick="toggleKeyValues()">Show KeyValues</button>
 		</div>
 		<ul id="logfileinfo">
-			<li><b>Environment: </b><em class="logfileinfovalue" id="Environment">UAT</em></li>
-			<li><b>OS: </b><em class="logfileinfovalue" id="OS">Microsoft Windows 7 Workstation version 6.1.7601</em></li>
-			<li><b>Testname: </b><em class="logfileinfovalue" id="Testname">HardCoded TestName</em></li>
-			<li><b>Date: </b><em class="logfileinfovalue" id="Date">2015-3-20</em></li>
 		</ul>
 	</div>
 	<div id="logfileelements">

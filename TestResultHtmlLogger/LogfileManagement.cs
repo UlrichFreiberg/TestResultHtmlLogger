@@ -215,9 +215,11 @@ namespace TestResultHtmlLogger
             HtmlLine += "<html>\n";
             HtmlLine += "  <head>\n";
             HtmlLine += "    <title>Ulrich Og Kasper</title>\n";
+            HtmlLine += "    <style type=\"text/css\">\n";
             HtmlLine += GetStyleSheet();
+            HtmlLine += "    </style>\n<script type=\"text/javascript\">";
             HtmlLine += GetJavaScript();
-            HtmlLine += "  </head>\n";
+            HtmlLine += "  </script>\n</head>\n";
             HtmlLine += GetOpenBody();
 
             logFileHandle.Write(HtmlLine);

@@ -1,4 +1,3 @@
-<script type="text/javascript">
 var lastAnchor = '';
 
 function getURLParameter(name) {
@@ -232,4 +231,3 @@ function initButtons() {
     hideButtonByDisplayCount("traceBtn", TraceCount);
     hideButtonByDisplayCount("internalBtn", InternalCount);
 }
-</script>
