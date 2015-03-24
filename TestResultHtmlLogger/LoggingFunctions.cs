@@ -36,7 +36,7 @@ namespace TestResultHtmlLogger
                     HtmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>\n", Message);
                     break;
 
-                default:
+              default:
                     HtmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, LogLevelString.ToLower());
                     HtmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", TimeOfLastMessage.ToString("HH:mm:ss"));
                     HtmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", LogLevelString);
@@ -179,9 +179,17 @@ namespace TestResultHtmlLogger
 
         public int LogKeyValue(string key, string value, string message)
         {
-            var TempNeedsToBeReworkedMessage = string.Format("Message=[{0}], Key=[{1}], Value=[{2}]", message, key, value);
+            String HtmlLine; 
 
-            return LogOneHtmlMessage(LogLevel.KeyValue, TempNeedsToBeReworkedMessage);
+            HtmlLine = string.Format("<div class=\"line keyvalue\">\n");
+            HtmlLine += string.Format("   <div class=\"el key\">{0}</div>\n", key);
+            HtmlLine += string.Format("   <div class=\"el value\">{0}</div>\n", value);
+            HtmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
+            HtmlLine += string.Format("</div>");
+
+            logFileHandle.Write(HtmlLine);
+            logFileHandle.Flush();
+            return HtmlLine.Length;
         }
     }
 }
