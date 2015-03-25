@@ -10,11 +10,5 @@ namespace TestResultHtmlLogger
     {
         // Used by Assertion functions
         int SetRunStatus();
-
-        // Headers in test scripts
-        int LogHeader(string headerMessage);
-        int LogKeyValue(string Key, string value);
-        int LogSubHeader(string subHeaderMessage);
-        int Log(string message);
     }
 }

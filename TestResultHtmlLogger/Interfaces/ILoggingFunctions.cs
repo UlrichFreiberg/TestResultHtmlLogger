@@ -31,5 +31,9 @@ namespace TestResultHtmlLogger
         int Fail(string testStepName, string message);
 
         int LogKeyValue(string key, string value, string message);
+
+        // Headers in test scripts
+        int LogHeader(string headerMessage);
+        int LogSubHeader(string subHeaderMessage);
     }
 }
