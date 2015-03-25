@@ -14,6 +14,7 @@ namespace TestResultHtmlLogger
         public String LogFileName { get; set; }
         public int AlertLongInterval { get; set; }
         public LogLevel LogLevel { get; set; }
+        public String PathToLogoImageFile { get; set; }
 
         /// <summary>
         /// Standard constructor - sets up default configuration... 
@@ -27,6 +28,7 @@ namespace TestResultHtmlLogger
             LogFileName = @"C:\temp\TestResultHtmlLogger.html";
             AlertLongInterval = 10000;
             LogLevel = LogLevel.Error;
+            PathToLogoImageFile = String.Empty;
         }
     }
 }
