@@ -9,6 +9,10 @@ namespace TestResultHtmlLogger
     public partial class TestResultHtmlLogger : ILoggingFunctions
     {
         int messageId = 0;
+        String GetNextMessageId()
+        {
+            return string.Format("m{0}", messageId++);
+        }
 
         int LogOneHtmlMessage(LogLevel logLevel, string Message)
         {
@@ -19,8 +23,8 @@ namespace TestResultHtmlLogger
             if (! AddLoglevelToRunReport[logLevel]) {
                 return -1;
             }
-            
-            messageIdString = string.Format("m{0}", messageId++);
+
+            messageIdString = GetNextMessageId();
             LogLevelString = Enum.GetName(typeof(LogLevel), logLevel);
             CheckForPerformanceAlert();
 
