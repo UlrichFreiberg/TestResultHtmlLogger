@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ITestResultHtmlLogger_OriginalCompiled.txt" />
+    <None Include="Todo.csv" />
     <None Include="Resources\OpenBody.txt" />
     <None Include="Resources\Transparent.gif" />
     <None Include="Resources\logger.js" />

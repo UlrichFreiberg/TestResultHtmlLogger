@@ -1,0 +1,8 @@
+Titel	Prio	Assigned	Comment
+Screenshot	1	K	
+LogAutomationIdObject	2		Hvis toString() returnerer tom streng skal der laves noget reflection
+CallstackManagement	1	U	
+LogConfiguration	1		Flyt configuration til app.config (dll.config)
+LogfileManagement	1		Implementer FileUtil
+Archiving logfile	5		
+SetRunStatus	2		Overordnet status, pass.count/fail.count, fail fordi: blah blah, arkivering af logfil…
