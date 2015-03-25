@@ -15,6 +15,9 @@ namespace UnitTest
         }
 
 
+        /// <summary>
+        /// All log levels
+        /// </summary>
         [TestMethod]
         public void TestMethod_AllLogType()
         {
