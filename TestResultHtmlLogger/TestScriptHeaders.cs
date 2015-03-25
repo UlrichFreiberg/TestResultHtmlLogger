@@ -21,31 +21,13 @@ namespace TestResultHtmlLogger
         int ITestScriptHeaders.SetRunStatus()
         {
             throw new NotImplementedException();
-        }
-
-        // =============================================================
-        //
-        // Headers in test scripts
-        //
-        // =============================================================
-        int ITestScriptHeaders.LogHeader(string headerMessage)
-        {
-            throw new NotImplementedException();
-        }
-
-        int ITestScriptHeaders.LogKeyValue(string Key, string value)
-        {
-            throw new NotImplementedException();
-        }
-
-        int ITestScriptHeaders.LogSubHeader(string subHeaderMessage)
-        {
-            throw new NotImplementedException();
-        }
-
-        int ITestScriptHeaders.Log(string message)
-        {
-            throw new NotImplementedException();
+            //<div class="line logheader">Teststatus</div>
+            //<div onclick="sa('m3535')" id="m3535" class="line fail">
+            //    <div class="el time">17:13:04</div>
+            //    <div class="el level">fail</div>
+            //    <div class="el pad"> ·  · </div>
+            //    <div class="el msg">TITEL<span id="runstatus">gennemført med fejl!<br></div>
+            //</div>        
         }
     }
 }
