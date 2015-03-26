@@ -56,6 +56,12 @@ namespace UnitTest
 
             MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
 
+            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunction", (new String[] { "arg1", "arg2" }), new object[] { null });
+            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunction", 42);
+
+            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunctionShort");
+            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunctionShort");
+
             MyLogger.LogInfo("Ovid TRACE: Nu kommer der en PASSING TestRunStatus");
             MyLogger.SetRunStatus(true);
             MyLogger.LogInfo("Ovid TRACE: Nu kommer der en FALING TestRunStatus");
