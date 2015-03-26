@@ -18,16 +18,27 @@ namespace TestResultHtmlLogger
         // Used by Assertion functions
         //
         // =============================================================
-        int ITestScriptHeaders.SetRunStatus()
+        public int SetRunStatus(Boolean RunStatusAllPassed)
         {
-            throw new NotImplementedException();
-            //<div class="line logheader">Teststatus</div>
-            //<div onclick="sa('m3535')" id="m3535" class="line fail">
-            //    <div class="el time">17:13:04</div>
-            //    <div class="el level">fail</div>
-            //    <div class="el pad"> ·  · </div>
-            //    <div class="el msg">TITEL<span id="runstatus">gennemført med fejl!<br></div>
-            //</div>        
+            int retVal;
+
+            LogHeader("Teststatus");
+            if (RunStatusAllPassed)
+            {
+                retVal = LogPass("Teststatus", "Test Completed with errors");
+            }
+            else
+            {
+                retVal = LogFail("Teststatus", "Test Completed with errors");
+            }
+
+            return retVal;
+        }
+
+        public int SetRunStatus()
+        {
+            // Figure out if there is a failing test or not, and then call 
+            return SetRunStatus(true);
         }
     }
 }

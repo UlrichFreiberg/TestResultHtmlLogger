@@ -55,6 +55,12 @@ namespace UnitTest
             MyLogger.Fail("testStepName Fail", "Fail");
 
             MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
+
+            MyLogger.LogInfo("Ovid TRACE: Nu kommer der en PASSING TestRunStatus");
+            MyLogger.SetRunStatus(true);
+            MyLogger.LogInfo("Ovid TRACE: Nu kommer der en FALING TestRunStatus");
+            MyLogger.SetRunStatus(false);
+
         }
 
 
