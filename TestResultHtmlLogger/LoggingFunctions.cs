@@ -189,7 +189,7 @@ namespace TestResultHtmlLogger
             HtmlLine += string.Format("   <div class=\"el key\">{0}</div>\n", key);
             HtmlLine += string.Format("   <div class=\"el value\">{0}</div>\n", value);
             HtmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
-            HtmlLine += string.Format("</div>");
+            HtmlLine += string.Format("</div>\n");
 
             logFileHandle.Write(HtmlLine);
             logFileHandle.Flush();

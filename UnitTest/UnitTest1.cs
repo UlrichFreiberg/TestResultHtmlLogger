@@ -48,6 +48,12 @@ namespace UnitTest
             MyLogger.LogHeader("LogHeader");
             MyLogger.Header("Header");
 
+            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunction", (new String[] { "arg1", "arg2" }), new object[] { null });
+            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunction", 42);
+
+            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunctionShort");
+            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunctionShort");
+
             // used solely by Assert functions
             MyLogger.LogPass("testStepName LogPass", "LogPass");
             MyLogger.Pass("testStepName Pass", "Pass");
@@ -56,11 +62,6 @@ namespace UnitTest
 
             MyLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
 
-            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunction", (new String[] { "arg1", "arg2" }), new object[] { null });
-            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunction", 42);
-
-            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunctionShort");
-            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunctionShort");
 
             MyLogger.LogInfo("Ovid TRACE: Nu kommer der en PASSING TestRunStatus");
             MyLogger.SetRunStatus(true);
@@ -83,6 +84,25 @@ namespace UnitTest
             {
                 MyLogger.LogInfo(String.Format("LogInfo Nr {0}", i));
             }
+        }
+
+        [TestMethod]
+        public void TestMethod_CallStack()
+        {
+            var MyLogger = new TestResultHtmlLogger.TestResultHtmlLogger();
+
+            MyLogger.Init(@"c:\temp\unittestlogger.html");
+            MyLogger.LogLevel = TestResultHtmlLogger.LogLevel.Internal;
+            MyLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
+
+            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunction_L1");
+            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunction_L2");
+            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunction_L3");
+            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunction_L3");
+            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunction_L2");
+            MyLogger.LogFunctionEnter(TestResultHtmlLogger.LogLevel.Info, "Int", "NameOfFunction_L3");
+            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunction_L2");
+            MyLogger.LogFunctionExit(TestResultHtmlLogger.LogLevel.Info, "NameOfFunction_L1");
         }
     }
 }

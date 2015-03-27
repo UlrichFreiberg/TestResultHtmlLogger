@@ -10,6 +10,19 @@ namespace TestResultHtmlLogger
     {
         Stack<String> CallStack = new Stack<String>();
 
+        private String indentString()
+        {
+            int DotCount = CallStack.Count * 3;
+            String retVal = String.Empty;
+
+            for(int i=0; i<DotCount;i++) {
+                retVal += ".";
+            }
+
+            //"".PadLeft(CallStack.Count * 3)
+            return retVal;
+        }
+
         // =============================================================
         //
         // Functions in models/adapters
@@ -22,7 +35,7 @@ namespace TestResultHtmlLogger
 
             Args = "TODO: Concatenated string of argName and Values";
 
-            message = String.Format("--> {0} (1) returning {2}", functionName, Args, nameOfReturnType);
+            message = String.Format("> {0} {1} (2) returning {3}", indentString(), functionName, Args, nameOfReturnType);
             CallStack.Push(functionName);
             return LogOneHtmlMessage(logLevel, message);
         }
@@ -38,7 +51,7 @@ namespace TestResultHtmlLogger
             String PoppedName;
 
             PoppedName = CallStack.Pop();
-            message = String.Format("<-- Exited {0} returning {1}", PoppedName, "returnValue.ToString");
+            message = String.Format("< {0} Exited {1} returning {2}", indentString(), PoppedName, "returnValue.ToString");
             return LogOneHtmlMessage(logLevel, message);
         }
 
