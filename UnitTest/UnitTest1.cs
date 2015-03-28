@@ -112,14 +112,14 @@ namespace UnitTest
         [TestMethod]
         public void TestLogScreenshot()
         {
-            var myLogger = new TestResultHtmlLogger.TestResultHtmlLogger();
+            var myLogger = new TestResultHtmlLogger();
 
             myLogger.Init(@"c:\temp\unittestlogger.html");
-            myLogger.LogLevel = TestResultHtmlLogger.LogLevel.Internal;
+            myLogger.LogLevel = LogLevel.Internal;
             myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
 
             myLogger.LogTrace("Just before a screenshot is taken");
-            myLogger.LogScreenshot(TestResultHtmlLogger.LogLevel.Info, "Grabbed screenshot");
+            myLogger.LogScreenshot(LogLevel.Info, "Grabbed screenshot");
             myLogger.LogTrace("right after a screenshot is taken");
         }
     }

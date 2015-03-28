@@ -12,8 +12,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
-namespace TestResultHtmlLogger
+namespace Stf.Utilities.TestResultHtmlLogger
 {
     /// <summary>
     /// The test result html logger.
@@ -129,7 +130,7 @@ namespace TestResultHtmlLogger
         /// </returns>
         private int LogOneImage(LogLevel logLevel, string imageFile, string message)
         {
-            if (!AddLoglevelToRunReport[logLevel])
+            if (!_addLoglevelToRunReport[logLevel])
             {
                 return -1;
             }
@@ -144,8 +145,8 @@ namespace TestResultHtmlLogger
             html += string.Format("    <p><img  onclick=\"showImage(this)\" class=\"embeddedimage\" alt=\"{0}\" src=\"data:image/png;base64, {1}\"</p>", message, imageFile);
             html += "</div>";
 
-            logFileHandle.Write(html);
-            logFileHandle.Flush();
+            _logFileHandle.Write(html);
+            _logFileHandle.Flush();
 
             return html.Length;
         }

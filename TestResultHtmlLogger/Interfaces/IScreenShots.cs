@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TestResultHtmlLogger
+namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>
     /// The Screenshots interface.
