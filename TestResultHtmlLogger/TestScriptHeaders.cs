@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
-namespace TestResultHtmlLogger
+namespace Stf.Utilities.TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ITestScriptHeaders
     {
@@ -18,12 +15,12 @@ namespace TestResultHtmlLogger
         // Used by Assertion functions
         //
         // =============================================================
-        public int SetRunStatus(Boolean RunStatusAllPassed)
+        public int SetRunStatus(Boolean runStatusAllPassed)
         {
             int retVal;
 
             LogHeader("Teststatus");
-            if (RunStatusAllPassed)
+            if (runStatusAllPassed)
             {
                 retVal = LogPass("Teststatus", "Test Completed with errors");
             }

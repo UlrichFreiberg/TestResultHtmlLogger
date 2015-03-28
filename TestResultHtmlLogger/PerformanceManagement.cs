@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
-namespace TestResultHtmlLogger
+namespace Stf.Utilities.TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : IPerformanceManagement
     {
         /// <summary>
         /// Used for indicating performance issues - if not logging, then something takes a long time:-)
         /// </summary>
-        DateTime TimeOfLastMessage;
+        DateTime _timeOfLastMessage;
 
         public void CheckForPerformanceAlert()
         {
-            var ElapsedTime = DateTime.Now - TimeOfLastMessage;
-            TimeOfLastMessage = DateTime.Now;
+            var elapsedTime = DateTime.Now - _timeOfLastMessage;
+            _timeOfLastMessage = DateTime.Now;
 
-            if (ElapsedTime.Seconds > Configuration.AlertLongInterval)
+            if (elapsedTime.Seconds > Configuration.AlertLongInterval)
             {
-                LogPerformanceAlert(ElapsedTime.TotalSeconds);
+                LogPerformanceAlert(elapsedTime.TotalSeconds);
             }
         }
 
@@ -31,9 +28,9 @@ namespace TestResultHtmlLogger
         // =============================================================
         public int LogPerformanceAlert(double elapsedTime)
         {
-            String PerformanceAlert = String.Format("PerfAlert: {0} seconds since last logEntry", elapsedTime);
+            String performanceAlert = String.Format("PerfAlert: {0} seconds since last logEntry", elapsedTime);
 
-            return LogWarning(PerformanceAlert);
+            return LogWarning(performanceAlert);
         }
     }
 }

@@ -8,10 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestResultHtmlLogger.Properties {
-    using System;
-    
-    
+using System.CodeDom.Compiler;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Globalization;
+using System.Resources;
+using System.Runtime.CompilerServices;
+
+namespace Stf.Utilities.TestResultHtmlLogger.Properties {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,27 +25,27 @@ namespace TestResultHtmlLogger.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+    [GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [DebuggerNonUserCode()]
+    [CompilerGenerated()]
     internal class Resources {
         
-        private static global::System.Resources.ResourceManager resourceMan;
+        private static ResourceManager resourceMan;
         
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        private static CultureInfo resourceCulture;
         
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static ResourceManager ResourceManager {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TestResultHtmlLogger.Properties.Resources", typeof(Resources).Assembly);
+                if (ReferenceEquals(resourceMan, null)) {
+                    ResourceManager temp = new ResourceManager("Stf.Utilities.TestResultHtmlLogger.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -50,8 +56,8 @@ namespace TestResultHtmlLogger.Properties {
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        internal static CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,67 +69,66 @@ namespace TestResultHtmlLogger.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_done {
+        internal static Bitmap icon_done {
             get {
                 object obj = ResourceManager.GetObject("icon_done", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_eye {
+        internal static Bitmap icon_eye {
             get {
                 object obj = ResourceManager.GetObject("icon_eye", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_fail {
+        internal static Bitmap icon_fail {
             get {
                 object obj = ResourceManager.GetObject("icon_fail", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_right_arrow {
+        internal static Bitmap icon_right_arrow {
             get {
                 object obj = ResourceManager.GetObject("icon_right_arrow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_star {
+        internal static Bitmap icon_star {
             get {
                 object obj = ResourceManager.GetObject("icon_star", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to var lastAnchor = &apos;&apos;;
         ///
-        ///
         ///function getURLParameter(name) {
         ///  return decodeURIComponent((new RegExp(&apos;[?|&amp;]&apos; + name + &apos;=&apos; + &apos;([^&amp;;]+?)(&amp;|#|;|$)&apos;).exec(location.search)||[,&quot;&quot;])[1].replace(/\+/g, &apos;%20&apos;))||null
         ///}
         ///
         ///function toggleKeyValues() {
-        ///	if (document.getElementById(&quot;toggleKeyValues&quot;).value == &quot;Skjul&quot;) {
+        ///	if (document.getElementById(&quot;toggleKeyValues&quot;).value == &quot;Hide&quot;) {
         ///		css(&apos;ul#logfileinfo&apos;, &apos;display&apos;, &apos;none&apos;);
-        ///		toggleButton(&quot;toggleKeyValues&quot;, &quot;Vis&quot;, &quot;Vis nøgleværdier&quot;);
-        ///	} else if (document.getElementById(&quot;toggleKeyValues&quot;).value == &quot;Vis&quot;) {
-        ///		var headerHeight [rest of string was truncated]&quot;;.
+        ///		toggleButton(&quot;toggleKeyValues&quot;, &quot;Show&quot;, &quot;Show KeyValues&quot;);
+        ///	} else if (document.getElementById(&quot;toggleKeyValues&quot;).value == &quot;Show&quot;) {
+        ///		var headerHeight =  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string logger {
             get {
@@ -134,22 +139,23 @@ namespace TestResultHtmlLogger.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap middot {
+        internal static Bitmap middot {
             get {
                 object obj = ResourceManager.GetObject("middot", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap)(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;body onload=&quot;loadKeyValueList()&quot;&gt;
-        ///  &lt;div id=&quot;header&quot;&gt;
-        ///    &lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;
-        ///	&lt;h1 id=&quot;logtitle&quot;&gt;LOGFILETITLE&lt;/h1&gt;
-        ///	&lt;p id=&quot;generatedbypOvid&quot;&gt;Leveret til dig af Ovid&lt;/p&gt;
-        ///  &lt;div id=&quot;buttons&quot;&gt;&lt;button id=&quot;passBtn&quot;          value=&quot;Skjul&quot; type=&quot;button&quot; onclick=&quot;toggleLogElements(&apos;.pass&apos;,  &apos;passBtn&apos;,  &apos;Pass&apos;)&quot; &gt;Skjul Pass&lt;/button&gt;
-        ///  &lt;button id=&quot;failBtn&quot;          value=&quot;Skjul&quot; type=&quot;button&quot; onclick=&quot;toggleLogElements(&apos;.fail&apos;,  &apos;failBtn&apos;,  &apos;Fail&apos;)&quot; &gt;Skjul Fail&lt;/button&gt;
-        ///  &lt;button id=&quot;errorBtn&quot;         value [rest of string was truncated]&quot;;.
+        ///	&lt;div id=&quot;header&quot;&gt;
+        ///		&lt;div id=&quot;logo&quot;&gt;&lt;/div&gt;
+        ///		&lt;h1 id=&quot;logtitle&quot;&gt;LOGFILETITLE&lt;/h1&gt;
+        ///		&lt;p id=&quot;generatedbypOvid&quot;&gt;Leveret til dig af Ovid&lt;/p&gt;
+        ///		&lt;div id=&quot;buttons&quot;&gt;
+        ///			&lt;button id=&quot;passBtn&quot;          value=&quot;Hide&quot; type=&quot;button&quot; onclick=&quot;toggleLogElements(&apos;.pass&apos;,  &apos;passBtn&apos;,  &apos;Pass&apos;)&quot; &gt;Hide Pass&lt;/button&gt;
+        ///			&lt;button id=&quot;failBtn&quot;          value=&quot;Hide&quot; type=&quot;button&quot; onclick=&quot;toggleLogElements(&apos;.fail&apos;,  &apos;failBtn&apos;,  &apos;Fail&apos;)&quot; &gt;Hide Fail&lt;/button&gt;
+        ///			&lt;button id=&quot;errorBtn&quot;         val [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string OpenBody {
             get {
@@ -174,7 +180,7 @@ namespace TestResultHtmlLogger.Properties {
         ///margin-left: 5px;
         ///height: 30px;
         ///width: 101px;
-        ///background: url(data:image/x-png;base64,iVBORw0KGgoAAAANSUhEUgAAAGUAAAAeCAYAAAA1mdDNAAAACXBIWXMAAAsTAAALEwEAmpwYAAAKT2lDQ1BQaG90b3Nob3AgSUNDIHByb2ZpbGUAAHjanVNnVFPpFj333vRCS4iAlEtvUhUIIFJCi4AUkSYqIQkQSoghodkVUcERRUUEG8igiAOOjoCMFVEsDIoK2AfkIaKOg6OIisr74Xuja9a89+bN/rXXPues852zzw [rest of string was truncated]&quot;;.
+        ///background: url(data:image/x-png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQTEhUUExQWFhUWGBsYGBgYGBwfGhoYFx0aFxgYGx0bHiggHRolHBoYIjEiJSkrLi4uGh8zODMtNyguLisBCgoKDQ0MDwwMDiwZFBksKzcsKyssKys3KysrLCssKysrNysrKywrKywrKysrLCsrLCssKysrKyssKysrKywrK//AABEIAMIBAwMBIgACEQEDEQH/xAAbAA [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string style {
             get {
@@ -185,10 +191,10 @@ namespace TestResultHtmlLogger.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Transparent {
+        internal static Bitmap Transparent {
             get {
                 object obj = ResourceManager.GetObject("Transparent", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((Bitmap)(obj));
             }
         }
     }

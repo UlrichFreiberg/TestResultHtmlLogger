@@ -1,58 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
-namespace TestResultHtmlLogger
+namespace Stf.Utilities.TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ILoggingFunctions
     {
-        int messageId = 0;
+        int _messageId = 0;
         String GetNextMessageId()
         {
-            return string.Format("m{0}", messageId++);
+            return string.Format("m{0}", _messageId++);
         }
 
-        int LogOneHtmlMessage(LogLevel logLevel, string Message)
+        int LogOneHtmlMessage(LogLevel logLevel, string message)
         {
-            string HtmlLine, LogLevelString;
-            string IndentString;
+            string htmlLine, logLevelString;
+            string indentString;
             string messageIdString;
 
-            if (! AddLoglevelToRunReport[logLevel]) {
+            if (! _addLoglevelToRunReport[logLevel]) {
                 return -1;
             }
 
             messageIdString = GetNextMessageId();
-            LogLevelString = Enum.GetName(typeof(LogLevel), logLevel);
+            logLevelString = Enum.GetName(typeof(LogLevel), logLevel);
             CheckForPerformanceAlert();
 
             // TODO need some info from LogFunctionEnter/Exit, to set the indentation right
-            IndentString = "";
+            indentString = "";
 
             switch (logLevel)
             {
                 case LogLevel.Header:
-                    HtmlLine = string.Format("<div class=\"line logheader\">{0}</div>\n", Message);
+                    htmlLine = string.Format("<div class=\"line logheader\">{0}</div>\n", message);
                     break;
                 case LogLevel.SubHeader:
-                    HtmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>\n", Message);
+                    htmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>\n", message);
                     break;
 
               default:
-                    HtmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, LogLevelString.ToLower());
-                    HtmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", TimeOfLastMessage.ToString("HH:mm:ss"));
-                    HtmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", LogLevelString);
-                    HtmlLine += String.Format("    <div class=\"el pad\">{0}</div>\n", IndentString);
-                    HtmlLine += String.Format("    <div class=\"el msg\">{0}</div>\n", Message);
-                    HtmlLine += String.Format("</div>\n");
+                    htmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, logLevelString.ToLower());
+                    htmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", _timeOfLastMessage.ToString("HH:mm:ss"));
+                    htmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
+                    htmlLine += String.Format("    <div class=\"el pad\">{0}</div>\n", indentString);
+                    htmlLine += String.Format("    <div class=\"el msg\">{0}</div>\n", message);
+                    htmlLine += String.Format("</div>\n");
                     break;
             }
 
-            logFileHandle.Write(HtmlLine);
-            logFileHandle.Flush();
-            return HtmlLine.Length;
+            _logFileHandle.Write(htmlLine);
+            _logFileHandle.Flush();
+            return htmlLine.Length;
         }
 
         // =============================================================
@@ -159,9 +156,9 @@ namespace TestResultHtmlLogger
         // =============================================================
         public int LogPass(string testStepName, string message)
         {
-            var TempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
+            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
 
-            return LogOneHtmlMessage(LogLevel.Pass, TempNeedsToBeReworkedMessage);
+            return LogOneHtmlMessage(LogLevel.Pass, tempNeedsToBeReworkedMessage);
         }
 
         public int Pass(string testStepName, string message)
@@ -171,9 +168,9 @@ namespace TestResultHtmlLogger
 
         public int LogFail(string testStepName, string message)
         {
-            var TempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
+            var tempNeedsToBeReworkedMessage = string.Format("TestStepName=[{0}], message=[{1}]", testStepName, message);
 
-            return LogOneHtmlMessage(LogLevel.Fail, TempNeedsToBeReworkedMessage);
+            return LogOneHtmlMessage(LogLevel.Fail, tempNeedsToBeReworkedMessage);
         }
 
         public int Fail(string testStepName, string message)
@@ -183,17 +180,17 @@ namespace TestResultHtmlLogger
 
         public int LogKeyValue(string key, string value, string message)
         {
-            String HtmlLine; 
+            String htmlLine; 
 
-            HtmlLine = string.Format("<div class=\"line keyvalue\">\n");
-            HtmlLine += string.Format("   <div class=\"el key\">{0}</div>\n", key);
-            HtmlLine += string.Format("   <div class=\"el value\">{0}</div>\n", value);
-            HtmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
-            HtmlLine += string.Format("</div>\n");
+            htmlLine = string.Format("<div class=\"line keyvalue\">\n");
+            htmlLine += string.Format("   <div class=\"el key\">{0}</div>\n", key);
+            htmlLine += string.Format("   <div class=\"el value\">{0}</div>\n", value);
+            htmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
+            htmlLine += string.Format("</div>\n");
 
-            logFileHandle.Write(HtmlLine);
-            logFileHandle.Flush();
-            return HtmlLine.Length;
+            _logFileHandle.Write(htmlLine);
+            _logFileHandle.Flush();
+            return htmlLine.Length;
         }
     }
 }

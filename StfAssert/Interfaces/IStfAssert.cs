@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Stf.Utilities.Assert.Interfaces
+namespace Stf.Utilities.StfAssert.Interfaces
 {
     public interface IStfAssert
     {
@@ -98,9 +94,9 @@ namespace Stf.Utilities.Assert.Interfaces
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
         /// <param name="value"></param>
-        /// <param name="ExpectedTypeName"></param>
+        /// <param name="expectedTypeName"></param>
         /// <returns>Boolean</returns>
-        Boolean AssertIsInstanceOf(String testStep, Object value, String ExpectedTypeName);
+        Boolean AssertIsInstanceOf(String testStep, Object value, String expectedTypeName);
 
         /// <summary>
         /// 
@@ -138,67 +134,67 @@ namespace Stf.Utilities.Assert.Interfaces
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="LeftHandSide"></param>
-        /// <param name="RightHandSide"></param>
+        /// <param name="leftHandSide"></param>
+        /// <param name="rightHandSide"></param>
         /// <returns>Boolean</returns>
-        Boolean AssertGreaterThan(String testStep, Object LeftHandSide, Object RightHandSide);
+        Boolean AssertGreaterThan(String testStep, Object leftHandSide, Object rightHandSide);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="LeftHandSide"></param>
-        /// <param name="RightHandSide"></param>
+        /// <param name="leftHandSide"></param>
+        /// <param name="rightHandSide"></param>
         /// <returns>Boolean</returns>
-        Boolean AssertLessThan(String testStep, Object LeftHandSide, Object RightHandSide);
+        Boolean AssertLessThan(String testStep, Object leftHandSide, Object rightHandSide);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="FilenameAndPath">Absolut path to the file of interest</param>
+        /// <param name="filenameAndPath">Absolut path to the file of interest</param>
         /// <returns>Boolean</returns>
-        Boolean AssertFileExists(String testStep, String FilenameAndPath);
+        Boolean AssertFileExists(String testStep, String filenameAndPath);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="FoldernameAndPath"></param>
+        /// <param name="foldernameAndPath"></param>
         /// <returns>Boolean</returns>
-        Boolean AssertFolderExists(String testStep, String FoldernameAndPath);
+        Boolean AssertFolderExists(String testStep, String foldernameAndPath);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="FoldernameAndPath"></param>
+        /// <param name="foldernameAndPath"></param>
         /// <returns>Boolean</returns>
-        Boolean AssertFolderNotExists(String testStep, String FoldernameAndPath);
+        Boolean AssertFolderNotExists(String testStep, String foldernameAndPath);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="FilenameAndPath">Absolut path to the file of interest</param>
+        /// <param name="filenameAndPath">Absolut path to the file of interest</param>
         /// <returns>Boolean</returns>
-        Boolean AssertFileNotExists(String testStep, String FilenameAndPath);
+        Boolean AssertFileNotExists(String testStep, String filenameAndPath);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="Value"></param>
+        /// <param name="value"></param>
         /// <returns>Boolean</returns>
-        Boolean AssertTrue(String testStep, Boolean Value);
+        Boolean AssertTrue(String testStep, Boolean value);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="Value"></param>
+        /// <param name="value"></param>
         /// <returns>Boolean</returns>
-        Boolean AssertFalse(String testStep, Boolean Value);
+        Boolean AssertFalse(String testStep, Boolean value);
 
         /// <summary>
         /// 

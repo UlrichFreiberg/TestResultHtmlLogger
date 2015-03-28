@@ -31,7 +31,7 @@ position: fixed;
 top: 0;
 display: none;
 }
-p#generatedbyovid {
+p#generatedbyObject LeftHandSide, Object RightHandSide {
 margin-top: 0px;
 padding-top: 0px;
 font-size: 0.75em;

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+using Stf.Utilities.TestResultHtmlLogger.Properties;
 
-namespace TestResultHtmlLogger
+namespace Stf.Utilities.TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ILogfileManagement
     {
@@ -16,17 +15,17 @@ namespace TestResultHtmlLogger
 
         public LogConfiguration Configuration = new LogConfiguration();
 
-        StreamWriter logFileHandle;
+        StreamWriter _logFileHandle;
 
         /// <summary>
         /// Do we log for a given loglevel?
         /// </summary>
-        Dictionary<LogLevel, Boolean> AddLoglevelToRunReport;
+        Dictionary<LogLevel, Boolean> _addLoglevelToRunReport;
 
         /// <summary>
         /// NumberOfLoglevelMessages - to the finishing TestStatus
         /// </summary>
-        Dictionary<LogLevel, int> NumberOfLoglevelMessages;
+        Dictionary<LogLevel, int> _numberOfLoglevelMessages;
 
         /// <summary>
         /// Logging disabled until LogFile property is set. />
@@ -41,14 +40,14 @@ namespace TestResultHtmlLogger
         /// <summary>
         /// Details about Environment, Test Agent (the current machine - OS, versions of Software), Date
         /// </summary>
-        Dictionary<string, string> LogInfoDetails;
+        Dictionary<string, string> _logInfoDetails;
 
         /// <summary>
         /// Title
         /// </summary>
         string LogTitle { get; set; }
 
-        string mLogFileName;
+        string _mLogFileName;
         /// <summary>
         /// Path to the resulting logfile
         /// </summary>
@@ -56,16 +55,16 @@ namespace TestResultHtmlLogger
         {
             get
             {
-                return mLogFileName;
+                return _mLogFileName;
             }
             set
             {
-                mLogFileName = value;
+                _mLogFileName = value;
                 BeginHtmlLogFile(LogFileName);
             }
         }
 
-        LogLevel mLogLevel;
+        LogLevel _mLogLevel;
         /// <summary>
         /// What level should the logger accept logging for. Lower levels than this will be ignored - as "trace" will be ignored is level is set to "debug"
         /// </summary>
@@ -73,50 +72,50 @@ namespace TestResultHtmlLogger
         {
             get
             {
-                return mLogLevel;
+                return _mLogLevel;
             }
 
             set
             {
-                mLogLevel = value;
-                TimeOfLastMessage = DateTime.Now;
+                _mLogLevel = value;
+                _timeOfLastMessage = DateTime.Now;
 
                 //TODO: Should go to a contructor
-                AddLoglevelToRunReport = new Dictionary<LogLevel, bool>();
-                NumberOfLoglevelMessages = new Dictionary<LogLevel, int>();
+                _addLoglevelToRunReport = new Dictionary<LogLevel, bool>();
+                _numberOfLoglevelMessages = new Dictionary<LogLevel, int>();
 
                 foreach (LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
                 {
-                    NumberOfLoglevelMessages.Add(loglevel, 0);
-                    AddLoglevelToRunReport.Add(loglevel, true);
+                    _numberOfLoglevelMessages.Add(loglevel, 0);
+                    _addLoglevelToRunReport.Add(loglevel, true);
                 }
 
                 switch (value)
                 {
                     case LogLevel.Error:
-                        AddLoglevelToRunReport[LogLevel.Warning] = false;
-                        AddLoglevelToRunReport[LogLevel.Info] = false;
-                        AddLoglevelToRunReport[LogLevel.Debug] = false;
-                        AddLoglevelToRunReport[LogLevel.Trace] = false;
-                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        _addLoglevelToRunReport[LogLevel.Warning] = false;
+                        _addLoglevelToRunReport[LogLevel.Info] = false;
+                        _addLoglevelToRunReport[LogLevel.Debug] = false;
+                        _addLoglevelToRunReport[LogLevel.Trace] = false;
+                        _addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Warning:
-                        AddLoglevelToRunReport[LogLevel.Info] = false;
-                        AddLoglevelToRunReport[LogLevel.Debug] = false;
-                        AddLoglevelToRunReport[LogLevel.Trace] = false;
-                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        _addLoglevelToRunReport[LogLevel.Info] = false;
+                        _addLoglevelToRunReport[LogLevel.Debug] = false;
+                        _addLoglevelToRunReport[LogLevel.Trace] = false;
+                        _addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Info:
-                        AddLoglevelToRunReport[LogLevel.Debug] = false;
-                        AddLoglevelToRunReport[LogLevel.Trace] = false;
-                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        _addLoglevelToRunReport[LogLevel.Debug] = false;
+                        _addLoglevelToRunReport[LogLevel.Trace] = false;
+                        _addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Debug:
-                        AddLoglevelToRunReport[LogLevel.Trace] = false;
-                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        _addLoglevelToRunReport[LogLevel.Trace] = false;
+                        _addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Trace:
-                        AddLoglevelToRunReport[LogLevel.Internal] = false;
+                        _addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Internal:
                         break;
@@ -143,12 +142,12 @@ namespace TestResultHtmlLogger
         /// <returns></returns>
         string GetJavaScript()
         {
-            String RetVal;
-            var styleSheet = Properties.Resources.ResourceManager.GetObject("logger");
+            String retVal;
+            var styleSheet = Resources.ResourceManager.GetObject("logger");
 
-            RetVal = styleSheet.ToString();
+            retVal = styleSheet.ToString();
 
-            return RetVal;
+            return retVal;
         }
 
         
@@ -159,11 +158,11 @@ namespace TestResultHtmlLogger
         /// <returns></returns>
         string GetOpenBody()
         {
-            String RetVal;
-            var openBody = Properties.Resources.ResourceManager.GetObject("OpenBody");
+            String retVal;
+            var openBody = Resources.ResourceManager.GetObject("OpenBody");
 
-            RetVal = openBody.ToString();
-            return RetVal;
+            retVal = openBody.ToString();
+            return retVal;
         }
 
         /// <summary>
@@ -172,29 +171,29 @@ namespace TestResultHtmlLogger
         /// <returns></returns>
         string GetStyleSheet()
         {
-            String RetVal;
-            var styleSheet = Properties.Resources.ResourceManager.GetObject("style");
+            String retVal;
+            var styleSheet = Resources.ResourceManager.GetObject("style");
 
-            RetVal = styleSheet.ToString();
+            retVal = styleSheet.ToString();
 
-            return RetVal;
+            return retVal;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="FileName"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
-        Boolean BeginHtmlLogFile(string FileName)
+        Boolean BeginHtmlLogFile(string fileName)
         {
-            String HtmlLine;
+            String htmlLine;
 
-            if (logFileHandle != null)
+            if (_logFileHandle != null)
             {
-                logFileHandle.Close();
+                _logFileHandle.Close();
             }
 
-            logFileHandle = new StreamWriter(LogFileName);
+            _logFileHandle = new StreamWriter(LogFileName);
 
             /*  if value is nullOrEmpty we want to close the file
              *       Close the currently opened log file.
@@ -211,31 +210,31 @@ namespace TestResultHtmlLogger
              * LogToFile = True
             */
 
-            HtmlLine = "<!DOCTYPE html>\n";
-            HtmlLine += "<html>\n";
-            HtmlLine += "  <head>\n";
-            HtmlLine += "    <title>Ulrich Og Kasper</title>\n";
-            HtmlLine += "    <style type=\"text/css\">\n";
-            HtmlLine += GetStyleSheet();
-            HtmlLine += "    </style>\n<script type=\"text/javascript\">";
-            HtmlLine += GetJavaScript();
-            HtmlLine += "  </script>\n</head>\n";
-            HtmlLine += GetOpenBody();
+            htmlLine = "<!DOCTYPE html>\n";
+            htmlLine += "<html>\n";
+            htmlLine += "  <head>\n";
+            htmlLine += "    <title>Ulrich Og Kasper</title>\n";
+            htmlLine += "    <style type=\"text/css\">\n";
+            htmlLine += GetStyleSheet();
+            htmlLine += "    </style>\n<script type=\"text/javascript\">";
+            htmlLine += GetJavaScript();
+            htmlLine += "  </script>\n</head>\n";
+            htmlLine += GetOpenBody();
 
-            logFileHandle.Write(HtmlLine);
-            logFileHandle.Flush();
+            _logFileHandle.Write(htmlLine);
+            _logFileHandle.Flush();
             return true;
         }
 
         Boolean EndHtmlLogFile()
         {
-            String HtmlLine;
+            String htmlLine;
 
-            HtmlLine = "  </body>\n";
-            HtmlLine += "</html>\n";
+            htmlLine = "  </body>\n";
+            htmlLine += "</html>\n";
 
-            logFileHandle.Write(HtmlLine);
-            logFileHandle.Flush();
+            _logFileHandle.Write(htmlLine);
+            _logFileHandle.Flush();
             return true;
         }
 

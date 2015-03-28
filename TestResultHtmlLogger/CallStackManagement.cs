@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
-namespace TestResultHtmlLogger
+namespace Stf.Utilities.TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ITestResultHtmlLogger
     {
-        Stack<String> CallStack = new Stack<String>();
+        readonly Stack<String> _callStack = new Stack<String>();
 
-        private String indentString()
+        private String IndentString()
         {
-            int DotCount = CallStack.Count * 3;
+            int dotCount = _callStack.Count * 3;
             String retVal = String.Empty;
 
-            for(int i=0; i<DotCount;i++) {
+            for(int i=0; i<dotCount;i++) {
                 retVal += ".";
             }
 
@@ -31,12 +29,12 @@ namespace TestResultHtmlLogger
         public int LogFunctionEnter(LogLevel logLevel, string nameOfReturnType, string functionName, string[] args, object[] argValues)
         {
             String message;
-            String Args;
+            String argsString;
 
-            Args = "TODO: Concatenated string of argName and Values";
+            argsString = "TODO: Concatenated string of argName and Values";
 
-            message = String.Format("> {0} {1} (2) returning {3}", indentString(), functionName, Args, nameOfReturnType);
-            CallStack.Push(functionName);
+            message = String.Format("> {0} {1} {2} returning {3}", IndentString(), functionName, argsString, nameOfReturnType);
+            _callStack.Push(functionName);
             return LogOneHtmlMessage(logLevel, message);
         }
 
@@ -48,10 +46,10 @@ namespace TestResultHtmlLogger
         public int LogFunctionExit(LogLevel logLevel, string functionName, object returnValue)
         {
             String message;
-            String PoppedName;
+            String poppedName;
 
-            PoppedName = CallStack.Pop();
-            message = String.Format("< {0} Exited {1} returning {2}", indentString(), PoppedName, "returnValue.ToString");
+            poppedName = _callStack.Pop();
+            message = String.Format("< {0} Exited {1} returning {2}", IndentString(), poppedName, "returnValue.ToString");
             return LogOneHtmlMessage(logLevel, message);
         }
 

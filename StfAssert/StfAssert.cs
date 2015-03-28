@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Stf.Utilities.StfAssert.Interfaces;
 
-namespace Stf.Utilities.Assert
+namespace Stf.Utilities.StfAssert
 {
-    public class StfAssert : Interfaces.IStfAssert
+    public class StfAssert : IStfAssert
     {
-        Boolean Equals(Object expected, Object actual, ref String Message) 
+        Boolean Equals(Object expected, Object actual, ref String message) 
         {
             return true;
         }
@@ -101,7 +98,7 @@ namespace Stf.Utilities.Assert
             throw new NotImplementedException();
         }
 
-        public bool AssertIsInstanceOf(string testStep, object value, string ExpectedTypeName)
+        public bool AssertIsInstanceOf(string testStep, object value, string expectedTypeName)
         {
             throw new NotImplementedException();
         }
@@ -126,42 +123,42 @@ namespace Stf.Utilities.Assert
             throw new NotImplementedException();
         }
 
-        public bool AssertGreaterThan(string testStep, object LeftHandSide, object RightHandSide)
+        public bool AssertGreaterThan(string testStep, object leftHandSide, object rightHandSide)
         {
             throw new NotImplementedException();
         }
 
-        public bool AssertLessThan(string testStep, object LeftHandSide, object RightHandSide)
+        public bool AssertLessThan(string testStep, object leftHandSide, object rightHandSide)
         {
             throw new NotImplementedException();
         }
 
-        public bool AssertFileExists(string testStep, string FilenameAndPath)
+        public bool AssertFileExists(string testStep, string filenameAndPath)
         {
             throw new NotImplementedException();
         }
 
-        public bool AssertFolderExists(string testStep, string FoldernameAndPath)
+        public bool AssertFolderExists(string testStep, string foldernameAndPath)
         {
             throw new NotImplementedException();
         }
 
-        public bool AssertFolderNotExists(string testStep, string FoldernameAndPath)
+        public bool AssertFolderNotExists(string testStep, string foldernameAndPath)
         {
             throw new NotImplementedException();
         }
 
-        public bool AssertFileNotExists(string testStep, string FilenameAndPath)
+        public bool AssertFileNotExists(string testStep, string filenameAndPath)
         {
             throw new NotImplementedException();
         }
 
-        public bool AssertTrue(string testStep, bool Value)
+        public bool AssertTrue(string testStep, bool value)
         {
             throw new NotImplementedException();
         }
 
-        public bool AssertFalse(string testStep, bool Value)
+        public bool AssertFalse(string testStep, bool value)
         {
             throw new NotImplementedException();
         }

@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
-namespace TestResultHtmlLogger
+namespace Stf.Utilities.TestResultHtmlLogger
 {
     static class Settings
     {
-        static UriBuilder uri = new UriBuilder(Assembly.GetExecutingAssembly().CodeBase);
-        static System.Configuration.Configuration myDllConfig = ConfigurationManager.OpenExeConfiguration(uri.Path);
-        static AppSettingsSection AppSettings = (AppSettingsSection)myDllConfig.GetSection("appSettings");
-        static NumberFormatInfo nfi = new NumberFormatInfo()
+        static readonly UriBuilder Uri = new UriBuilder(Assembly.GetExecutingAssembly().CodeBase);
+        static readonly Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(Uri.Path);
+        static readonly AppSettingsSection AppSettings = (AppSettingsSection)MyDllConfig.GetSection("appSettings");
+        static readonly NumberFormatInfo Nfi = new NumberFormatInfo()
         {
             NumberGroupSeparator = "",
             CurrencyDecimalSeparator = "."
@@ -22,7 +19,7 @@ namespace TestResultHtmlLogger
 
         public static T Setting<T>(string name)
         {
-            return (T)Convert.ChangeType(AppSettings.Settings[name].Value, typeof(T), nfi);
+            return (T)Convert.ChangeType(AppSettings.Settings[name].Value, typeof(T), Nfi);
         }
     }
 
