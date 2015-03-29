@@ -7,19 +7,14 @@ namespace Stf.Utilities.TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ILogfileManagement
     {
-        ~TestResultHtmlLogger()
-        {
-            _logFileHandle.Close();
-        }
-
         public LogConfiguration Configuration = new LogConfiguration();
 
-        LogfileWriter _logFileHandle = new LogfileWriter();
+        readonly LogfileWriter _logFileHandle = new LogfileWriter();
 
         /// <summary>
         /// Do we log for a given loglevel?
         /// </summary>
-        Dictionary<LogLevel, Boolean> _addLoglevelToRunReport;
+        private Dictionary<LogLevel, bool> _addLoglevelToRunReport;
 
         /// <summary>
         /// NumberOfLoglevelMessages - to the finishing TestStatus
@@ -29,12 +24,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// Logging disabled until LogFile property is set. />
         /// </summary>
-        public Boolean LogToFile { get; set; }
+        public bool LogToFile { get; set; }
 
         /// <summary>
         /// If logfile exists overwrite it.
         /// </summary>
-        Boolean OverwriteLogFile { get; set; }
+        bool OverwriteLogFile { get; set; }
 
         /// <summary>
         /// Details about Environment, Test Agent (the current machine - OS, versions of Software), Date
@@ -136,7 +131,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// Should we archive the logfile
         /// </summary>
-        Boolean ArchiveLogFile { get; set; }
+        bool ArchiveLogFile { get; set; }
 
         /// <summary>
         ///   reads in the JavaScript functions for the logfile buttons etc
@@ -144,15 +139,22 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <returns></returns>
         string GetJavaScript()
         {
-            String retVal;
-            var styleSheet = Resources.ResourceManager.GetObject("logger");
+            string retVal;
+            var loggerJs = Resources.ResourceManager.GetObject("logger");
 
-            retVal = styleSheet.ToString();
+            if (loggerJs == null)
+            {
+                retVal = "<error>No Logger JS section defined</error>";
+            }
+            else
+            {
+                retVal = loggerJs.ToString();
+            }
 
             return retVal;
         }
 
-        
+
 
         /// <summary>
         ///   reads in the HTML that constitoes the top LogHeader
@@ -160,10 +162,18 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <returns></returns>
         string GetOpenBody()
         {
-            String retVal;
+            string retVal;
             var openBody = Resources.ResourceManager.GetObject("OpenBody");
 
-            retVal = openBody.ToString();
+            if (openBody == null)
+            {
+                retVal = "<error>No OpenBody section file found</error>";
+            }
+            else
+            {
+                retVal = openBody.ToString();
+            }
+
             return retVal;
         }
 
@@ -173,10 +183,17 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <returns></returns>
         string GetStyleSheet()
         {
-            String retVal;
+            string retVal;
             var styleSheet = Resources.ResourceManager.GetObject("style");
 
-            retVal = styleSheet.ToString();
+            if (styleSheet == null)
+            {
+                retVal = "<error>No styleSheet file found</error>";
+            }
+            else
+            {
+                retVal = styleSheet.ToString();
+            }
 
             return retVal;
         }
@@ -186,9 +203,9 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        Boolean BeginHtmlLogFile(string fileName)
+        bool BeginHtmlLogFile(string fileName)
         {
-            String htmlLine;
+            string htmlLine;
 
             _logFileHandle.Open(fileName);
 
@@ -207,9 +224,9 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return true;
         }
 
-        Boolean EndHtmlLogFile()
+        bool EndHtmlLogFile()
         {
-            String htmlLine;
+            string htmlLine;
 
             htmlLine = "  </body>\n";
             htmlLine += "</html>\n";
@@ -232,9 +249,9 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </summary>
         /// <param name="logFileName"></param>
         /// <returns></returns>
-        private Boolean Init(string logFileName)
+        private bool Init(string logFileName)
         {
-            var userName = String.Format("{0}\\{1}", Environment.UserDomainName, Environment.UserName);
+            var userName = string.Format("{0}\\{1}", Environment.UserDomainName, Environment.UserName);
 
             OverwriteLogFile = Configuration.OverwriteLogFile;
             TestName = "TestName_Not_Set";
@@ -243,9 +260,9 @@ namespace Stf.Utilities.TestResultHtmlLogger
             LogLevel = Configuration.LogLevel;
 
             // If no valid logfilename is given, then go for the configured value
-            if (String.IsNullOrEmpty(logFileName))
+            if (string.IsNullOrEmpty(logFileName))
             {
-                FileName = Configuration.LogFileName;                
+                FileName = Configuration.LogFileName;
             }
 
             if (_logFileHandle.Initialized)
@@ -261,7 +278,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
 
             if (!BeginHtmlLogFile(logFileName))
             {
-                return false;                
+                return false;
             }
 
             LogKeyValue("Environment", "TODO_ENVIRONMENT", "Configuration.EnvironmentName");
@@ -276,7 +293,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             LogKeyValue("Testname", TestName, "TODO_Testname");
             LogKeyValue("Date", DateTime.Now.ToShortDateString(), "");
 
-            LogTrace(String.Format("Log Initiated at [{0}]", FileName));
+            LogTrace(string.Format("Log Initiated at [{0}]", FileName));
             return true;
         }
 

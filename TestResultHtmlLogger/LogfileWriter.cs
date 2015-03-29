@@ -1,31 +1,83 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LogfileWriter.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the LogfileWriter type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 using System.IO;
 
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    /// <summary>
+    /// The logfile writer.
+    /// </summary>
     internal class LogfileWriter
     {
-        private StreamWriter Stream { set; get; }
-        public String LogFileName { set; get; }
-        public Boolean Initialized{ set; get; }
+        /// <summary>
+        /// Gets or sets the log file name.
+        /// </summary>
+        public string LogFileName { get; set; }
 
-        public Boolean Write(String stuffToWrite)
+        /// <summary>
+        /// Gets a value indicating whether or not the logfile is initialized.
+        /// </summary>
+        public bool Initialized { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the stream.
+        /// </summary>
+        private StreamWriter Stream { get; set; }
+
+        /// <summary>
+        /// Writes a buffer of characters to the logfile.
+        /// </summary>
+        /// <param name="stuffToWrite">
+        /// The stuff to write.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Write(string stuffToWrite)
         {
-            Stream.Write(stuffToWrite);
+            if (this.Stream == null)
+            {
+                return false;
+            }
+
+            this.Stream.Write(stuffToWrite);
             return true;
         }
 
-        public Boolean Open(String fileName)
+        /// <summary>
+        /// Open a logfile stream - respects the OverWriteFlag (soon:-)).
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Open(string fileName)
         {
             LogFileName = fileName;
             return Open();
         }
 
-        public Boolean Open()
+        /// <summary>
+        /// Open a logfile stream - respects the OverWriteFlag (soon:-)).
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Open()
         {
-            if (Initialized)
+            if (this.Initialized)
             {
-                Close();
+                this.Close();
             }
 
             /*       LogToFile = False */
@@ -35,12 +87,18 @@ namespace Stf.Utilities.TestResultHtmlLogger
              * open new file - respect the overwritefileflag
             */
 
-            Stream = new StreamWriter(LogFileName) {AutoFlush = true};
-            Initialized = true;
+            this.Stream = new StreamWriter(this.LogFileName) { AutoFlush = true };
+            this.Initialized = true;
             return true;
         }
 
-        public Boolean Close()
+        /// <summary>
+        /// Closing the logfile stream
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool Close()
         {
             if (Initialized)
             {

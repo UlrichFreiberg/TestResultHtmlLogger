@@ -15,7 +15,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         // Used by Assertion functions
         //
         // =============================================================
-        public int SetRunStatus(Boolean runStatusAllPassed)
+        public int SetRunStatus(bool runStatusAllPassed)
         {
             int retVal;
 
