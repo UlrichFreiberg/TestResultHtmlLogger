@@ -94,6 +94,7 @@
     <Compile Include="TestScriptHeaders.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utils\ScreenshotUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ITestResultHtmlLogger_OriginalCompiled.txt" />

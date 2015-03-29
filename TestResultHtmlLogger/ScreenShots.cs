@@ -8,11 +8,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Windows.Forms;
 using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+using Stf.Utilities.TestResultHtmlLogger.Utils;
 
 namespace Stf.Utilities.TestResultHtmlLogger
 {
@@ -21,6 +19,19 @@ namespace Stf.Utilities.TestResultHtmlLogger
     /// </summary>
     public partial class TestResultHtmlLogger : IScreenshots
     {
+        /// <summary>
+        /// The utilities.
+        /// </summary>
+        private ScreenshotUtilities utilities;
+
+        /// <summary>
+        /// Gets the utilities.
+        /// </summary>
+        internal ScreenshotUtilities Utilities 
+        {
+            get { return utilities ?? (utilities = new ScreenshotUtilities(this)); }
+        }
+
         /// <summary>
         /// The log all windows.
         /// </summary>
@@ -55,7 +66,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             var length = 0;
             foreach (var screen in Screen.AllScreens)
             {
-                length += LogOneImage(logLevel, DoScreenshot(screen.Bounds), message);
+                length += LogOneImage(logLevel, Utilities.DoScreenshot(screen.Bounds), message);
                 if (length < 0)
                 {
                     break;
@@ -83,44 +94,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
         public int LogImage(LogLevel logLevel, string imageFile, string message)
         {
             return LogOneImage(logLevel, imageFile, message);
-        }
-
-        /// <summary>
-        /// The take one screenshot.
-        /// </summary>
-        /// <param name="bounds">
-        /// The bounds.
-        /// </param>
-        /// <returns>
-        /// Base64 encoded image <see cref="string"/>
-        /// </returns>
-        private string DoScreenshot(Rectangle bounds)
-        {
-            var imageString = string.Empty;
-            var startingPoint = new Point(bounds.X, bounds.Y);
-
-            try
-            {
-                using (var bitmap = new Bitmap(bounds.Width, bounds.Height, PixelFormat.Format16bppRgb565))
-                {
-                    using (var graphics = Graphics.FromImage(bitmap))
-                    {
-                        graphics.CopyFromScreen(startingPoint, Point.Empty, bounds.Size);
-
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            bitmap.Save(memoryStream, ImageFormat.Png);
-                            imageString = Convert.ToBase64String(memoryStream.ToArray());
-                        }
-                    }
-                }
-            }
-            catch (Exception exception)
-            {
-                Internal(string.Format("Failed to grab screenshot. Error message: {0}", exception.Message)); // TODO: Handle specific exceptions
-            }
-
-            return imageString;
         }
 
         /// <summary>
