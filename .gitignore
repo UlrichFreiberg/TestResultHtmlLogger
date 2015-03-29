@@ -1,3 +1,4 @@
+*.Cache
 Thumbs.db
 *.suo
 **/bin/**
