@@ -32,7 +32,7 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         /// </summary>
         /// <param name="message">
         /// The message.
-        /// </param>
+        /// </param>C:\Users\Ulrich\Documents\GitHub\TestResultHtmlLogger\TestResultHtmlLogger\Interfaces\ILoggingFunctions.cs
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
