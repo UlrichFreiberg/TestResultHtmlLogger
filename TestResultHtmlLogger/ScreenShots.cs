@@ -9,6 +9,7 @@
 
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
@@ -52,8 +53,17 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </returns>
         public int LogScreenshot(LogLevel logLevel, string message)
         {
-            // TODO: log a screenshot of all monitors connected to the machine (this one currently only gets the primary screen)
-            return LogOneImage(logLevel, DoScreenshot(Screen.GetBounds(Point.Empty)), message);
+            var length = 0;
+            foreach (var screen in Screen.AllScreens)
+            {
+                length += LogOneImage(logLevel, DoScreenshot(screen.Bounds), message);
+                if (length < 0)
+                {
+                    break;
+                }
+            }
+
+            return length;
         }
 
         /// <summary>
@@ -88,6 +98,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         private string DoScreenshot(Rectangle bounds)
         {
             var imageString = string.Empty;
+            var startingPoint = new Point(bounds.X, bounds.Y);
 
             try
             {
@@ -95,7 +106,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
                 {
                     using (var graphics = Graphics.FromImage(bitmap))
                     {
-                        graphics.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
+                        graphics.CopyFromScreen(startingPoint, Point.Empty, bounds.Size);
 
                         using (var memoryStream = new MemoryStream())
                         {
