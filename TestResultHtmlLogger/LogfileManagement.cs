@@ -46,20 +46,23 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </summary>
         string LogTitle { get; set; }
 
-        string _mLogFileName;
+        string _mFileName;
         /// <summary>
         /// Path to the resulting logfile
         /// </summary>
-        string LogFileName
+        public string FileName
         {
             get
             {
-                return _mLogFileName;
+                return _mFileName;
             }
             set
             {
-                _mLogFileName = value;
-                BeginHtmlLogFile(LogFileName);
+                _mFileName = value;
+                if (!Init(FileName))
+                {
+                    Console.WriteLine(@"Coulnd't initialise the logfile");
+                }
             }
         }
 
@@ -229,29 +232,51 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </summary>
         /// <param name="logFileName"></param>
         /// <returns></returns>
-        public Boolean Init(string logFileName)
+        private Boolean Init(string logFileName)
         {
+            var userName = String.Format("{0}\\{1}", Environment.UserDomainName, Environment.UserName);
+
             OverwriteLogFile = Configuration.OverwriteLogFile;
             TestName = "TestName_Not_Set";
             LogToFile = Configuration.LogToFile;
             LogTitle = Configuration.LogTitle;
             LogLevel = Configuration.LogLevel;
-            LogFileName = Configuration.LogFileName;
+
+            // If no valid logfilename is given, then go for the configured value
+            if (String.IsNullOrEmpty(logFileName))
+            {
+                FileName = Configuration.LogFileName;                
+            }
+
+            if (_logFileHandle.Initialized)
+            {
+                EndHtmlLogFile();
+                _logFileHandle.Close();
+            }
+
+            if (!_logFileHandle.Open(logFileName))
+            {
+                return false;
+            }
+
+            if (!BeginHtmlLogFile(logFileName))
+            {
+                return false;                
+            }
 
             LogKeyValue("Environment", "TODO_ENVIRONMENT", "Configuration.EnvironmentName");
-            LogKeyValue("OS", "TODO_Windows OS", "");
-            LogKeyValue("InstDir", "TODO_InstDir", "TODO_InstDir");
-            LogKeyValue("ResultDir", "TODO_ResultDir", "TODO_ResultDir");
-            LogKeyValue("Controller", "TODO_Controller", "TODO_Controller");
-            LogKeyValue("Hostname", "TODO_Hostname", "TODO_Hostname");
-            LogKeyValue("TestDir", "TODO_TestDir", "TODO_TestDir");
+            LogKeyValue("OS", Environment.OSVersion.ToString(), "");
+            LogKeyValue("User", userName, "");
+            LogKeyValue("InstDir", Environment.CurrentDirectory, "TODO_InstDir");
+            LogKeyValue("ResultDir", Environment.CurrentDirectory, "TODO_ResultDir");
+            LogKeyValue("Controller", Environment.MachineName, "TODO_Controller");
+            LogKeyValue("Hostname", Environment.MachineName, "TODO_Hostname");
+            LogKeyValue("TestDir", Environment.CurrentDirectory, "TODO_TestDir");
             LogKeyValue("Test Iteration", "TODO_Test Iteration", "TODO_Test Iteration");
-            LogKeyValue("Testname", "TODO_Testname", "TODO_Testname");
+            LogKeyValue("Testname", TestName, "TODO_Testname");
             LogKeyValue("Date", DateTime.Now.ToShortDateString(), "");
 
-            //LogFileName = NewLogFileName
-
-            LogTrace(String.Format("Log Initiated at [{0}]", LogFileName));
+            LogTrace(String.Format("Log Initiated at [{0}]", FileName));
             return true;
         }
 
