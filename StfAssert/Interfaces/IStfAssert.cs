@@ -1,217 +1,221 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IStfAssert.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the IStfAssert type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 
 namespace Stf.Utilities.StfAssert.Interfaces
 {
+    /// <summary>
+    /// The StfAssert interface.
+    /// </summary>
     public interface IStfAssert
     {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="expected"></param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertEquals(String testStep, Object expected, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="expected">Value expected for the assert</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertEquals(string testStep, object expected, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="expected"></param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertBooleanEqual(String testStep, Object expected, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="expected">Value expected for the assert</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertBooleanEqual(string testStep, object expected, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="expected"></param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertEqualsCi(String testStep, Object expected, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="expected">Value expected for the assert</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertEqualsCi(string testStep, object expected, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="expected"></param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertNotEquals(String testStep, Object expected, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="expected">Value expected for the assert</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertNotEquals(string testStep, object expected, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="expected"></param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertNotEqualsCi(String testStep, Object expected, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="expected">Value expected for the assert</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertNotEqualsCi(string testStep, object expected, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertNothing(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertNothing(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertNotNothing(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertNotNothing(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertEmpty(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertEmpty(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertNotEmpty(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertNotEmpty(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertIsObject(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertIsObject(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="value"></param>
         /// <param name="expectedTypeName"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertIsInstanceOf(String testStep, Object value, String expectedTypeName);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertIsInstanceOf(string testStep, object value, string expectedTypeName);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertNotNull(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertNotNull(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertNull(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertNull(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertHasValue(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertHasValue(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
-        /// <param name="actual"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertHasNoValue(String testStep, Object actual);
+        /// <param name="testStep">Name of the test step in the test script</param>
+        /// <param name="actual">Value that was actually experienced</param>
+        /// <returns><see cref="bool"/></returns>
+        bool AssertHasNoValue(string testStep, object actual);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="leftHandSide"></param>
         /// <param name="rightHandSide"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertGreaterThan(String testStep, Object leftHandSide, Object rightHandSide);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertGreaterThan(string testStep, object leftHandSide, object rightHandSide);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="leftHandSide"></param>
         /// <param name="rightHandSide"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertLessThan(String testStep, Object leftHandSide, Object rightHandSide);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertLessThan(string testStep, object leftHandSide, object rightHandSide);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="filenameAndPath">Absolut path to the file of interest</param>
-        /// <returns>Boolean</returns>
-        Boolean AssertFileExists(String testStep, String filenameAndPath);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertFileExists(string testStep, string filenameAndPath);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="foldernameAndPath"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertFolderExists(String testStep, String foldernameAndPath);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertFolderExists(string testStep, string foldernameAndPath);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="foldernameAndPath"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertFolderNotExists(String testStep, String foldernameAndPath);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertFolderNotExists(string testStep, string foldernameAndPath);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="filenameAndPath">Absolut path to the file of interest</param>
-        /// <returns>Boolean</returns>
-        Boolean AssertFileNotExists(String testStep, String filenameAndPath);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertFileNotExists(string testStep, string filenameAndPath);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="value"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertTrue(String testStep, Boolean value);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertTrue(string testStep, bool value);
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="testStep">Name of the test step in the testscript</param>
+        /// <param name="testStep">Name of the test step in the test script</param>
         /// <param name="value"></param>
-        /// <returns>Boolean</returns>
-        Boolean AssertFalse(String testStep, Boolean value);
+        /// <returns><see cref="bool"/></returns>
+        bool AssertFalse(string testStep, bool value);
 
         /// <summary>
         /// 
         /// </summary>
-        Boolean EnableNegativeTesting { get; set; }
+        bool EnableNegativeTesting { get; set; }
 
         /// <summary>
-        /// 
+        /// Property for the last message reported - used by Unit tests 
         /// </summary>
-        /// <param name="actual"></param>
-        /// <param name="message"></param>
-        /// <returns>Boolean</returns>
-        Boolean CheckHasValue(Object actual, ref String message);
-
-        /// <summary>
-        ///Property for the last message reported - used by Unit tests 
-        /// </summary>
-        String LastMessage { get; }
+        string LastMessage { get; }
     }
 }
