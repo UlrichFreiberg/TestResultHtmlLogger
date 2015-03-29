@@ -5,9 +5,9 @@ namespace Stf.Utilities.TestResultHtmlLogger
 {
     internal class LogfileWriter
     {
-        public StreamWriter Stream { set; get; }
+        private StreamWriter Stream { set; get; }
         public String LogFileName { set; get; }
-        private Boolean _initialized;
+        public Boolean Initialized{ set; get; }
 
         public Boolean Write(String stuffToWrite)
         {
@@ -23,7 +23,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
 
         public Boolean Open()
         {
-            if (_initialized)
+            if (Initialized)
             {
                 Close();
             }
@@ -33,24 +33,21 @@ namespace Stf.Utilities.TestResultHtmlLogger
             /* Normalize value filename
              * if new file, then close the old file 
              * open new file - respect the overwritefileflag
-             * 
-                 
-             * LogToFile = True
             */
 
             Stream = new StreamWriter(LogFileName) {AutoFlush = true};
-            _initialized = true;
+            Initialized = true;
             return true;
         }
 
         public Boolean Close()
         {
-            if (_initialized)
+            if (Initialized)
             {
                 Stream.Close();
             }
 
-            _initialized = false;
+            Initialized = false;
             return true;
             /*       LogToFile = False */
         }
