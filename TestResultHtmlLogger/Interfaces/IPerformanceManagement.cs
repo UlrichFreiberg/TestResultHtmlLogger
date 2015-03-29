@@ -18,7 +18,9 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         /// Check how many seconds since last log entry - any performance issues?
         /// </summary>
         /// <param name="elapsedTime">seconds since last log entry</param>
-        /// <returns></returns>
+        /// <returns>
+        /// Number of alerts issued.
+        /// </returns>
         int LogPerformanceAlert(double elapsedTime);
     }
 }

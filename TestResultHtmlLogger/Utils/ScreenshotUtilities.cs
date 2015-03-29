@@ -67,7 +67,8 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
             }
             catch (Exception exception)
             {
-                Logger.Internal(string.Format("Failed to grab screenshot. Error message: {0}", exception.Message)); // TODO: Handle specific exceptions
+                // TODO: Handle specific exceptions
+                Logger.LogInternal(string.Format("Failed to grab screen shot. Error message: {0}", exception.Message)); 
             }
 
             return imageString;

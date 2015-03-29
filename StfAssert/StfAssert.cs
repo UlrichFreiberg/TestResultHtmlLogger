@@ -18,7 +18,7 @@ namespace Stf.Utilities.StfAssert
         /// <summary>
         /// The m enable negative testing.
         /// </summary>
-        private bool mEnableNegativeTesting;
+        private bool enableNegativeTesting;
 
         /// <summary>
         /// Gets or sets the logger.
@@ -32,21 +32,19 @@ namespace Stf.Utilities.StfAssert
         {
             get
             {
-                return this.mEnableNegativeTesting;
+                return this.enableNegativeTesting;
             }
 
             set
             {
                 this.Logger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value.ToString()));
-                this.mEnableNegativeTesting = value;
+                this.enableNegativeTesting = value;
             }
         }
 
         /// <summary>
         /// Gets the last message.
         /// </summary>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public string LastMessage
         {
             get { throw new NotImplementedException(); }
@@ -54,436 +52,340 @@ namespace Stf.Utilities.StfAssert
         }
 
         /// <summary>
-        /// The assert equals.
+        /// Assert if two values are the same. Values and objects can be compared.
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="expected">
-        /// The expected.
+        /// Value <c>expected</c> for the assert
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced.
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertEquals(string testStep, object expected, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert boolean equal.
+        /// Assert if two strings are the same - Case Insignificant
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="expected">
-        /// The expected.
+        /// Value <c>expected</c> for the assert
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced.
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public bool AssertBooleanEqual(string testStep, object expected, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// The assert equals ci.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertEqualsCi(string testStep, object expected, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert not equals.
+        /// Asserts that two values are the same. Values and objects can be compared.
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="expected">
-        /// The expected.
+        /// Value <c>expected</c> for the assert
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced.
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertNotEquals(string testStep, object expected, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert not equals ci.
+        /// Asserts that two values are not equal - Case Insignificant
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="expected">
-        /// The expected.
+        /// Value <c>expected</c> for the assert
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced.
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertNotEqualsCi(string testStep, object expected, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert nothing.
+        /// Asserts that a string is Null or Empty
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced.
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public bool AssertNothing(string testStep, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// The assert not nothing.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        public bool AssertNotNothing(string testStep, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// The assert empty.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertEmpty(string testStep, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert not empty.
+        /// Asserts that a string is Not (Null or Empty)
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced.
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertNotEmpty(string testStep, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert is object.
+        /// Asserts that a value is a Object type and not a reference type
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced.
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertIsObject(string testStep, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert is instance of.
+        /// Asserts a variable is of a specific type
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="value">
-        /// The value.
+        /// The variable to investigate
         /// </param>
         /// <param name="expectedTypeName">
-        /// The expected type name.
+        /// The expected type of the variable
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertIsInstanceOf(string testStep, object value, string expectedTypeName)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert not null.
+        /// Asserts whether a variable is NOT Null
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertNotNull(string testStep, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert null.
+        /// Asserts whether a variable is Null
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertNull(string testStep, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert has value.
+        /// Asserts whether a variable has a value - e.g. not Null or Empty
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertHasValue(string testStep, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert has no value.
+        /// Asserts whether a variable has NO value - e.g. Null or Empty
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="actual">
-        /// The value actually experienced
+        /// Value that was actually experienced
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertHasNoValue(string testStep, object actual)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert greater than.
+        /// Asserts whether the left hand side is greater than the right hand side
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="leftHandSide">
-        /// The left hand side.
+        /// The value to the left in a compare expression
         /// </param>
         /// <param name="rightHandSide">
-        /// The right hand side.
+        /// The value to the right in a compare expression
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertGreaterThan(string testStep, object leftHandSide, object rightHandSide)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert less than.
+        /// Asserts whether the left hand side is less than the right hand side
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="leftHandSide">
-        /// The left hand side.
+        /// The value to the left in a compare expression
         /// </param>
         /// <param name="rightHandSide">
-        /// The right hand side.
+        /// The value to the right in a compare expression
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertLessThan(string testStep, object leftHandSide, object rightHandSide)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert file exists.
+        /// Asserts that a file exists
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="filenameAndPath">
-        /// The filename and path.
+        /// Absolute path to the file of interest
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertFileExists(string testStep, string filenameAndPath)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert folder exists.
+        /// Asserts that a folder (directory) exists
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="foldernameAndPath">
-        /// The foldername and path.
+        /// Path to the folder
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertFolderExists(string testStep, string foldernameAndPath)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert folder not exists.
+        /// Asserts that a folder (directory) does NOT exists
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="foldernameAndPath">
-        /// The foldername and path.
+        /// Path to the folder
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertFolderNotExists(string testStep, string foldernameAndPath)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert file not exists.
+        /// Asserts that a file doesn't exists
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="filenameAndPath">
-        /// The filename and path.
+        /// Absolute path to the file of interest
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public bool AssertFileNotExists(string testStep, string filenameAndPath)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// The assert true.
+        /// Asserts that a expression is True
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="value">
-        /// The value actually experienced
+        /// The Value to investigate
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
@@ -507,13 +409,13 @@ namespace Stf.Utilities.StfAssert
         }
 
         /// <summary>
-        /// The assert false.
+        /// Asserts that a expression is True
         /// </summary>
         /// <param name="testStep">
-        /// The test step.
+        /// Name of the test step in the test script
         /// </param>
         /// <param name="value">
-        /// The value actually experienced
+        /// The Value to investigate
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
@@ -543,13 +445,11 @@ namespace Stf.Utilities.StfAssert
         /// The value actually experienced.
         /// </param>
         /// <param name="message">
-        /// The message.
+        /// The Message.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         private bool CheckHasValue(object actual, ref string message)
         {
             throw new NotImplementedException();
@@ -559,13 +459,13 @@ namespace Stf.Utilities.StfAssert
         /// The equals.
         /// </summary>
         /// <param name="expected">
-        /// The expected.
+        /// The Expected.
         /// </param>
         /// <param name="actual">
         /// The value actually experienced
         /// </param>
         /// <param name="message">
-        /// The message.
+        /// The Message.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
@@ -579,7 +479,7 @@ namespace Stf.Utilities.StfAssert
         /// The comparable.
         /// </summary>
         /// <param name="expected">
-        /// The expected.
+        /// The Expected.
         /// </param>
         /// <param name="actual">
         /// The value actually experienced.
@@ -599,7 +499,7 @@ namespace Stf.Utilities.StfAssert
         /// The test step.
         /// </param>
         /// <param name="message">
-        /// The message.
+        /// The Message.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
@@ -617,7 +517,7 @@ namespace Stf.Utilities.StfAssert
         /// The test step.
         /// </param>
         /// <param name="message">
-        /// The message.
+        /// The Message.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.

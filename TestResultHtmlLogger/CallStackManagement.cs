@@ -21,7 +21,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// The _call stack.
         /// </summary>
-        private readonly Stack<string> _callStack = new Stack<string>();
+        private readonly Stack<string> callStack = new Stack<string>();
 
         // =============================================================
         //
@@ -58,10 +58,25 @@ namespace Stf.Utilities.TestResultHtmlLogger
             argsString = "TODO: Concatenated string of argName and Values";
 
             message = string.Format("> {0} {1} {2} returning {3}", IndentString(), functionName, argsString, nameOfReturnType);
-            _callStack.Push(functionName);
+            this.callStack.Push(functionName);
             return LogOneHtmlMessage(logLevel, message);
         }
 
+        /// <summary>
+        /// The log function enter. Should be called/inserted when entering a model/adapter function.
+        /// </summary>
+        /// <param name="logLevel">
+        /// The log level.
+        /// </param>
+        /// <param name="nameOfReturnType">
+        /// The name of return type.
+        /// </param>
+        /// <param name="functionName">
+        /// The function name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         public int LogFunctionEnter(LogLevel logLevel, string nameOfReturnType, string functionName)
         {
             return LogFunctionEnter(logLevel, nameOfReturnType, functionName, null, null);
@@ -87,11 +102,23 @@ namespace Stf.Utilities.TestResultHtmlLogger
             string message;
             string poppedName;
 
-            poppedName = _callStack.Pop();
+            poppedName = this.callStack.Pop();
             message = string.Format("< {0} Exited {1} returning {2}", IndentString(), poppedName, "returnValue.ToString");
             return LogOneHtmlMessage(logLevel, message);
         }
 
+        /// <summary>
+        /// The log function exit. Should be called/inserted when exiting a model/adapter function.
+        /// </summary>
+        /// <param name="logLevel">
+        /// The log level.
+        /// </param>
+        /// <param name="functionName">
+        /// The function name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         public int LogFunctionExit(LogLevel logLevel, string functionName)
         {
             return LogFunctionExit(logLevel, functionName, null);
@@ -151,7 +178,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </returns>
         private string IndentString()
         {
-            var dotCount = _callStack.Count * 3;
+            var dotCount = this.callStack.Count * 3;
             var retVal = string.Empty;
 
             for (var i = 0; i < dotCount; i++)

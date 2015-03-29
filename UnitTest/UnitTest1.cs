@@ -40,27 +40,18 @@ namespace UnitTest
                 LogLevel = LogLevel.Internal
             };
 
-            myLogger.Info("For Some Reason this is never shown - seems like the first line is ignored");
             myLogger.LogError("LogError");
-            myLogger.Error("Error");
             myLogger.LogWarning("LogWarning");
-            myLogger.Warning("Warning");
             myLogger.LogInfo("LogInfo");
-            myLogger.Info("Info");
             myLogger.LogDebug("LogDebug");
-            myLogger.Debug("Debug");
 
             // normal logging functions - models and adapters
             myLogger.LogTrace("LogTrace");
-            myLogger.Trace("Trace");
             myLogger.LogInternal("LogInternal");
-            myLogger.Internal("Internal");
 
             // Header logging functions - testscripts
-            myLogger.LogSubHeader("LogSubHeader");
-            myLogger.SubHeader("SubHeader");
             myLogger.LogHeader("LogHeader");
-            myLogger.Header("Header");
+            myLogger.LogSubHeader("LogSubHeader");
 
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction", new[] { "arg1", "arg2" }, new object[] { null });
             myLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction", 42);
@@ -70,9 +61,7 @@ namespace UnitTest
 
             // used solely by Assert functions
             myLogger.LogPass("testStepName LogPass", "LogPass");
-            myLogger.Pass("testStepName Pass", "Pass");
             myLogger.LogFail("testStepName LogFail", "LogFail");
-            myLogger.Fail("testStepName Fail", "Fail");
 
             myLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
 
@@ -94,7 +83,6 @@ namespace UnitTest
                 LogLevel = LogLevel.Internal
             };
 
-            myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
             for (int i = 0; i < 75; i++)
             {
                 myLogger.LogInfo(string.Format("LogInfo Nr {0}", i));
@@ -112,8 +100,6 @@ namespace UnitTest
                 FileName = @"c:\temp\unittestlogger.html", 
                 LogLevel = LogLevel.Internal
             };
-
-            myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
 
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L1");
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L2");
@@ -137,15 +123,13 @@ namespace UnitTest
                 LogLevel = LogLevel.Internal
             };
 
-            myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
-
             myLogger.LogTrace("Just before a screenshot is taken");
             myLogger.LogScreenshot(LogLevel.Info, "Grabbed screenshot");
             myLogger.LogTrace("right after a screenshot is taken");
         }
 
         /// <summary>
-        /// The test log screenshot.
+        /// The test log screen shot.
         /// </summary>
         [TestMethod]
         public void TestLogFileWriter()

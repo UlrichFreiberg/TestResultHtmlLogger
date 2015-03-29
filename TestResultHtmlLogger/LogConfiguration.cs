@@ -102,11 +102,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
             /// <summary>
             /// The setting.
             /// </summary>
+            /// <typeparam name="T">
+            /// For now only Strings are supported
+            /// </typeparam>
             /// <param name="name">
             /// The name of the configuration file entry.
             /// </param>
-            /// <typeparam name="T">
-            /// </typeparam>
             /// <returns>
             /// The <see cref="T"/>.
             /// </returns>

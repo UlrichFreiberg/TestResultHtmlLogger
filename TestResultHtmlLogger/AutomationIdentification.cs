@@ -18,7 +18,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
     public partial class TestResultHtmlLogger : IAutomationIdentification
     {
         /// <summary>
-        /// dump an AutomationIdentification <c>object</c>.
+        /// Dump an AutomationIdentification <c>object</c>.
         /// </summary>
         /// <param name="logLevel">
         /// The log level.
@@ -27,13 +27,11 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// The automation id obj.
         /// </param>
         /// <param name="message">
-        /// The message.
+        /// The Message.
         /// </param>
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
         public int LogAutomationIdObject(LogLevel logLevel, object automationIdObj, string message)
         {
             throw new NotImplementedException();

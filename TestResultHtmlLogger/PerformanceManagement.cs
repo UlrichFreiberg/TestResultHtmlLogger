@@ -20,15 +20,15 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// Used for indicating performance issues - if not logging, then something takes a long time:-)
         /// </summary>
-        private DateTime _timeOfLastMessage;
+        private DateTime timeOfLastMessage;
 
         /// <summary>
         /// The check for performance alert.
         /// </summary>
         public void CheckForPerformanceAlert()
         {
-            var elapsedTime = DateTime.Now - _timeOfLastMessage;
-            _timeOfLastMessage = DateTime.Now;
+            var elapsedTime = DateTime.Now - this.timeOfLastMessage;
+            this.timeOfLastMessage = DateTime.Now;
 
             if (elapsedTime.Seconds > Configuration.AlertLongInterval)
             {

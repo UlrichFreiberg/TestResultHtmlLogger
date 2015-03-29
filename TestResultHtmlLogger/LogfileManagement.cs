@@ -121,7 +121,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             set
             {
                 _mLogLevel = value;
-                _timeOfLastMessage = DateTime.Now;
+                this.timeOfLastMessage = DateTime.Now;
 
                 // TODO: Should go to a contructor
                 _addLoglevelToRunReport = new Dictionary<LogLevel, bool>();
