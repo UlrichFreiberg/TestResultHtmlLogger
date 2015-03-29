@@ -1,8 +1,34 @@
-﻿namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IAutomationIdentification.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the IAutomationIdentification type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
+    /// <summary>
+    /// The AutomationIdentification <c>interface</c>.
+    /// </summary>
     public interface IAutomationIdentification
     {
-        // dump an AutomationIdentification object
+        /// <summary>
+        /// dump an AutomationIdentification to the log
+        /// </summary>
+        /// <param name="logLevel">
+        /// The log level.
+        /// </param>
+        /// <param name="automationIdObj">
+        /// The automation id obj.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogAutomationIdObject(LogLevel logLevel, object automationIdObj, string message);
     }
 }
