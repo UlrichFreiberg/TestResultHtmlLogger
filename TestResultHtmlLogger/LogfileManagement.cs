@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 using Stf.Utilities.TestResultHtmlLogger.Properties;
 
@@ -10,12 +9,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
     {
         ~TestResultHtmlLogger()
         {
-            //logFileHandle.Close();
+            _logFileHandle.Close();
         }
 
         public LogConfiguration Configuration = new LogConfiguration();
 
-        StreamWriter _logFileHandle;
+        LogfileWriter _logFileHandle = new LogfileWriter();
 
         /// <summary>
         /// Do we log for a given loglevel?
@@ -188,27 +187,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         {
             String htmlLine;
 
-            if (_logFileHandle != null)
-            {
-                _logFileHandle.Close();
-            }
-
-            _logFileHandle = new StreamWriter(LogFileName);
-
-            /*  if value is nullOrEmpty we want to close the file
-             *       Close the currently opened log file.
-             *       LogToFile = False
-             *       LogFileName = String.Empty
-             *       return
-             * endif
-             *  
-             * Normalize value filename
-             * if new file, then close the old file 
-             * open new file - respect the overwritefileflag
-             * 
-                 
-             * LogToFile = True
-            */
+            _logFileHandle.Open(fileName);
 
             htmlLine = "<!DOCTYPE html>\n";
             htmlLine += "<html>\n";
@@ -222,7 +201,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine += GetOpenBody();
 
             _logFileHandle.Write(htmlLine);
-            _logFileHandle.Flush();
             return true;
         }
 
@@ -234,7 +212,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine += "</html>\n";
 
             _logFileHandle.Write(htmlLine);
-            _logFileHandle.Flush();
             return true;
         }
 

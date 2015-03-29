@@ -5,7 +5,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
 {
     public partial class TestResultHtmlLogger : ILoggingFunctions
     {
-        int _messageId = 0;
+        int _messageId;
         String GetNextMessageId()
         {
             return string.Format("m{0}", _messageId++);
@@ -22,7 +22,9 @@ namespace Stf.Utilities.TestResultHtmlLogger
             }
 
             messageIdString = GetNextMessageId();
-            logLevelString = Enum.GetName(typeof(LogLevel), logLevel);
+            logLevelString = Enum.GetName(typeof(LogLevel), logLevel) ?? "Unknown LogLevel";
+            logLevelString = logLevelString.ToLower();
+
             CheckForPerformanceAlert();
 
             // TODO need some info from LogFunctionEnter/Exit, to set the indentation right
@@ -38,7 +40,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
                     break;
 
               default:
-                    htmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, logLevelString.ToLower());
+                    htmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, logLevelString);
                     htmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", _timeOfLastMessage.ToString("HH:mm:ss"));
                     htmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
                     htmlLine += String.Format("    <div class=\"el pad\">{0}</div>\n", indentString);
@@ -48,7 +50,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
             }
 
             _logFileHandle.Write(htmlLine);
-            _logFileHandle.Flush();
             return htmlLine.Length;
         }
 
@@ -189,7 +190,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine += string.Format("</div>\n");
 
             _logFileHandle.Write(htmlLine);
-            _logFileHandle.Flush();
             return htmlLine.Length;
         }
     }

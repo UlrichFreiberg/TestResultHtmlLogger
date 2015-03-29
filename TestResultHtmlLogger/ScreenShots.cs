@@ -146,7 +146,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
             html += "</div>";
 
             _logFileHandle.Write(html);
-            _logFileHandle.Flush();
 
             return html.Length;
         }
