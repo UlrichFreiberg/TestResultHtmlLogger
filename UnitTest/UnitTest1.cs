@@ -11,9 +11,8 @@ namespace UnitTest
         [TestMethod]
         public void TestMethod_Init()
         {
-            var myLogger = new TestResultHtmlLogger();
-
-            myLogger.Init(@"c:\temp\unittestlogger.html");
+            var myLogger = new TestResultHtmlLogger {FileName = @"c:\temp\unittestlogger.html"};
+            myLogger.CloseLogFile();
         }
 
 
@@ -23,12 +22,14 @@ namespace UnitTest
         [TestMethod]
         public void TestMethod_AllLogType()
         {
-            var myLogger = new TestResultHtmlLogger();
+            var myLogger = new TestResultHtmlLogger
+            {
+                FileName = @"c:\temp\unittestlogger.html",
+                LogLevel = LogLevel.Internal
+            };
 
-            myLogger.Init(@"c:\temp\unittestlogger.html");
-            myLogger.LogLevel = LogLevel.Internal;
 
-            myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
+            myLogger.Info("For Some Reason this is never shown - seems like the first line is ignored");
             myLogger.LogError("LogError");
             myLogger.Error("Error");
             myLogger.LogWarning("LogWarning");
@@ -75,10 +76,12 @@ namespace UnitTest
         [TestMethod]
         public void TestMethod_LotsOfEntries()
         {
-            var myLogger = new TestResultHtmlLogger();
+            var myLogger = new TestResultHtmlLogger
+            {
+                FileName = @"c:\temp\unittestlogger.html",
+                LogLevel = LogLevel.Internal
+            };
 
-            myLogger.Init(@"c:\temp\unittestlogger.html");
-            myLogger.LogLevel = LogLevel.Internal;
 
             myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
             for (int i = 0; i < 75; i++)
@@ -90,10 +93,12 @@ namespace UnitTest
         [TestMethod]
         public void TestMethod_CallStack()
         {
-            var myLogger = new TestResultHtmlLogger();
+            var myLogger = new TestResultHtmlLogger
+            {
+                FileName = @"c:\temp\unittestlogger.html",
+                LogLevel = LogLevel.Internal
+            };
 
-            myLogger.Init(@"c:\temp\unittestlogger.html");
-            myLogger.LogLevel = LogLevel.Internal;
             myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
 
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L1");
@@ -112,15 +117,30 @@ namespace UnitTest
         [TestMethod]
         public void TestLogScreenshot()
         {
-            var myLogger = new TestResultHtmlLogger();
+            var myLogger = new TestResultHtmlLogger
+            {
+                FileName = @"c:\temp\unittestlogger.html",
+                LogLevel = LogLevel.Internal
+            };
 
-            myLogger.Init(@"c:\temp\unittestlogger.html");
-            myLogger.LogLevel = LogLevel.Internal;
             myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
 
             myLogger.LogTrace("Just before a screenshot is taken");
             myLogger.LogScreenshot(LogLevel.Info, "Grabbed screenshot");
             myLogger.LogTrace("right after a screenshot is taken");
+        }
+
+        /// <summary>
+        /// The test log screenshot.
+        /// </summary>
+        [TestMethod]
+        public void TestLogFileWriter()
+        {
+            var myLogger = new TestResultHtmlLogger {FileName = @"c:\temp\unittestlogger.html"};
+
+            myLogger.FileName = @"c:\temp\unittestlogger.html" ;
+            myLogger.FileName = @"c:\temp\unittestlogger2.html";
+            myLogger.FileName = @"c:\temp\unittestlogger3.html";
         }
     }
 }
