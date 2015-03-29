@@ -1,5 +1,15 @@
 var lastAnchor = '';
 
+/* Hide buttons if no messages are present - good idea, not implemented fully yet */
+var PassCount = 1;
+var FailCount = 1;
+var ErrorCount = 1;
+var WarnCount = 1;
+var InfoCount = 1;
+var DebugCount = 1;
+var TraceCount = 1;
+var InternalCount = 1;
+
 function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
 }
@@ -220,6 +230,7 @@ function initButtons() {
     } else {
         css('siv#buttons', 'display', 'block');
     }
+
     hideButtonByDisplayCount("passBtn", PassCount);
     hideButtonByDisplayCount("failBtn", FailCount);
     hideButtonByDisplayCount("errorBtn", ErrorCount);
