@@ -57,7 +57,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
 
             argsString = "TODO: Concatenated string of argName and Values";
 
-            message = string.Format("> {0} {1} {2} returning {3}", IndentString(), functionName, argsString, nameOfReturnType);
+            message = string.Format("> {0} {1} returning {2}", functionName, argsString, nameOfReturnType);
             this.callStack.Push(functionName);
             return LogOneHtmlMessage(logLevel, message);
         }
@@ -103,7 +103,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             string poppedName;
 
             poppedName = this.callStack.Pop();
-            message = string.Format("< {0} Exited {1} returning {2}", IndentString(), poppedName, "returnValue.ToString");
+            message = string.Format("< Exited {0} returning {1}", poppedName, "returnValue.ToString");
             return LogOneHtmlMessage(logLevel, message);
         }
 
@@ -178,12 +178,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </returns>
         private string IndentString()
         {
-            var dotCount = this.callStack.Count * 3;
+            var dotCount = this.callStack.Count;
             var retVal = string.Empty;
 
             for (var i = 0; i < dotCount; i++)
             {
-                retVal += ".";
+                retVal += " . . .";
             }
 
             return retVal;

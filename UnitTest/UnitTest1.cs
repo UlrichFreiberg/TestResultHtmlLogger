@@ -101,14 +101,40 @@ namespace UnitTest
                 LogLevel = LogLevel.Internal
             };
 
+            myLogger.LogInfo("NameOfFunction_L0A");
+            myLogger.LogInfo("NameOfFunction_L0B");
+
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L1");
+            myLogger.LogInfo("NameOfFunction_L1A");
+            myLogger.LogInfo("NameOfFunction_L1B");
+
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L2");
+            myLogger.LogInfo("NameOfFunction_L2A");
+            myLogger.LogInfo("NameOfFunction_L2B");
+
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L3");
+            myLogger.LogInfo("NameOfFunction_L3A");
+            myLogger.LogInfo("NameOfFunction_L3B");
+            
             myLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L3");
+            myLogger.LogInfo("NameOfFunction_L2A");
+            myLogger.LogInfo("NameOfFunction_L2B");
+            
             myLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L2");
-            myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L3");
+            myLogger.LogInfo("NameOfFunction_L1A");
+            myLogger.LogInfo("NameOfFunction_L1B");
+            
+            myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L2");
+            myLogger.LogInfo("NameOfFunction_L2A");
+            myLogger.LogInfo("NameOfFunction_L2B");
+
             myLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L2");
+            myLogger.LogInfo("NameOfFunction_L1A");
+            myLogger.LogInfo("NameOfFunction_L1B");
+
             myLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L1");
+            myLogger.LogInfo("NameOfFunction_L0A");
+            myLogger.LogInfo("NameOfFunction_L0B");
         }
 
         /// <summary>

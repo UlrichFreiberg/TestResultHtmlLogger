@@ -310,7 +310,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
         private int LogOneHtmlMessage(LogLevel logLevel, string message)
         {
             string htmlLine, logLevelString;
-            string indentString;
             string messageIdString;
 
             if (!_addLoglevelToRunReport[logLevel])
@@ -323,9 +322,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
             logLevelString = logLevelString.ToLower();
 
             CheckForPerformanceAlert();
-
-            // TODO need some info from LogFunctionEnter/Exit, to set the indentation right
-            indentString = string.Empty;
 
             switch (logLevel)
             {
@@ -345,7 +341,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
                         "    <div class=\"el time\">{0}</div>\n",
                         this.timeOfLastMessage.ToString("HH:mm:ss"));
                     htmlLine += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
-                    htmlLine += string.Format("    <div class=\"el pad\">{0}</div>\n", indentString);
+                    htmlLine += string.Format("    <div class=\"el pad\">{0}</div>\n", IndentString());
                     htmlLine += string.Format("    <div class=\"el msg\">{0}</div>\n", message);
                     htmlLine += string.Format("</div>\n");
                     break;
