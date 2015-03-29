@@ -1,33 +1,159 @@
-﻿namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ILoggingFunctions.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the ILoggingFunctions type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
+    /// <summary>
+    /// The LoggingFunctions <c>interface</c>.
+    /// </summary>
     public interface ILoggingFunctions
     {
-        // normal logging functions - testscripts/models/adapters
+        // normal logging functions - test scripts/models/adapters
+
+        /// <summary>
+        /// Logging one error <paramref name="message"/>. Something bad has happened.
+        /// </summary>
+        /// <param name="message">
+        /// The message describing the error
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogError(string message);
-        int Error(string message);
+
+        /// <summary>
+        /// Logging one warning <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogWarning(string message);
-        int Warning(string message);
+
+        /// <summary>
+        /// Logging one info <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogInfo(string message);
-        int Info(string message);
+
+        /// <summary>
+        /// Logging one debug <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogDebug(string message);
-        int Debug(string message);
 
         // normal logging functions - models and adapters
+
+        /// <summary>
+        /// Logging one trace <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogTrace(string message);
-        int Trace(string message);
+
+        /// <summary>
+        /// Logging one <c>internal</c> <paramref name="message"/>.
+        /// </summary>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogInternal(string message);
-        int Internal(string message);
 
         // used solely by Assert functions
-        int LogPass(string testStepName, string message);
-        int Pass(string testStepName, string message);
-        int LogFail(string testStepName, string message);
-        int Fail(string testStepName, string message);
 
+        /// <summary>
+        /// Logging a test step assertion did pass.
+        /// </summary>
+        /// <param name="testStepName">
+        /// The test step name.
+        /// </param>
+        /// <param name="message">
+        /// Further information related to the passing test step - if any.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int LogPass(string testStepName, string message);
+
+        /// <summary>
+        /// Logging a test step assertion did fail.
+        /// </summary>
+        /// <param name="testStepName">
+        /// The test step name.
+        /// </param>
+        /// <param name="message">
+        /// Further information related to the failing test step - if any.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        int LogFail(string testStepName, string message);
+
+        /// <summary>
+        /// Logging a KeyValue pair - as you see fit. The logger will log some, that are generally useful - like OS
+        /// Machine, CurrentDirectory etc..
+        /// </summary>
+        /// <param name="key">
+        /// The <c>key</c> part of the pair.
+        /// </param>
+        /// <param name="value">
+        /// The <c>value</c> part of the pair.
+        /// </param>
+        /// <param name="message">
+        /// Further information related to the KeyValue pair - if any.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogKeyValue(string key, string value, string message);
 
         // Headers in test scripts
+
+        /// <summary>
+        /// Insert a header in the log file - makes it easier to overview the logfile
+        /// </summary>
+        /// <param name="headerMessage">
+        /// The header message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogHeader(string headerMessage);
+
+        /// <summary>
+        /// Insert a sub header in the log file - makes it easier to overview the logfile
+        /// </summary>
+        /// <param name="subHeaderMessage">
+        /// The sub header message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int LogSubHeader(string subHeaderMessage);
     }
 }

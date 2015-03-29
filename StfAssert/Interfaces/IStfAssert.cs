@@ -17,6 +17,17 @@ namespace Stf.Utilities.StfAssert.Interfaces
     public interface IStfAssert
     {
         /// <summary>
+        /// Gets or sets a value indicating whether negative testing is enabled - 
+        /// As in LogFail and errors don't count as errors
+        /// </summary>
+        bool EnableNegativeTesting { get; set; }
+
+        /// <summary>
+        /// Gets the last message reported - used by Unit tests 
+        /// </summary>
+        string LastMessage { get; }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="testStep">Name of the test step in the test script</param>
@@ -207,15 +218,5 @@ namespace Stf.Utilities.StfAssert.Interfaces
         /// <param name="value"></param>
         /// <returns><see cref="bool"/></returns>
         bool AssertFalse(string testStep, bool value);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        bool EnableNegativeTesting { get; set; }
-
-        /// <summary>
-        /// Property for the last message reported - used by Unit tests 
-        /// </summary>
-        string LastMessage { get; }
     }
 }

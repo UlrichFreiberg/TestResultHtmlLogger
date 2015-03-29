@@ -1,37 +1,59 @@
-﻿using System;
-using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TestScriptHeaders.cs" company="Foobar">
+//   2015
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+
+    /// <summary>
+    /// The test result html logger.
+    /// </summary>
     public partial class TestResultHtmlLogger : ITestScriptHeaders
     {
         /// <summary>
-        /// Name of Current Test
+        /// Gets or sets the name of Current Test
         /// </summary>
         public string TestName { get; set; }
 
         // =============================================================
-        //
         // Used by Assertion functions
-        //
         // =============================================================
+
+        /// <summary>
+        /// The set run status.
+        /// </summary>
+        /// <param name="runStatusAllPassed">
+        /// The run status all passed.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         public int SetRunStatus(bool runStatusAllPassed)
         {
             int retVal;
 
-            LogHeader("Teststatus");
+            LogHeader("Test status");
             if (runStatusAllPassed)
             {
-                retVal = LogPass("Teststatus", "Test Completed with errors");
+                retVal = LogPass("Test status", "Test Completed with errors");
             }
             else
             {
-                retVal = LogFail("Teststatus", "Test Completed with errors");
+                retVal = LogFail("Test status", "Test Completed with errors");
             }
 
             return retVal;
         }
 
+        /// <summary>
+        /// The set run status.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         public int SetRunStatus()
         {
             // Figure out if there is a failing test or not, and then call 

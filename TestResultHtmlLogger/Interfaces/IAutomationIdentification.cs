@@ -24,7 +24,7 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         /// The automation id obj.
         /// </param>
         /// <param name="message">
-        /// The message.
+        /// Describing the Aid.
         /// </param>
         /// <returns>
         /// The <see cref="int"/>.

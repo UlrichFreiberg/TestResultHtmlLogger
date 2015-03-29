@@ -65,7 +65,7 @@
     <Compile Include="Interfaces\IScreenShots.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\ITestResultHtmlLogger.cs">
+    <Compile Include="Interfaces\LogLevel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\ITestScriptHeaders.cs">
@@ -75,6 +75,7 @@
     <Compile Include="LogfileWriter.cs" />
     <Compile Include="LogfileManagement.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="LoggingFunctions.cs">
       <SubType>Code</SubType>

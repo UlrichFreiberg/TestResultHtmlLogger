@@ -26,79 +26,6 @@ namespace Stf.Utilities.StfAssert
         public TestResultHtmlLogger Logger { get; set; }
 
         /// <summary>
-        /// The equals.
-        /// </summary>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced
-        /// </param>
-        /// <param name="message">
-        /// The message.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool Equals(object expected, object actual, ref string message) 
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// The comparable.
-        /// </summary>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool Comparable(object expected, object actual)
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// The assert pass.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="message">
-        /// The message.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool AssertPass(string testStep, string message)
-        {
-            this.Logger.LogPass(testStep, message);
-            return true;
-        }
-
-        /// <summary>
-        /// The assert fail.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="message">
-        /// The message.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool AssertFail(string testStep, string message)
-        {
-            this.Logger.LogFail(testStep, message);
-            return true;
-        }
-
-        /// <summary>
         /// Gets or sets a value indicating whether enable negative testing.
         /// </summary>
         public bool EnableNegativeTesting
@@ -113,25 +40,6 @@ namespace Stf.Utilities.StfAssert
                 this.Logger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value.ToString()));
                 this.mEnableNegativeTesting = value;
             }
-        }
-
-        /// <summary>
-        /// The check has value.
-        /// </summary>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <param name="message">
-        /// The message.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        /// <exception cref="NotImplementedException">
-        /// </exception>
-        private bool CheckHasValue(object actual, ref string message)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -625,6 +533,98 @@ namespace Stf.Utilities.StfAssert
                 this.AssertFail(testStep, msg);
             }
 
+            return true;
+        }
+
+        /// <summary>
+        /// The check has value.
+        /// </summary>
+        /// <param name="actual">
+        /// The value actually experienced.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
+        private bool CheckHasValue(object actual, ref string message)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// The equals.
+        /// </summary>
+        /// <param name="expected">
+        /// The expected.
+        /// </param>
+        /// <param name="actual">
+        /// The value actually experienced
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool Equals(object expected, object actual, ref string message)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// The comparable.
+        /// </summary>
+        /// <param name="expected">
+        /// The expected.
+        /// </param>
+        /// <param name="actual">
+        /// The value actually experienced.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool Comparable(object expected, object actual)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// The assert pass.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool AssertPass(string testStep, string message)
+        {
+            this.Logger.LogPass(testStep, message);
+            return true;
+        }
+
+        /// <summary>
+        /// The assert fail.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool AssertFail(string testStep, string message)
+        {
+            this.Logger.LogFail(testStep, message);
             return true;
         }
     }

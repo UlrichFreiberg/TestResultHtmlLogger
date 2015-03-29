@@ -1,49 +1,89 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LogfileManagement.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the TestResultHtmlLogger type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 using Stf.Utilities.TestResultHtmlLogger.Properties;
 
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    /// <summary>
+    /// The test result html logger. the <see cref="ILogfileManagement"/> part
+    /// </summary>
     public partial class TestResultHtmlLogger : ILogfileManagement
     {
-        public LogConfiguration Configuration = new LogConfiguration();
-
-        readonly LogfileWriter _logFileHandle = new LogfileWriter();
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestResultHtmlLogger"/> class.
+        /// </summary>
+        /// <param name="archiveLogFile">
+        /// The archive log file.
+        /// </param>
+        public TestResultHtmlLogger(bool archiveLogFile)
+        {
+            this.ArchiveLogFile = archiveLogFile;
+        }
 
         /// <summary>
-        /// Do we log for a given loglevel?
+        /// Initializes a new instance of the <see cref="TestResultHtmlLogger"/> class.
+        /// </summary>
+        public TestResultHtmlLogger()
+        {
+        }
+
+        /// <summary>
+        /// The configuration.
+        /// </summary>
+        public LogConfiguration Configuration = new LogConfiguration();
+
+        /// <summary>
+        /// The _log file handle.
+        /// </summary>
+        private LogfileWriter _logFileHandle = new LogfileWriter();
+
+        /// <summary>
+        /// Do we log for a given log level?
         /// </summary>
         private Dictionary<LogLevel, bool> _addLoglevelToRunReport;
 
         /// <summary>
         /// NumberOfLoglevelMessages - to the finishing TestStatus
         /// </summary>
-        Dictionary<LogLevel, int> _numberOfLoglevelMessages;
+        public Dictionary<LogLevel, int> _numberOfLoglevelMessages;
 
         /// <summary>
         /// Logging disabled until LogFile property is set. />
         /// </summary>
-        public bool LogToFile { get; set; }
+        private bool LogToFile { get; set; }
 
         /// <summary>
         /// If logfile exists overwrite it.
         /// </summary>
-        bool OverwriteLogFile { get; set; }
+        private bool OverwriteLogFile { get; set; }
 
         /// <summary>
         /// Details about Environment, Test Agent (the current machine - OS, versions of Software), Date
         /// </summary>
-        Dictionary<string, string> _logInfoDetails;
+        public Dictionary<string, string> _logInfoDetails;
 
         /// <summary>
         /// Title
         /// </summary>
-        string LogTitle { get; set; }
+        public string LogTitle { get; set; }
 
-        string _mFileName;
         /// <summary>
-        /// Path to the resulting logfile
+        /// The _m file name.
+        /// </summary>
+        private string _mFileName;
+
+        /// <summary>
+        /// Gets or sets the path to the resulting logfile
         /// </summary>
         public string FileName
         {
@@ -51,6 +91,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             {
                 return _mFileName;
             }
+
             set
             {
                 _mFileName = value;
@@ -61,7 +102,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
             }
         }
 
+        /// <summary>
+        /// The _m log level.
+        /// </summary>
         LogLevel _mLogLevel;
+
+
         /// <summary>
         /// What level should the logger accept logging for. Lower levels than this will be ignored - as "trace" will be ignored is level is set to "debug"
         /// </summary>
@@ -77,7 +123,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
                 _mLogLevel = value;
                 _timeOfLastMessage = DateTime.Now;
 
-                //TODO: Should go to a contructor
+                // TODO: Should go to a contructor
                 _addLoglevelToRunReport = new Dictionary<LogLevel, bool>();
                 _numberOfLoglevelMessages = new Dictionary<LogLevel, int>();
 
@@ -126,18 +172,18 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// If the logfile should be archived - to where should it be archived
         /// </summary>
-        string ArchiveDirecory { get; set; }
+        public string ArchiveDirecory { get; set; }
 
         /// <summary>
         /// Should we archive the logfile
         /// </summary>
-        bool ArchiveLogFile { get; set; }
+        public bool ArchiveLogFile { get; set; }
 
         /// <summary>
         ///   reads in the JavaScript functions for the logfile buttons etc
         /// </summary>
-        /// <returns></returns>
-        string GetJavaScript()
+        /// <returns>A string representing the JS that controls the logger</returns>
+        private string GetJavaScript()
         {
             string retVal;
             var loggerJs = Resources.ResourceManager.GetObject("logger");
@@ -157,10 +203,10 @@ namespace Stf.Utilities.TestResultHtmlLogger
 
 
         /// <summary>
-        ///   reads in the HTML that constitoes the top LogHeader
+        ///   reads in the HTML that constitutes the top LogHeader
         /// </summary>
-        /// <returns></returns>
-        string GetOpenBody()
+        /// <returns>A Html string representing the start of the Body for the logger</returns>
+        private string GetOpenBody()
         {
             string retVal;
             var openBody = Resources.ResourceManager.GetObject("OpenBody");
@@ -180,8 +226,8 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         ///   reads in the CSS 
         /// </summary>
-        /// <returns></returns>
-        string GetStyleSheet()
+        /// <returns>A string representing the CSS that controls the logger</returns>
+        private string GetStyleSheet()
         {
             string retVal;
             var styleSheet = Resources.ResourceManager.GetObject("style");
@@ -199,11 +245,11 @@ namespace Stf.Utilities.TestResultHtmlLogger
         }
 
         /// <summary>
-        /// 
+        /// Open and Start the logger
         /// </summary>
         /// <param name="fileName"></param>
-        /// <returns></returns>
-        bool BeginHtmlLogFile(string fileName)
+        /// <returns></returns>private 
+        private bool BeginHtmlLogFile(string fileName)
         {
             string htmlLine;
 
@@ -224,7 +270,13 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return true;
         }
 
-        bool EndHtmlLogFile()
+        /// <summary>
+        /// End html log file.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool EndHtmlLogFile()
         {
             string htmlLine;
 
@@ -240,12 +292,23 @@ namespace Stf.Utilities.TestResultHtmlLogger
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets or sets the current log level.
+        /// </summary>
         public int CurrentLogLevel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the build archive log file path.
+        /// </summary>
         public int BuildArchiveLogFilePath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the local log file name.
+        /// </summary>
         public int LocalLogFileName { get; set; }
 
         /// <summary>
-        /// Initialise a logger
+        /// initialize a logger
         /// </summary>
         /// <param name="logFileName"></param>
         /// <returns></returns>
@@ -297,19 +360,40 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return true;
         }
 
-        // =============================================================
-        // Have we logged a Error or Fail? 
-        // =============================================================
+        /// <summary>
+        /// Have we logged a Error or Fail? 
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public int ErrorOrFail()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The close log file.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public int CloseLogFile()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// The archive this log file.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         public int ArchiveThisLogFile()
         {
             throw new NotImplementedException();

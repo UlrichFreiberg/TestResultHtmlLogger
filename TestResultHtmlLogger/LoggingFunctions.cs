@@ -1,63 +1,42 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="LoggingFunctions.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the TestResultHtmlLogger type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    /// <summary>
+    /// The test result html logger. The <see cref="ILoggingFunctions"/> part.
+    /// </summary>
     public partial class TestResultHtmlLogger : ILoggingFunctions
     {
-        int _messageId;
-        String GetNextMessageId()
-        {
-            return string.Format("m{0}", _messageId++);
-        }
-
-        int LogOneHtmlMessage(LogLevel logLevel, string message)
-        {
-            string htmlLine, logLevelString;
-            string indentString;
-            string messageIdString;
-
-            if (! _addLoglevelToRunReport[logLevel]) {
-                return -1;
-            }
-
-            messageIdString = GetNextMessageId();
-            logLevelString = Enum.GetName(typeof(LogLevel), logLevel) ?? "Unknown LogLevel";
-            logLevelString = logLevelString.ToLower();
-
-            CheckForPerformanceAlert();
-
-            // TODO need some info from LogFunctionEnter/Exit, to set the indentation right
-            indentString = "";
-
-            switch (logLevel)
-            {
-                case LogLevel.Header:
-                    htmlLine = string.Format("<div class=\"line logheader\">{0}</div>\n", message);
-                    break;
-                case LogLevel.SubHeader:
-                    htmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>\n", message);
-                    break;
-
-              default:
-                    htmlLine = String.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", messageIdString, logLevelString);
-                    htmlLine += String.Format("    <div class=\"el time\">{0}</div>\n", _timeOfLastMessage.ToString("HH:mm:ss"));
-                    htmlLine += String.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
-                    htmlLine += String.Format("    <div class=\"el pad\">{0}</div>\n", indentString);
-                    htmlLine += String.Format("    <div class=\"el msg\">{0}</div>\n", message);
-                    htmlLine += String.Format("</div>\n");
-                    break;
-            }
-
-            _logFileHandle.Write(htmlLine);
-            return htmlLine.Length;
-        }
+        /// <summary>
+        /// The _message id.
+        /// </summary>
+        private int _messageId;
 
         // =============================================================
         //
         // normal logging functions - testscripts/models/adapters
         //
         // =============================================================
+
+        /// <summary>
+        /// Logging one error <paramref name="message"/>. Something bad has happened.
+        /// </summary>
+        /// <param name="message">
+        /// The message describing the error
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         public int LogError(string message)
         {
             return LogOneHtmlMessage(LogLevel.Error, message);
@@ -110,7 +89,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
 
         // =============================================================
         //
-        // Header logging functions - testscripts
+        // Header logging functions - test scripts
         //
         // =============================================================
 
@@ -181,13 +160,84 @@ namespace Stf.Utilities.TestResultHtmlLogger
 
         public int LogKeyValue(string key, string value, string message)
         {
-            String htmlLine; 
+            string htmlLine; 
 
             htmlLine = string.Format("<div class=\"line keyvalue\">\n");
             htmlLine += string.Format("   <div class=\"el key\">{0}</div>\n", key);
             htmlLine += string.Format("   <div class=\"el value\">{0}</div>\n", value);
             htmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
             htmlLine += string.Format("</div>\n");
+
+            _logFileHandle.Write(htmlLine);
+            return htmlLine.Length;
+        }
+
+        /// <summary>
+        /// The get next message id.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        private string GetNextMessageId()
+        {
+            return string.Format("m{0}", _messageId++);
+        }
+
+        /// <summary>
+        /// The log one html message.
+        /// </summary>
+        /// <param name="logLevel">
+        /// The log level.
+        /// </param>
+        /// <param name="message">
+        /// The message.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        private int LogOneHtmlMessage(LogLevel logLevel, string message)
+        {
+            string htmlLine, logLevelString;
+            string indentString;
+            string messageIdString;
+
+            if (!_addLoglevelToRunReport[logLevel])
+            {
+                return -1;
+            }
+
+            messageIdString = GetNextMessageId();
+            logLevelString = Enum.GetName(typeof(LogLevel), logLevel) ?? "Unknown LogLevel";
+            logLevelString = logLevelString.ToLower();
+
+            CheckForPerformanceAlert();
+
+            // TODO need some info from LogFunctionEnter/Exit, to set the indentation right
+            indentString = string.Empty;
+
+            switch (logLevel)
+            {
+                case LogLevel.Header:
+                    htmlLine = string.Format("<div class=\"line logheader\">{0}</div>\n", message);
+                    break;
+                case LogLevel.SubHeader:
+                    htmlLine = string.Format("<div class=\"line logsubheader\">{0}</div>\n", message);
+                    break;
+
+                default:
+                    htmlLine = string.Format(
+                        "<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n",
+                        messageIdString,
+                        logLevelString);
+                    htmlLine += string.Format(
+                        "    <div class=\"el time\">{0}</div>\n",
+                        _timeOfLastMessage.ToString("HH:mm:ss"));
+                    htmlLine += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
+                    htmlLine += string.Format("    <div class=\"el pad\">{0}</div>\n", indentString);
+                    htmlLine += string.Format("    <div class=\"el msg\">{0}</div>\n", message);
+                    htmlLine += string.Format("</div>\n");
+                    break;
+            }
 
             _logFileHandle.Write(htmlLine);
             return htmlLine.Length;

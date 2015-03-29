@@ -1,15 +1,30 @@
-﻿using System;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="PerformanceManagement.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the TestResultHtmlLogger type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+using System;
 using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    /// <summary>
+    /// The test result html logger. The <c>IPerformanceManagement</c> part.
+    /// </summary>
     public partial class TestResultHtmlLogger : IPerformanceManagement
     {
         /// <summary>
         /// Used for indicating performance issues - if not logging, then something takes a long time:-)
         /// </summary>
-        DateTime _timeOfLastMessage;
+        private DateTime _timeOfLastMessage;
 
+        /// <summary>
+        /// The check for performance alert.
+        /// </summary>
         public void CheckForPerformanceAlert()
         {
             var elapsedTime = DateTime.Now - _timeOfLastMessage;
@@ -21,14 +36,18 @@ namespace Stf.Utilities.TestResultHtmlLogger
             }
         }
 
-        // =============================================================
-        //
-        // how long time since last - any performance issues?
-        //
-        // =============================================================
+        /// <summary>
+        /// how long time since last - any performance issues?
+        /// </summary>
+        /// <param name="elapsedTime">
+        /// The elapsed time.
+        /// </param>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         public int LogPerformanceAlert(double elapsedTime)
         {
-            String performanceAlert = String.Format("PerfAlert: {0} seconds since last logEntry", elapsedTime);
+            var performanceAlert = string.Format("PerfAlert: {0} seconds since last logEntry", elapsedTime);
 
             return LogWarning(performanceAlert);
         }

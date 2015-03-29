@@ -10,7 +10,7 @@
 namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>
-    /// The LogfileManagement interface.
+    /// The LogfileManagement <c>interface</c>.
     /// </summary>
     public interface ILogfileManagement
     {
@@ -31,7 +31,7 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         int CloseLogFile();
 
         /// <summary>
-        /// Archive this log file.
+        /// Archive <c>this</c> log file.
         /// </summary>
         /// <returns>
         /// The <see cref="int"/>.

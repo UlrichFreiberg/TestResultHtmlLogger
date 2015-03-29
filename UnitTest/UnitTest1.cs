@@ -1,22 +1,32 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities.TestResultHtmlLogger;
-using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UnitTest1.cs" company="Foobar">
+//   2015
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace UnitTest
 {
-    using Stf.Utilities.StfAssert;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+    using Stf.Utilities.StfAssert;
+    using Stf.Utilities.TestResultHtmlLogger;
+    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+
+    /// <summary>
+    /// The unit test 1.
+    /// </summary>
     [TestClass]
     public class UnitTest1
     {
+        /// <summary>
+        /// The test method_ init.
+        /// </summary>
         [TestMethod]
         public void TestMethod_Init()
         {
-            var myLogger = new TestResultHtmlLogger {FileName = @"c:\temp\unittestlogger.html"};
+            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger.html" };
             myLogger.CloseLogFile();
         }
-
 
         /// <summary>
         /// All log levels
@@ -26,10 +36,9 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html",
+                FileName = @"c:\temp\unittestlogger.html", 
                 LogLevel = LogLevel.Internal
             };
-
 
             myLogger.Info("For Some Reason this is never shown - seems like the first line is ignored");
             myLogger.LogError("LogError");
@@ -53,7 +62,7 @@ namespace UnitTest
             myLogger.LogHeader("LogHeader");
             myLogger.Header("Header");
 
-            myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction", (new[] { "arg1", "arg2" }), new object[] { null });
+            myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction", new[] { "arg1", "arg2" }, new object[] { null });
             myLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction", 42);
 
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunctionShort");
@@ -71,33 +80,36 @@ namespace UnitTest
             myLogger.SetRunStatus(true);
             myLogger.LogInfo("Ovid TRACE: Nu kommer der en FALING TestRunStatus");
             myLogger.SetRunStatus(false);
-
         }
 
-
+        /// <summary>
+        /// The test method_ lots of entries.
+        /// </summary>
         [TestMethod]
         public void TestMethod_LotsOfEntries()
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html",
+                FileName = @"c:\temp\unittestlogger.html", 
                 LogLevel = LogLevel.Internal
             };
-
 
             myLogger.Header("For Some Reason this is never shown - seems like the first line is ignored");
             for (int i = 0; i < 75; i++)
             {
-                myLogger.LogInfo(String.Format("LogInfo Nr {0}", i));
+                myLogger.LogInfo(string.Format("LogInfo Nr {0}", i));
             }
         }
 
+        /// <summary>
+        /// The test method_ call stack.
+        /// </summary>
         [TestMethod]
         public void TestMethod_CallStack()
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html",
+                FileName = @"c:\temp\unittestlogger.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -114,14 +126,14 @@ namespace UnitTest
         }
 
         /// <summary>
-        /// The test log screenshot.
+        /// The test log screen shot.
         /// </summary>
         [TestMethod]
         public void TestLogScreenshot()
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html",
+                FileName = @"c:\temp\unittestlogger.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -138,19 +150,22 @@ namespace UnitTest
         [TestMethod]
         public void TestLogFileWriter()
         {
-            var myLogger = new TestResultHtmlLogger {FileName = @"c:\temp\unittestlogger.html"};
+            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger.html" };
 
-            myLogger.FileName = @"c:\temp\unittestlogger.html" ;
+            myLogger.FileName = @"c:\temp\unittestlogger.html";
             myLogger.FileName = @"c:\temp\unittestlogger2.html";
             myLogger.FileName = @"c:\temp\unittestlogger3.html";
         }
 
+        /// <summary>
+        /// The test method_ asserts.
+        /// </summary>
         [TestMethod]
         public void TestMethod_Asserts()
         {
             var myLogger = new TestResultHtmlLogger
                                {
-                                   FileName = @"c:\temp\unittestlogger_asserts.html",
+                                   FileName = @"c:\temp\unittestlogger_asserts.html", 
                                    LogLevel = LogLevel.Internal
                                };
             var myAsserter = new StfAssert
@@ -168,6 +183,5 @@ namespace UnitTest
             myAsserter.AssertFalse("2 > 3 Value for AssertFalse", 2 > 3);
             myAsserter.AssertFalse("3 > 2 Value for AssertFalse", 3 > 2);
         }
-
     }
 }

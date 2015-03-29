@@ -1,8 +1,25 @@
-﻿namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="ITestScriptHeaders.cs" company="Foobar">
+//   2015
+// </copyright>
+// <summary>
+//   Defines the ITestScriptHeaders type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
+    /// <summary>
+    /// The TestScriptHeaders <c>interface</c>.
+    /// </summary>
     public interface ITestScriptHeaders
     {
-        // Used by Assertion functions
+        /// <summary>
+        /// The set run status. When closing down the logfile, <c>this</c> gives an overall status for the tests performed so far.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
         int SetRunStatus();
     }
 }
