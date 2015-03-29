@@ -54,6 +54,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StfAssert\StfAssert.csproj">
+      <Project>{6933E0AF-0E2A-48D2-8660-2C939B3DB6FB}</Project>
+      <Name>StfAssert</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestResultHtmlLogger\TestResultHtmlLogger.csproj">
       <Project>{761bf58c-4b19-46d2-9601-2f9296c80152}</Project>
       <Name>TestResultHtmlLogger</Name>

@@ -5,6 +5,8 @@ using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 
 namespace UnitTest
 {
+    using Stf.Utilities.StfAssert;
+
     [TestClass]
     public class UnitTest1
     {
@@ -142,5 +144,30 @@ namespace UnitTest
             myLogger.FileName = @"c:\temp\unittestlogger2.html";
             myLogger.FileName = @"c:\temp\unittestlogger3.html";
         }
+
+        [TestMethod]
+        public void TestMethod_Asserts()
+        {
+            var myLogger = new TestResultHtmlLogger
+                               {
+                                   FileName = @"c:\temp\unittestlogger_asserts.html",
+                                   LogLevel = LogLevel.Internal
+                               };
+            var myAsserter = new StfAssert
+                                 {
+                                    Logger = myLogger
+                                 };
+
+            myAsserter.AssertTrue("True Value for AssertTrue", true);
+            myAsserter.AssertTrue("False Value for AssertTrue", false);
+            myAsserter.AssertTrue("2 > 3 Value for AssertTrue", 2 > 3);
+            myAsserter.AssertTrue("3 > 2 Value for AssertTrue", 3 > 2);
+
+            myAsserter.AssertFalse("True Value for AssertFalse", true);
+            myAsserter.AssertFalse("False Value for AssertFalse", false);
+            myAsserter.AssertFalse("2 > 3 Value for AssertFalse", 2 > 3);
+            myAsserter.AssertFalse("3 > 2 Value for AssertFalse", 3 > 2);
+        }
+
     }
 }
