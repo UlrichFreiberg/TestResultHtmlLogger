@@ -155,6 +155,23 @@ namespace UnitTest
         }
 
         /// <summary>
+        /// The test log all windows.
+        /// </summary>
+        [TestMethod]
+        public void TestLogAllWindows()
+        {
+            var myLogger = new TestResultHtmlLogger
+            {
+                FileName = @"c:\temp\unittestlogger.html",
+                LogLevel = LogLevel.Internal
+            };
+
+            myLogger.LogTrace("Just before logging all windows");
+            myLogger.LogAllWindows(LogLevel.Info, "Grabbed all windows");
+            myLogger.LogTrace("right after logging all windows");
+        }
+
+        /// <summary>
         /// The test log screen shot.
         /// </summary>
         [TestMethod]

@@ -8,6 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
 using System.Windows.Forms;
 using Stf.Utilities.TestResultHtmlLogger.Interfaces;
 using Stf.Utilities.TestResultHtmlLogger.Utils;
@@ -27,7 +28,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// Gets the utilities.
         /// </summary>
-        internal ScreenshotUtilities Utilities 
+        private ScreenshotUtilities Utilities 
         {
             get { return utilities ?? (utilities = new ScreenshotUtilities(this)); }
         }
@@ -46,7 +47,15 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </returns>
         public int LogAllWindows(LogLevel logLevel, string message)
         {
-            throw new NotImplementedException();
+            // TODO: Duplicate code, fix this with some proper logic
+            if (!_addLoglevelToRunReport[logLevel])
+            {
+                return -1;
+            }
+
+            var allWindows = Utilities.GetImagesOfAllWindows();
+
+            return allWindows.Sum(window => LogOneImage(logLevel, window.Value, message));
         }
 
         /// <summary>
