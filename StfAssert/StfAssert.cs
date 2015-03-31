@@ -6,6 +6,7 @@
 namespace Stf.Utilities.StfAssert
 {
     using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Stf.Utilities.StfAssert.Interfaces;
     using Stf.Utilities.TestResultHtmlLogger;
@@ -95,7 +96,22 @@ namespace Stf.Utilities.StfAssert
             return RetVal;
         }
 
-        private bool WrapperAssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
+        public bool WrapperAssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
+        {
+            bool RetVal = true;
+            try
+            {
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(expected, actual);
+            }
+            catch (AssertFailedException Ex)
+            {
+                RetVal = false;
+            }
+
+            return RetVal;
+        }
+
+        private bool WrapperAssertEquals_old<T1, T2>(string testStep, T1 expected, T2 actual)
         {
             var ExpectedTypeInfo = expected.GetType();
             var ActualTypeInfo = actual.GetType();

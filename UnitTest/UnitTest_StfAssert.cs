@@ -13,6 +13,8 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\TestMethod_AssertEquals.html" };
             var myAsserts = new StfAssert(myLogger);
+            var obj1 = new DateTime(42);
+            var obj2 = new DateTime(4242);
 
             myAsserts.AssertEquals("1 = 1", 1, 1);
             myAsserts.AssertEquals("1 = 1.0", 1, 1.0);
@@ -25,11 +27,13 @@ namespace UnitTest
             myAsserts.AssertEquals("\"A\" == \"a\"", "A", "a");
             myAsserts.AssertEquals("\"string\" == \"string\"", "string", "string");
 
-            var obj1 = new DateTime(42);
-            var obj2 = new DateTime(4242);
-
             myAsserts.AssertEquals("obj1 = obj1", obj1, obj1);
             myAsserts.AssertEquals("obj1 = obj2", obj1, obj2);
+
+            // fail scenarios
+            myAsserts.AssertEquals("obj1 = 1", obj1, 1);
+            myAsserts.AssertEquals("obj1 = \"string\"", obj1, "string");
+           //Assert. myAsserts.AssertEquals("\"string\" = 1", "string", 1);
         }
     }
 }
