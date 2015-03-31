@@ -15,6 +15,17 @@ namespace Stf.Utilities.StfAssert
     /// </summary>
     public class StfAssert : IStfAssert
     {
+        public StfAssert(TestResultHtmlLogger logger)
+        {
+            AssertLogger = logger;
+        }
+        public StfAssert()
+        {
+            AssertLogger = null;
+        }
+
+        TestResultHtmlLogger AssertLogger { get; set; }
+
         /// <summary>
         /// The m enable negative testing.
         /// </summary>
@@ -66,9 +77,76 @@ namespace Stf.Utilities.StfAssert
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertEquals(string testStep, object expected, object actual)
+        public bool AssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
         {
-            throw new NotImplementedException();
+            bool RetVal;
+
+            RetVal = WrapperAssertEquals(testStep, expected, actual);
+
+            if (RetVal)
+            {
+                AssertLogger.LogPass(testStep, "Pass");
+            }
+            else
+            {
+                AssertLogger.LogFail(testStep, "Fail");
+            }
+
+            return RetVal;
+        }
+
+        private bool WrapperAssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
+        {
+            var ExpectedTypeInfo = expected.GetType();
+            var ActualTypeInfo = actual.GetType();
+
+            if (ExpectedTypeInfo.IsPrimitive && ActualTypeInfo.IsPrimitive)
+            {
+                return CompareTo(expected, actual);
+            }
+
+            if (ActualTypeInfo != ExpectedTypeInfo)
+            {
+                Console.WriteLine("Different type of objects are different");
+                return false;
+            }
+
+            if (expected is IConvertible)
+            {
+                return CompareTo(expected, actual);
+            }
+
+            switch (ActualTypeInfo.FullName)
+            {
+                case "System.String":
+                    var OrgStringActual = (string)(Convert.ChangeType(actual, ActualTypeInfo));
+                    var OrgStringExpected = (string)(Convert.ChangeType(expected, ExpectedTypeInfo));
+                    var RetVal = string.Compare(OrgStringExpected, OrgStringActual);
+                    return (RetVal == 0);
+            }
+
+            return false;
+        }
+
+        private bool CompareTo<T1, T2>(T1 obj1, T2 obj2)
+        {
+            if ((obj1 is IConvertible) && (obj2 is IConvertible))
+            {
+                return ValueEquality(obj1, obj2);
+            }
+
+            return false;
+        }
+
+        private bool ValueEquality<T1, T2>(T1 val1, T2 val2)
+        //where T1 : IConvertible
+        //where T2 : IConvertible
+        {
+            // convert val2 to type of val1.
+            T1 boxed2 = (T1)Convert.ChangeType(val2, typeof(T1));
+
+            // compare now that same type.
+            return val1.Equals(boxed2);
         }
 
         /// <summary>

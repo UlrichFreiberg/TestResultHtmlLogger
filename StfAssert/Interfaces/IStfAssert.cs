@@ -36,7 +36,7 @@ namespace Stf.Utilities.StfAssert.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertEquals(string testStep, object expected, object actual);
+        bool AssertEquals<T1, T2>(string testStep, T1 expected, T2 actual);
 
         /// <summary>
         /// Asserts that two values are the same. Values and objects can be compared.
