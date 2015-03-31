@@ -16,7 +16,7 @@ namespace UnitTest
     /// The unit test 1.
     /// </summary>
     [TestClass]
-    public class UnitTest1
+    public class UnitTest_TestResultHtmlLogger
     {
         /// <summary>
         /// The test method_ init.
