@@ -16,15 +16,15 @@ namespace UnitTest
     /// The unit test 1.
     /// </summary>
     [TestClass]
-    public class UnitTest_TestResultHtmlLogger
+    public class UnitTestTestResultHtmlLogger
     {
         /// <summary>
         /// The test method_ init.
         /// </summary>
         [TestMethod]
-        public void TestMethod_Init()
+        public void TestMethodInit()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger.html" };
+            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodInit.html" };
             myLogger.CloseLogFile();
         }
 
@@ -32,11 +32,11 @@ namespace UnitTest
         /// All log levels
         /// </summary>
         [TestMethod]
-        public void TestMethod_AllLogType()
+        public void TestMethodAllLogType()
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html", 
+                FileName = @"c:\temp\unittestlogger_TestMethodAllLogType.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -75,11 +75,11 @@ namespace UnitTest
         /// The test method_ lots of entries.
         /// </summary>
         [TestMethod]
-        public void TestMethod_LotsOfEntries()
+        public void TestMethodLotsOfEntries()
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html", 
+                FileName = @"c:\temp\unittestlogger_TestMethodLotsOfEntries.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -93,11 +93,11 @@ namespace UnitTest
         /// The test method_ call stack.
         /// </summary>
         [TestMethod]
-        public void TestMethod_CallStack()
+        public void TestMethodCallStack()
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html", 
+                FileName = @"c:\temp\unittestlogger_TestMethodCallStack.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -145,7 +145,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html", 
+                FileName = @"c:\temp\unittestlogger_TestLogScreenshot.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -162,7 +162,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger.html",
+                FileName = @"c:\temp\unittestlogger_TestLogAllWindows.html",
                 LogLevel = LogLevel.Internal
             };
 
@@ -177,7 +177,7 @@ namespace UnitTest
         [TestMethod]
         public void TestLogFileWriter()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger.html" };
+            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestLogFileWriter.html" };
 
             myLogger.FileName = @"c:\temp\unittestlogger.html";
             myLogger.FileName = @"c:\temp\unittestlogger2.html";
@@ -188,11 +188,11 @@ namespace UnitTest
         /// The test method_ asserts.
         /// </summary>
         [TestMethod]
-        public void TestMethod_Asserts()
+        public void TestMethodAsserts()
         {
             var myLogger = new TestResultHtmlLogger
                                {
-                                   FileName = @"c:\temp\unittestlogger_asserts.html", 
+                                   FileName = @"c:\temp\unittestlogger_TestMethodAsserts.html", 
                                    LogLevel = LogLevel.Internal
                                };
             var myAsserter = new StfAssert
