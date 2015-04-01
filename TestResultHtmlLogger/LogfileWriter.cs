@@ -7,11 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.IO;
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using System.IO;
+
     /// <summary>
     /// The logfile writer.
     /// </summary>

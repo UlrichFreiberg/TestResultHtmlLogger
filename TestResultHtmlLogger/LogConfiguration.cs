@@ -7,14 +7,15 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Configuration;
-using System.Globalization;
-using System.Reflection;
-using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using System;
+    using System.Configuration;
+    using System.Globalization;
+    using System.Reflection;
+
+    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+
     /// <summary>
     /// The log configuration.
     /// </summary>
@@ -78,22 +79,22 @@ namespace Stf.Utilities.TestResultHtmlLogger
             /// <summary>
             /// The path to the assembly.
             /// </summary>
-            public static readonly UriBuilder Uri = new UriBuilder(Assembly.GetExecutingAssembly().CodeBase);
+            private static readonly UriBuilder Uri = new UriBuilder(Assembly.GetExecutingAssembly().CodeBase);
 
             /// <summary>
             /// The configuration file for <c>this</c> <c>assemnbly</c>.
             /// </summary>
-            public static readonly Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(Uri.Path);
+            private static readonly Configuration MyDllConfig = ConfigurationManager.OpenExeConfiguration(Uri.Path);
 
             /// <summary>
             /// The application settings.
             /// </summary>
-            public static readonly AppSettingsSection AppSettings = (AppSettingsSection)MyDllConfig.GetSection("appSettings");
+            private static readonly AppSettingsSection AppSettings = (AppSettingsSection)MyDllConfig.GetSection("appSettings");
 
             /// <summary>
             /// The nfi.
             /// </summary>
-            public static readonly NumberFormatInfo Nfi = new NumberFormatInfo()
+            private static readonly NumberFormatInfo Nfi = new NumberFormatInfo()
             {
                 NumberGroupSeparator = string.Empty,
                 CurrencyDecimalSeparator = "."

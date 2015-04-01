@@ -7,14 +7,15 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Linq;
-using System.Windows.Forms;
-using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-using Stf.Utilities.TestResultHtmlLogger.Utils;
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using System;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+    using Stf.Utilities.TestResultHtmlLogger.Utils;
+
     /// <summary>
     /// The test result html logger.
     /// </summary>
@@ -48,7 +49,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         public int LogAllWindows(LogLevel logLevel, string message)
         {
             // TODO: Duplicate code, fix this with some proper logic
-            if (!_addLoglevelToRunReport[logLevel])
+            if (!this.addLoglevelToRunReport[logLevel])
             {
                 return -1;
             }
@@ -122,7 +123,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </returns>
         private int LogOneImage(LogLevel logLevel, string imageFile, string message)
         {
-            if (!_addLoglevelToRunReport[logLevel])
+            if (!this.addLoglevelToRunReport[logLevel])
             {
                 return -1;
             }
@@ -137,7 +138,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             html += string.Format("    <p><img  onclick=\"showImage(this)\" class=\"embeddedimage\" alt=\"{0}\" src=\"data:image/png;base64, {1}\"</p>", message, imageFile);
             html += "</div>";
 
-            _logFileHandle.Write(html);
+            this.logFileHandle.Write(html);
 
             return html.Length;
         }

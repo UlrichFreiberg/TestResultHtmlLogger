@@ -7,12 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+
     /// <summary>
     /// The test result html logger. The <see cref="ICallStackManagement"/> part
     /// </summary>

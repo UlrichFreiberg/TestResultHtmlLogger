@@ -7,11 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using System;
+
+    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+
     /// <summary>
     /// The test result html logger. The <c>IPerformanceManagement</c> part.
     /// </summary>

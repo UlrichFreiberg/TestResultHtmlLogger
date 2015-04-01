@@ -7,13 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-using Stf.Utilities.TestResultHtmlLogger.Properties;
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+    using Stf.Utilities.TestResultHtmlLogger.Properties;
+
     /// <summary>
     /// The test result html logger. the <see cref="ILogfileManagement"/> part
     /// </summary>
@@ -45,17 +46,17 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// The _log file handle.
         /// </summary>
-        private LogfileWriter _logFileHandle = new LogfileWriter();
+        private readonly LogfileWriter logFileHandle = new LogfileWriter();
 
         /// <summary>
         /// Do we log for a given log level?
         /// </summary>
-        private Dictionary<LogLevel, bool> _addLoglevelToRunReport;
+        private Dictionary<LogLevel, bool> addLoglevelToRunReport;
 
         /// <summary>
         /// NumberOfLoglevelMessages - to the finishing TestStatus
         /// </summary>
-        public Dictionary<LogLevel, int> _numberOfLoglevelMessages;
+        public Dictionary<LogLevel, int> NumberOfLoglevelMessages;
 
         /// <summary>
         /// Logging disabled until LogFile property is set. />
@@ -70,7 +71,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// Details about Environment, Test Agent (the current machine - OS, versions of Software), Date
         /// </summary>
-        public Dictionary<string, string> _logInfoDetails;
+        public Dictionary<string, string> LogInfoDetails;
 
         /// <summary>
         /// Title
@@ -80,7 +81,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// The _m file name.
         /// </summary>
-        private string _mFileName;
+        private string mFileName;
 
         /// <summary>
         /// Gets or sets the path to the resulting logfile
@@ -89,12 +90,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
         {
             get
             {
-                return _mFileName;
+                return this.mFileName;
             }
 
             set
             {
-                _mFileName = value;
+                this.mFileName = value;
                 if (!Init(FileName))
                 {
                     Console.WriteLine(@"Coulnd't initialise the logfile");
@@ -105,7 +106,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// The _m log level.
         /// </summary>
-        LogLevel _mLogLevel;
+        LogLevel mLogLevel;
 
 
         /// <summary>
@@ -115,50 +116,50 @@ namespace Stf.Utilities.TestResultHtmlLogger
         {
             get
             {
-                return _mLogLevel;
+                return this.mLogLevel;
             }
 
             set
             {
-                _mLogLevel = value;
+                this.mLogLevel = value;
                 this.timeOfLastMessage = DateTime.Now;
 
                 // TODO: Should go to a contructor
-                _addLoglevelToRunReport = new Dictionary<LogLevel, bool>();
-                _numberOfLoglevelMessages = new Dictionary<LogLevel, int>();
+                this.addLoglevelToRunReport = new Dictionary<LogLevel, bool>();
+                this.NumberOfLoglevelMessages = new Dictionary<LogLevel, int>();
 
                 foreach (LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
                 {
-                    _numberOfLoglevelMessages.Add(loglevel, 0);
-                    _addLoglevelToRunReport.Add(loglevel, true);
+                    this.NumberOfLoglevelMessages.Add(loglevel, 0);
+                    this.addLoglevelToRunReport.Add(loglevel, true);
                 }
 
                 switch (value)
                 {
                     case LogLevel.Error:
-                        _addLoglevelToRunReport[LogLevel.Warning] = false;
-                        _addLoglevelToRunReport[LogLevel.Info] = false;
-                        _addLoglevelToRunReport[LogLevel.Debug] = false;
-                        _addLoglevelToRunReport[LogLevel.Trace] = false;
-                        _addLoglevelToRunReport[LogLevel.Internal] = false;
+                        this.addLoglevelToRunReport[LogLevel.Warning] = false;
+                        this.addLoglevelToRunReport[LogLevel.Info] = false;
+                        this.addLoglevelToRunReport[LogLevel.Debug] = false;
+                        this.addLoglevelToRunReport[LogLevel.Trace] = false;
+                        this.addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Warning:
-                        _addLoglevelToRunReport[LogLevel.Info] = false;
-                        _addLoglevelToRunReport[LogLevel.Debug] = false;
-                        _addLoglevelToRunReport[LogLevel.Trace] = false;
-                        _addLoglevelToRunReport[LogLevel.Internal] = false;
+                        this.addLoglevelToRunReport[LogLevel.Info] = false;
+                        this.addLoglevelToRunReport[LogLevel.Debug] = false;
+                        this.addLoglevelToRunReport[LogLevel.Trace] = false;
+                        this.addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Info:
-                        _addLoglevelToRunReport[LogLevel.Debug] = false;
-                        _addLoglevelToRunReport[LogLevel.Trace] = false;
-                        _addLoglevelToRunReport[LogLevel.Internal] = false;
+                        this.addLoglevelToRunReport[LogLevel.Debug] = false;
+                        this.addLoglevelToRunReport[LogLevel.Trace] = false;
+                        this.addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Debug:
-                        _addLoglevelToRunReport[LogLevel.Trace] = false;
-                        _addLoglevelToRunReport[LogLevel.Internal] = false;
+                        this.addLoglevelToRunReport[LogLevel.Trace] = false;
+                        this.addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Trace:
-                        _addLoglevelToRunReport[LogLevel.Internal] = false;
+                        this.addLoglevelToRunReport[LogLevel.Internal] = false;
                         break;
                     case LogLevel.Internal:
                         break;
@@ -253,7 +254,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         {
             string htmlLine;
 
-            _logFileHandle.Open(fileName);
+            this.logFileHandle.Open(fileName);
 
             htmlLine = "<!DOCTYPE html>\n";
             htmlLine += "<html>\n";
@@ -266,7 +267,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine += "  </script>\n</head>\n";
             htmlLine += GetOpenBody();
 
-            _logFileHandle.Write(htmlLine);
+            this.logFileHandle.Write(htmlLine);
             return true;
         }
 
@@ -283,7 +284,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine = "  </body>\n";
             htmlLine += "</html>\n";
 
-            _logFileHandle.Write(htmlLine);
+            this.logFileHandle.Write(htmlLine);
             return true;
         }
 
@@ -328,13 +329,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
                 FileName = Configuration.LogFileName;
             }
 
-            if (_logFileHandle.Initialized)
+            if (this.logFileHandle.Initialized)
             {
-                EndHtmlLogFile();
-                _logFileHandle.Close();
+                this.CloseLogFile();
             }
 
-            if (!_logFileHandle.Open(logFileName))
+            if (!this.logFileHandle.Open(logFileName))
             {
                 return false;
             }
@@ -381,9 +381,10 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </returns>
         /// <exception cref="NotImplementedException">
         /// </exception>
-        public int CloseLogFile()
+        public bool CloseLogFile()
         {
-            throw new NotImplementedException();
+            EndHtmlLogFile();
+            return this.logFileHandle.Close();
         }
 
         /// <summary>

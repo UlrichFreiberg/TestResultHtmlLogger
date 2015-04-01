@@ -26,9 +26,9 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         /// The close log file.
         /// </summary>
         /// <returns>
-        /// The <see cref="int"/>.
+        /// The <see cref="bool"/>.
         /// </returns>
-        int CloseLogFile();
+        bool CloseLogFile();
 
         /// <summary>
         /// Archive <c>this</c> log file.

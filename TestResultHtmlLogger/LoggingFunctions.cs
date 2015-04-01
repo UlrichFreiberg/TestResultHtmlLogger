@@ -7,11 +7,12 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using System;
+
+    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+
     /// <summary>
     /// The test result html logger. The <see cref="ILoggingFunctions"/> part.
     /// </summary>
@@ -280,7 +281,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
             htmlLine += string.Format("</div>\n");
 
-            _logFileHandle.Write(htmlLine);
+            this.logFileHandle.Write(htmlLine);
             return htmlLine.Length;
         }
 
@@ -312,7 +313,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             string htmlLine, logLevelString;
             string messageIdString;
 
-            if (!_addLoglevelToRunReport[logLevel])
+            if (!this.addLoglevelToRunReport[logLevel])
             {
                 return -1;
             }
@@ -347,7 +348,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
                     break;
             }
 
-            _logFileHandle.Write(htmlLine);
+            this.logFileHandle.Write(htmlLine);
             return htmlLine.Length;
         }
     }

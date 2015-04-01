@@ -6,6 +6,7 @@
 namespace Stf.Utilities.StfAssert
 {
     using System;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using Stf.Utilities.StfAssert.Interfaces;
@@ -80,11 +81,11 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
         {
-            bool RetVal;
+            bool retVal;
 
-            RetVal = WrapperAssertEquals(testStep, expected, actual);
+            retVal = WrapperAssertEquals(testStep, expected, actual);
 
-            if (RetVal)
+            if (retVal)
             {
                 AssertLogger.LogPass(testStep, "Pass");
             }
@@ -93,35 +94,35 @@ namespace Stf.Utilities.StfAssert
                 AssertLogger.LogFail(testStep, "Fail");
             }
 
-            return RetVal;
+            return retVal;
         }
 
         public bool WrapperAssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
         {
-            bool RetVal = true;
+            bool retVal = true;
             try
             {
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(expected, actual);
+                Assert.AreEqual(expected, actual);
             }
-            catch (AssertFailedException Ex)
+            catch (AssertFailedException ex)
             {
-                RetVal = false;
+                retVal = false;
             }
 
-            return RetVal;
+            return retVal;
         }
 
-        private bool WrapperAssertEquals_old<T1, T2>(string testStep, T1 expected, T2 actual)
+        private bool WrapperAssertEqualsOld<T1, T2>(string testStep, T1 expected, T2 actual)
         {
-            var ExpectedTypeInfo = expected.GetType();
-            var ActualTypeInfo = actual.GetType();
+            var expectedTypeInfo = expected.GetType();
+            var actualTypeInfo = actual.GetType();
 
-            if (ExpectedTypeInfo.IsPrimitive && ActualTypeInfo.IsPrimitive)
+            if (expectedTypeInfo.IsPrimitive && actualTypeInfo.IsPrimitive)
             {
                 return CompareTo(expected, actual);
             }
 
-            if (ActualTypeInfo != ExpectedTypeInfo)
+            if (actualTypeInfo != expectedTypeInfo)
             {
                 Console.WriteLine("Different type of objects are different");
                 return false;
@@ -132,13 +133,13 @@ namespace Stf.Utilities.StfAssert
                 return CompareTo(expected, actual);
             }
 
-            switch (ActualTypeInfo.FullName)
+            switch (actualTypeInfo.FullName)
             {
                 case "System.String":
-                    var OrgStringActual = (string)(Convert.ChangeType(actual, ActualTypeInfo));
-                    var OrgStringExpected = (string)(Convert.ChangeType(expected, ExpectedTypeInfo));
-                    var RetVal = string.Compare(OrgStringExpected, OrgStringActual);
-                    return (RetVal == 0);
+                    var orgStringActual = (string)(Convert.ChangeType(actual, actualTypeInfo));
+                    var orgStringExpected = (string)(Convert.ChangeType(expected, expectedTypeInfo));
+                    var retVal = String.CompareOrdinal(orgStringExpected, orgStringActual);
+                    return (retVal == 0);
             }
 
             return false;
