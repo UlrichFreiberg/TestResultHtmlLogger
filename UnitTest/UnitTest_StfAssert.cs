@@ -42,8 +42,29 @@ namespace UnitTest
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\TestMethod_AssertStrings.html" };
             var myAsserts = new StfAssert(myLogger);
 
-            Assert.IsTrue(myAsserts.StringContains("TestStepName", "Hejsa", "Hej"));
-            Assert.IsFalse(myAsserts.StringContains("TestStepName", "Hejsa", "Bent"));
+            Assert.IsTrue(myAsserts.StringContains("TestStepName 1", "Hejsa", "Hej"));
+            Assert.IsFalse(myAsserts.StringContains("TestStepName 2", "Hejsa", "Bent"));
+
+            Assert.IsTrue(myAsserts.StringDoesNotContain("TestStepName 3", "Hejsa", "Bent"));
+            Assert.IsFalse(myAsserts.StringDoesNotContain("TestStepName 4", "Hejsa", "Hej"));
+
+            Assert.IsTrue(myAsserts.StringMatches("TestStepName 5", "Hejsa", "^He.*"));
+            Assert.IsFalse(myAsserts.StringMatches("TestStepName 6", "Hejsa", "Nix.*"));
+
+            Assert.IsTrue(myAsserts.StringDoesNotMatch("TestStepName 7", "Hejsa", "Nix.*"));
+            Assert.IsFalse(myAsserts.StringDoesNotMatch("TestStepName 8", "Hejsa", "^He.*"));
+
+            Assert.IsTrue(myAsserts.StringStartsWith("TestStepName 9", "Hejsa", "He"));
+            Assert.IsFalse(myAsserts.StringStartsWith("TestStepName 10", "Hejsa", "hej"));
+
+            Assert.IsTrue(myAsserts.StringDoesNotStartWith("TestStepName 11", "Hejsa", "hej"));
+            Assert.IsFalse(myAsserts.StringDoesNotStartWith("TestStepName 12", "Hejsa", "He"));
+
+            Assert.IsTrue(myAsserts.StringEndsWith("TestStepName 13", "Hejsa", "jsa"));
+            Assert.IsFalse(myAsserts.StringEndsWith("TestStepName 14", "Hejsa", "Hej"));
+
+            Assert.IsTrue(myAsserts.StringDoesNotEndsWith("TestStepName 15", "Hejsa", "Bent"));
+            Assert.IsFalse(myAsserts.StringDoesNotEndsWith("TestStepName 16", "Hejsa", "ejsa"));
         }
     }
 }
