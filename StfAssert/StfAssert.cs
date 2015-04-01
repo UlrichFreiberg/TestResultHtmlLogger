@@ -14,7 +14,7 @@ namespace Stf.Utilities.StfAssert
     /// <summary>
     /// The stf assert.
     /// </summary>
-    public class StfAssert : IStfAssert
+    public partial class StfAssert : IStfAssert
     {
         public StfAssert(TestResultHtmlLogger logger)
         {

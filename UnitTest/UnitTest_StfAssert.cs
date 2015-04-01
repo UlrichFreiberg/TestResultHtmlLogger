@@ -33,7 +33,17 @@ namespace UnitTest
             // fail scenarios
             myAsserts.AssertEquals("obj1 = 1", obj1, 1);
             myAsserts.AssertEquals("obj1 = \"string\"", obj1, "string");
-           //Assert. myAsserts.AssertEquals("\"string\" = 1", "string", 1);
+            //Assert. myAsserts.AssertEquals("\"string\" = 1", "string", 1);
+        }
+
+        [TestMethod]
+        public void TestMethod_AssertStrings()
+        {
+            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\TestMethod_AssertStrings.html" };
+            var myAsserts = new StfAssert(myLogger);
+
+            Assert.IsTrue(myAsserts.StringContains("TestStepName", "Hejsa", "Hej"));
+            Assert.IsFalse(myAsserts.StringContains("TestStepName", "Hejsa", "Bent"));
         }
     }
 }
