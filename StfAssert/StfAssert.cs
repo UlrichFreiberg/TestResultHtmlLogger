@@ -167,26 +167,6 @@ namespace Stf.Utilities.StfAssert
         }
 
         /// <summary>
-        /// Assert if two strings are the same - Case Insignificant
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="expected">
-        /// Value <c>expected</c> for the assert
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertEqualsCi(string testStep, object expected, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Asserts that two values are the same. Values and objects can be compared.
         /// </summary>
         /// <param name="testStep">
@@ -202,60 +182,6 @@ namespace Stf.Utilities.StfAssert
         /// The <see cref="bool"/>.
         /// </returns>
         public bool AssertNotEquals(string testStep, object expected, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts that two values are not equal - Case Insignificant
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="expected">
-        /// Value <c>expected</c> for the assert
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertNotEqualsCi(string testStep, object expected, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts that a string is Null or Empty
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertEmpty(string testStep, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts that a string is Not (Null or Empty)
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertNotEmpty(string testStep, object actual)
         {
             throw new NotImplementedException();
         }

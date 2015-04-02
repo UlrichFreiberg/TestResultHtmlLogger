@@ -66,6 +66,24 @@
 
             Assert.IsTrue(myAsserts.StringDoesNotEndsWith("TestStepName 15", "Hejsa", "Bent"));
             Assert.IsFalse(myAsserts.StringDoesNotEndsWith("TestStepName 16", "Hejsa", "ejsa"));
+
+            Assert.IsTrue(myAsserts.StringEquals("TestStepName 17", "Hejsa", "Hejsa"));
+            Assert.IsFalse(myAsserts.StringEquals("TestStepName 18", "Hejsa", "hejsa"));
+
+            Assert.IsTrue(myAsserts.StringNotEquals("TestStepName 19", "Hejsa", "hejsa"));
+            Assert.IsFalse(myAsserts.StringNotEquals("TestStepName 20", "Hejsa", "Hejsa"));
+
+            Assert.IsTrue(myAsserts.StringEqualsCi("TestStepName 21", "Hejsa", "hejsa"));
+            Assert.IsFalse(myAsserts.StringEqualsCi("TestStepName 22", "Hejsa", "hej"));
+
+            Assert.IsTrue(myAsserts.StringNotEqualsCi("TestStepName 23", "Hejsa", "hejs"));
+            Assert.IsFalse(myAsserts.StringNotEqualsCi("TestStepName 24", "Hejsa", "hejsa"));
+
+            Assert.IsTrue(myAsserts.StringEmpty("TestStepName 25", string.Empty));
+            Assert.IsFalse(myAsserts.StringEmpty("TestStepName 26", "Hejsa"));
+
+            Assert.IsTrue(myAsserts.StringNotEmpty("TestStepName 27", "Hejsa"));
+            Assert.IsFalse(myAsserts.StringNotEmpty("TestStepName 28", string.Empty));
         }
     }
 }
