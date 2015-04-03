@@ -3,7 +3,6 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -162,7 +161,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestLogAllWindows.html",
+                FileName = @"c:\temp\unittestlogger_TestLogAllWindows.html", 
                 LogLevel = LogLevel.Internal
             };
 

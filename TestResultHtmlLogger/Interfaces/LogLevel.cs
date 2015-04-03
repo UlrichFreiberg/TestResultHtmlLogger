@@ -2,11 +2,7 @@
 // <copyright file="LogLevel.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   The log level.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>
@@ -17,42 +13,42 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         /// <summary>
         /// The error.
         /// </summary>
-        Error,
+        Error, 
 
         /// <summary>
         /// The warning.
         /// </summary>
-        Warning,
+        Warning, 
 
         /// <summary>
         /// The info.
         /// </summary>
-        Info,
+        Info, 
 
         /// <summary>
         /// The debug.
         /// </summary>
-        Debug,
+        Debug, 
 
         /// <summary>
         /// The trace.
         /// </summary>
-        Trace,
+        Trace, 
 
         /// <summary>
         /// The internal.
         /// </summary>
-        Internal,
+        Internal, 
 
         /// <summary>
         /// The header.
         /// </summary>
-        Header,
+        Header, 
 
         /// <summary>
         /// The sub header.
         /// </summary>
-        SubHeader,
+        SubHeader, 
 
         // ========================================
         // TestResults
@@ -61,12 +57,12 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         /// <summary>
         /// The pass.
         /// </summary>
-        Pass,
+        Pass, 
 
         /// <summary>
         /// The fail.
         /// </summary>
-        Fail,
+        Fail, 
 
         // ========================================
         // Level used to log keyvalues like OS, URL, VersionInfo etc...

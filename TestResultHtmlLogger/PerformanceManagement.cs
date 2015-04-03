@@ -2,11 +2,7 @@
 // <copyright file="PerformanceManagement.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the TestResultHtmlLogger type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
     using System;

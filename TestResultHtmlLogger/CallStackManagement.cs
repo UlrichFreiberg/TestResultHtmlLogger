@@ -2,11 +2,7 @@
 // <copyright file="CallStackManagement.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the TestResultHtmlLogger type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
     using System;
@@ -25,9 +21,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         private readonly Stack<string> callStack = new Stack<string>();
 
         // =============================================================
-        //
         // Functions in models/adapters
-        //
         // =============================================================
 
         /// <summary>
@@ -126,9 +120,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         }
 
         // =============================================================
-        //
         // Properties in models/adapters
-        //
         // =============================================================
 
         /// <summary>

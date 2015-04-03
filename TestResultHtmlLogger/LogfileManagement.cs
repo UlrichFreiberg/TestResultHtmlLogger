@@ -2,11 +2,7 @@
 // <copyright file="LogfileManagement.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the TestResultHtmlLogger type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
     using System;
@@ -164,6 +160,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
                     case LogLevel.Internal:
                         break;
                     default:
+
                         // logError
                         break;
                 }
@@ -248,8 +245,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// Open and Start the logger
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>private 
+        /// <param name="fileName">
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        /// private
         private bool BeginHtmlLogFile(string fileName)
         {
             string htmlLine;
@@ -288,6 +289,14 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return true;
         }
 
+        /// <summary>
+        /// The increment img count.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="int"/>.
+        /// </returns>
+        /// <exception cref="NotImplementedException">
+        /// </exception>
         int IncrementImgCount()
         {
             throw new NotImplementedException();
@@ -311,8 +320,11 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// <summary>
         /// initialize a logger
         /// </summary>
-        /// <param name="logFileName"></param>
-        /// <returns></returns>
+        /// <param name="logFileName">
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         private bool Init(string logFileName)
         {
             var userName = string.Format("{0}\\{1}", Environment.UserDomainName, Environment.UserName);
@@ -345,8 +357,8 @@ namespace Stf.Utilities.TestResultHtmlLogger
             }
 
             LogKeyValue("Environment", "TODO_ENVIRONMENT", "Configuration.EnvironmentName");
-            LogKeyValue("OS", Environment.OSVersion.ToString(), "");
-            LogKeyValue("User", userName, "");
+            LogKeyValue("OS", Environment.OSVersion.ToString(), string.Empty);
+            LogKeyValue("User", userName, string.Empty);
             LogKeyValue("InstDir", Environment.CurrentDirectory, "TODO_InstDir");
             LogKeyValue("ResultDir", Environment.CurrentDirectory, "TODO_ResultDir");
             LogKeyValue("Controller", Environment.MachineName, "TODO_Controller");
@@ -354,7 +366,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             LogKeyValue("TestDir", Environment.CurrentDirectory, "TODO_TestDir");
             LogKeyValue("Test Iteration", "TODO_Test Iteration", "TODO_Test Iteration");
             LogKeyValue("Testname", TestName, "TODO_Testname");
-            LogKeyValue("Date", DateTime.Now.ToShortDateString(), "");
+            LogKeyValue("Date", DateTime.Now.ToShortDateString(), string.Empty);
 
             LogTrace(string.Format("Log Initiated at [{0}]", FileName));
             return true;

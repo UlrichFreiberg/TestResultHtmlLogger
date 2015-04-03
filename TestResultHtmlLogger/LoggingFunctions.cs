@@ -2,11 +2,7 @@
 // <copyright file="LoggingFunctions.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the TestResultHtmlLogger type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
     using System;
@@ -39,7 +35,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.Error, message);
         }
 
-/*
+        /*
         public int Error(string message)
         {
             return LogError(message);
@@ -60,7 +56,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.Warning, message);
         }
 
-/*
+        /*
         public int Warning(string message)
         {
             return LogWarning(message);
@@ -81,7 +77,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.Info, message);
         }
 
-/*
+        /*
         public int Info(string message)
         {
             return LogInfo(message);
@@ -102,7 +98,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.Debug, message);
         }
 
-/*
+        /*
         public int Debug(string message)
         {
             return LogDebug(message);
@@ -147,7 +143,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.Header, headerMessage);
         }
 
-/*
+        /*
         public int Header(string message)
         {
             return LogHeader(message);
@@ -168,7 +164,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.SubHeader, subHeaderMessage);
         }
 
-/*
+        /*
         public int SubHeader(string message)
         {
             return LogSubHeader(message);
@@ -192,7 +188,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.Internal, message);
         }
 
-/*
+        /*
         public int Internal(string message)
         {
             return LogInternal(message);
@@ -221,7 +217,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.Pass, tempNeedsToBeReworkedMessage);
         }
 
-/*
+        /*
         public int Pass(string testStepName, string message)
         {
             return LogPass(testStepName, message);
@@ -247,7 +243,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             return LogOneHtmlMessage(LogLevel.Fail, tempNeedsToBeReworkedMessage);
         }
 
-/*
+        /*
         public int Fail(string testStepName, string message)
         {
             return LogFail(testStepName, message);
@@ -335,11 +331,11 @@ namespace Stf.Utilities.TestResultHtmlLogger
 
                 default:
                     htmlLine = string.Format(
-                        "<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n",
-                        messageIdString,
+                        "<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line {1} \">\n", 
+                        messageIdString, 
                         logLevelString);
                     htmlLine += string.Format(
-                        "    <div class=\"el time\">{0}</div>\n",
+                        "    <div class=\"el time\">{0}</div>\n", 
                         this.timeOfLastMessage.ToString("HH:mm:ss"));
                     htmlLine += string.Format("    <div class=\"el level\">{0}</div>\n", logLevelString);
                     htmlLine += string.Format("    <div class=\"el pad\">{0}</div>\n", IndentString());

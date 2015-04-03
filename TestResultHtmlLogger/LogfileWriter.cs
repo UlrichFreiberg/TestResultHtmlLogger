@@ -2,11 +2,7 @@
 // <copyright file="LogfileWriter.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the LogfileWriter type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
     using System.IO;
@@ -85,7 +81,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
              * if new file, then close the old file 
              * open new file - respect the overwritefileflag
             */
-
             this.Stream = new StreamWriter(this.LogFileName) { AutoFlush = true };
             this.Initialized = true;
             return true;
@@ -106,6 +101,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
 
             Initialized = false;
             return true;
+
             /*       LogToFile = False */
         }
     }

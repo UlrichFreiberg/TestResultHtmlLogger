@@ -3,7 +3,6 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
     using Stf.Utilities.TestResultHtmlLogger.Interfaces;

@@ -2,11 +2,7 @@
 // <copyright file="ILoggingFunctions.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the ILoggingFunctions type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>
@@ -32,7 +28,8 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         /// </summary>
         /// <param name="message">
         /// The message.
-        /// </param>C:\Users\Ulrich\Documents\GitHub\TestResultHtmlLogger\TestResultHtmlLogger\Interfaces\ILoggingFunctions.cs
+        /// </param>
+        /// C:\Users\Ulrich\Documents\GitHub\TestResultHtmlLogger\TestResultHtmlLogger\Interfaces\ILoggingFunctions.cs
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>

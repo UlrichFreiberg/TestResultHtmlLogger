@@ -2,11 +2,7 @@
 // <copyright file="ILogfileManagement.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the ILogfileManagement type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>

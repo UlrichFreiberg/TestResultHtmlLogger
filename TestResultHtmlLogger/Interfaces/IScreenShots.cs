@@ -2,11 +2,7 @@
 // <copyright file="IScreenShots.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   The Screenshots interface.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>

@@ -2,11 +2,7 @@
 // <copyright file="LogConfiguration.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the Settings type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
     using System;
@@ -96,7 +92,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             /// </summary>
             private static readonly NumberFormatInfo Nfi = new NumberFormatInfo()
             {
-                NumberGroupSeparator = string.Empty,
+                NumberGroupSeparator = string.Empty, 
                 CurrencyDecimalSeparator = "."
             };
 

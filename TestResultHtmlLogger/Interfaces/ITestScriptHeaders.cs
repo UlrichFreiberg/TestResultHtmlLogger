@@ -2,11 +2,7 @@
 // <copyright file="ITestScriptHeaders.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the ITestScriptHeaders type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>

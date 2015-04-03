@@ -2,11 +2,7 @@
 // <copyright file="ScreenShots.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   The test result html logger.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger
 {
     using System;

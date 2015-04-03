@@ -2,11 +2,7 @@
 // <copyright file="ICallStackManagement.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the ICallStackManagement type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>

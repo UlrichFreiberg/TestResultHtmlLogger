@@ -2,11 +2,7 @@
 // <copyright file="ScreenshotUtilities.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   The screenshot utilities.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger.Utils
 {
     using System;
@@ -41,9 +37,36 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
         /// </summary>
         public TestResultHtmlLogger Logger { get; set; }
 
+        /// <summary>
+        /// The get window rect.
+        /// </summary>
+        /// <param name="hwnd">
+        /// The hwnd.
+        /// </param>
+        /// <param name="lpRect">
+        /// The lp rect.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Reviewed. Suppression is OK here."), DllImport("user32.dll")]
         public static extern bool GetWindowRect(IntPtr hwnd, out RECT lpRect);
 
+        /// <summary>
+        /// The print window.
+        /// </summary>
+        /// <param name="hwnd">
+        /// The hwnd.
+        /// </param>
+        /// <param name="hdcBlt">
+        /// The hdc blt.
+        /// </param>
+        /// <param name="nFlags">
+        /// The n flags.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Reviewed. Suppression is OK here."), DllImport("user32.dll")]
         public static extern bool PrintWindow(IntPtr hwnd, IntPtr hdcBlt, int nFlags);
 
@@ -160,13 +183,29 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
         /// The rect. Taken and adapted from http://pinvoke.net/default.aspx/Structures/RECT.html
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
+
         // ReSharper disable once InconsistentNaming
         public struct RECT
         {
             /// <summary>
             /// The left.
             /// </summary>
-            public int Left, Top, Right, Bottom;
+            public int Left;
+
+            /// <summary>
+            /// The left.
+            /// </summary>
+            public int Top;
+
+            /// <summary>
+            /// The left.
+            /// </summary>
+            public int Right;
+
+            /// <summary>
+            /// The left.
+            /// </summary>
+            public int Bottom;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="RECT"/> struct.
@@ -197,7 +236,8 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
             /// <param name="r">
             /// The r.
             /// </param>
-            public RECT(Rectangle r) : this(r.Left, r.Top, r.Right, r.Bottom)
+            public RECT(Rectangle r)
+                : this(r.Left, r.Top, r.Right, r.Bottom)
             {
             }
 
@@ -240,8 +280,15 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
             /// </summary>
             public int Height
             {
-                get { return Bottom - Top; }
-                set { Bottom = value + Top; }
+                get
+                {
+                    return Bottom - Top;
+                }
+
+                set
+                {
+                    Bottom = value + Top;
+                }
             }
 
             /// <summary>
@@ -249,8 +296,15 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
             /// </summary>
             public int Width
             {
-                get { return Right - Left; }
-                set { Right = value + Left; }
+                get
+                {
+                    return Right - Left;
+                }
+
+                set
+                {
+                    Right = value + Left;
+                }
             }
 
             /// <summary>
@@ -404,7 +458,13 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
             /// </returns>
             public override string ToString()
             {
-                return string.Format(CultureInfo.CurrentCulture, "{{Left={0},Top={1},Right={2},Bottom={3}}}", Left, Top, Right, Bottom);
+                return string.Format(
+                    CultureInfo.CurrentCulture, 
+                    "{{Left={0},Top={1},Right={2},Bottom={3}}}", 
+                    Left, 
+                    Top, 
+                    Right, 
+                    Bottom);
             }
         }
     }

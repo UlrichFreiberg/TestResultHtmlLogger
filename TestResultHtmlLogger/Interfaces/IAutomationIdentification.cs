@@ -2,11 +2,7 @@
 // <copyright file="IAutomationIdentification.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   Defines the IAutomationIdentification type.
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
 {
     /// <summary>
