@@ -8,6 +8,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
     using System;
     using System.Configuration;
     using System.Globalization;
+    using System.Linq;
     using System.Reflection;
 
     using Stf.Utilities.TestResultHtmlLogger.Interfaces;
@@ -23,13 +24,13 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </summary>
         public LogConfiguration()
         {
-            OverwriteLogFile = Settings.Setting<bool>("OverwriteLogFile");
-            LogToFile = Settings.Setting<bool>("LogToFile");
-            LogTitle = Settings.Setting<string>("LogTitle");
-            LogFileName = Settings.Setting<string>("LogFileName");
-            AlertLongInterval = Settings.Setting<int>("AlertLongInterval");
+            OverwriteLogFile = Settings.Setting<bool>("OverwriteLogFile", true);
+            LogToFile = Settings.Setting<bool>("LogToFile", false);
+            LogTitle = Settings.Setting<string>("LogTitle", "Ovid LogTitle");
+            LogFileName = Settings.Setting<string>("LogFileName", @"c:\temp\Ovid_defaultlog.html");
+            AlertLongInterval = Settings.Setting<int>("AlertLongInterval", 30000);
             LogLevel = LogLevel.Info; // TODO: Settings.Setting<LogLevel>("LogLevel");
-            PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile");
+            PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
         }
 
         /// <summary>
@@ -108,9 +109,20 @@ namespace Stf.Utilities.TestResultHtmlLogger
             /// <returns>
             /// The <see cref="T"/>.
             /// </returns>
-            public static T Setting<T>(string name)
+            public static T Setting<T>(string name, T defaultValue)
             {
-                return (T)Convert.ChangeType(AppSettings.Settings[name].Value, typeof(T), Nfi);
+                T retVal;
+
+                if (AppSettings.Settings.AllKeys.Contains(name))
+                {
+                    retVal = (T)Convert.ChangeType(AppSettings.Settings[name].Value, typeof(T), Nfi);
+                }
+                else
+                {
+                    retVal = defaultValue;
+                }
+
+                return retVal;
             }
         }
     }
