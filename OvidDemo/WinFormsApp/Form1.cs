@@ -7,6 +7,7 @@ namespace WinFormsApp
 {
     using System;
     using System.Diagnostics;
+    using System.Drawing.Text;
     using System.Windows.Forms;
 
     using Stf.Utilities.StfAssert;
@@ -32,8 +33,10 @@ namespace WinFormsApp
 
             this.Mylogger = new TestResultHtmlLogger(LogfileName);
             this.MyAssert = new StfAssert(this.Mylogger);
-
-            this.Mylogger.LogInfo("logFile opened from constructor");
+            this.Mylogger.LogLevel = LogLevel.Trace;
+ 
+            this.Mylogger.LogInfo("logFile opened from DemoApp constructor");
+            this.TxtMessage.Text = @"Some test message";
         }
 
         /// <summary>
@@ -60,21 +63,12 @@ namespace WinFormsApp
         /// <param name="e">
         /// The e.
         /// </param>
-        private void button1_Click(object sender, EventArgs e)
+        private void BtnCallStackDemo_Click(object sender, EventArgs e)
         {
-            this.Mylogger.LogFunctionEnter(LogLevel.Info, "Void", "button1_Click");
-            this.Mylogger.LogInfo("Someone press the button");
-            this.Mylogger.LogFunctionExit(LogLevel.Info, "button1_Click");
-        }
-
-        /// <summary>
-        /// The add one.
-        /// </summary>
-        private void AddOne()
-        {
-            this.Mylogger.LogFunctionEnter(LogLevel.Debug, "Void", "button1_Click");
-            this.SomeCounter++;
-            this.Mylogger.LogFunctionExit(LogLevel.Debug, "button1_Click");            
+            this.Mylogger.LogFunctionEnter(LogLevel.Info, "Void", "BtnCallStackDemo_Click");
+            this.Mylogger.LogInfo("Someone pressed the CallStackDemo button");
+            callStackDemo("Demo");
+            this.Mylogger.LogFunctionExit(LogLevel.Info, "BtnCallStackDemo_Click");
         }
 
         /// <summary>
@@ -86,7 +80,7 @@ namespace WinFormsApp
         /// <param name="e">
         /// The e.
         /// </param>
-        private void button2_Click(object sender, EventArgs e)
+        private void BtnShowLogFile_Click(object sender, EventArgs e)
         {
             Process.Start(LogfileName);
         }
@@ -103,6 +97,66 @@ namespace WinFormsApp
         private void BtnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogInfo_Click(object sender, EventArgs e)
+        {
+            this.Mylogger.LogInfo("Info: " + this.TxtMessage.Text);
+        }
+
+        private void btnLogTrace_Click(object sender, EventArgs e)
+        {
+            this.Mylogger.LogTrace("Info: " + this.TxtMessage.Text);
+        }
+
+        private void btnLogPass_Click(object sender, EventArgs e)
+        {
+            this.Mylogger.LogPass("OvidDemo", this.TxtMessage.Text);
+        }
+
+        private void btnLogFail_Click(object sender, EventArgs e)
+        {
+            this.Mylogger.LogFail("OvidDemo", this.TxtMessage.Text);
+        }
+
+        private int callStackDemo(string argument)
+        {
+            var retVal = 40;
+
+            this.Mylogger.LogFunctionEnter(LogLevel.Debug, "Void", "callStackDemo");
+            this.Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", this.SomeCounter++));
+            this.callStackDemoL1("From Demo");
+            this.callStackDemoL1("From Demo");
+
+            this.Mylogger.LogFunctionExit(LogLevel.Debug, "callStackDemo");                        
+            return retVal;
+        }
+
+        private int callStackDemoL1(string argument)
+        {
+            var retVal = 41;
+
+            this.Mylogger.LogFunctionEnter(LogLevel.Debug, "Void", "callStackDemoL1");
+            this.Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", this.SomeCounter++));
+            this.callStackDemoL2("From Demo1");
+            this.callStackDemoL2("From Demo1");
+            this.Mylogger.LogFunctionExit(LogLevel.Debug, "callStackDemoL1");
+            return retVal;
+        }
+
+        private int callStackDemoL2(string argument)
+        {
+            var retVal = 42;
+
+            this.Mylogger.LogFunctionEnter(LogLevel.Debug, "Void", "callStackDemoL2");
+            this.Mylogger.LogInfo(string.Format("SomeCounter is [{0}]", this.SomeCounter++));
+            this.Mylogger.LogFunctionExit(LogLevel.Debug, "callStackDemoL2");
+            return retVal;
         }
     }
 }
