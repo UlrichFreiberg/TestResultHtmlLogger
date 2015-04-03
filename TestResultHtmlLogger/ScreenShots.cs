@@ -134,7 +134,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             html += string.Format("    <p><img  onclick=\"showImage(this)\" class=\"embeddedimage\" alt=\"{0}\" src=\"data:image/png;base64, {1}\"</p>", message, imageFile);
             html += "</div>";
 
-            this.logFileHandle.Write(html);
+            this.LogFileHandle.Write(html);
 
             return html.Length;
         }

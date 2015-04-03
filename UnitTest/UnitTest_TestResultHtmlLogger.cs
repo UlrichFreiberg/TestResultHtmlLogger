@@ -174,6 +174,16 @@ namespace UnitTest
         /// The test log screen shot.
         /// </summary>
         [TestMethod]
+        public void TestConstructor()
+        {
+            var myLoggerByConstructor = new TestResultHtmlLogger(@"c:\temp\unittestlogger_TestLogFileWriterByConstructor.html");
+            myLoggerByConstructor.CloseLogFile();
+        }
+
+        /// <summary>
+        /// The test log screen shot.
+        /// </summary>
+        [TestMethod]
         public void TestLogFileWriter()
         {
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestLogFileWriter.html" };
@@ -181,6 +191,8 @@ namespace UnitTest
             myLogger.FileName = @"c:\temp\unittestlogger.html";
             myLogger.FileName = @"c:\temp\unittestlogger2.html";
             myLogger.FileName = @"c:\temp\unittestlogger3.html";
+
+            myLogger.CloseLogFile();
         }
 
         /// <summary>
