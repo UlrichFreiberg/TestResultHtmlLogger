@@ -17,34 +17,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
     public partial class TestResultHtmlLogger : ILogfileManagement
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestResultHtmlLogger"/> class.
-        /// </summary>
-        /// <param name="archiveLogFile">
-        /// The archive log file.
-        /// </param>
-        public TestResultHtmlLogger(bool archiveLogFile)
-        {
-            this.ArchiveLogFile = archiveLogFile;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TestResultHtmlLogger"/> class.
-        /// </summary>
-        public TestResultHtmlLogger()
-        {
-        }
-
-        /// <summary>
-        /// The configuration.
-        /// </summary>
-        public LogConfiguration Configuration = new LogConfiguration();
-
-        /// <summary>
-        /// The _log file handle.
-        /// </summary>
-        private readonly LogfileWriter logFileHandle = new LogfileWriter();
-
-        /// <summary>
         /// Do we log for a given log level?
         /// </summary>
         private Dictionary<LogLevel, bool> addLoglevelToRunReport;
@@ -55,7 +27,59 @@ namespace Stf.Utilities.TestResultHtmlLogger
         public Dictionary<LogLevel, int> NumberOfLoglevelMessages;
 
         /// <summary>
-        /// Logging disabled until LogFile property is set. />
+        /// Initializes a new instance of the <see cref="TestResultHtmlLogger"/> class.
+        /// </summary>
+        /// <param name="logfileName">
+        /// The archive log file.
+        /// </param>
+        public TestResultHtmlLogger(string logfileName)
+            : this()
+        {
+            this.FileName = logfileName;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestResultHtmlLogger"/> class.
+        /// </summary>
+        public TestResultHtmlLogger()
+        {
+            this.addLoglevelToRunReport = new Dictionary<LogLevel, bool>();
+            this.NumberOfLoglevelMessages = new Dictionary<LogLevel, int>();
+
+            foreach (LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
+            {
+                this.NumberOfLoglevelMessages.Add(loglevel, 0);
+                this.addLoglevelToRunReport.Add(loglevel, true);
+            }
+
+            this.LogFileHandle = new LogfileWriter();
+
+            // Set according to the configuration
+            this.Configuration = new LogConfiguration();
+            this.FileName = Configuration.LogFileName;
+            this.LogLevel = Configuration.LogLevel;
+            this.OverwriteLogFile = Configuration.OverwriteLogFile;
+            this.LogToFile = Configuration.LogToFile;
+            this.LogTitle = Configuration.LogTitle;
+
+            /* 
+             * this.AlertLongInterval = Settings.Setting<int>("AlertLongInterval", 30000);
+             * this.PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
+            */
+        }
+
+        /// <summary>
+        /// Gets the configuration for the logfile.
+        /// </summary>
+        public LogConfiguration Configuration { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the _log file handle.
+        /// </summary>
+        private LogfileWriter LogFileHandle { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether Logging is disabled. It gets enabled when LogfileName property is set. />
         /// </summary>
         private bool LogToFile { get; set; }
 
@@ -120,16 +144,10 @@ namespace Stf.Utilities.TestResultHtmlLogger
                 this.mLogLevel = value;
                 this.timeOfLastMessage = DateTime.Now;
 
-                // TODO: Should go to a contructor
-                this.addLoglevelToRunReport = new Dictionary<LogLevel, bool>();
-                this.NumberOfLoglevelMessages = new Dictionary<LogLevel, int>();
-
                 foreach (LogLevel loglevel in Enum.GetValues(typeof(LogLevel)))
                 {
-                    this.NumberOfLoglevelMessages.Add(loglevel, 0);
-                    this.addLoglevelToRunReport.Add(loglevel, true);
+                    this.addLoglevelToRunReport[loglevel] = true;
                 }
-
                 switch (value)
                 {
                     case LogLevel.Error:
@@ -255,7 +273,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         {
             string htmlLine;
 
-            this.logFileHandle.Open(fileName);
+            this.LogFileHandle.Open(fileName);
 
             htmlLine = "<!DOCTYPE html>\n";
             htmlLine += "<html>\n";
@@ -268,7 +286,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine += "  </script>\n</head>\n";
             htmlLine += GetOpenBody();
 
-            this.logFileHandle.Write(htmlLine);
+            this.LogFileHandle.Write(htmlLine);
             return true;
         }
 
@@ -285,7 +303,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine = "  </body>\n";
             htmlLine += "</html>\n";
 
-            this.logFileHandle.Write(htmlLine);
+            this.LogFileHandle.Write(htmlLine);
             return true;
         }
 
@@ -313,11 +331,6 @@ namespace Stf.Utilities.TestResultHtmlLogger
         public int BuildArchiveLogFilePath { get; set; }
 
         /// <summary>
-        /// Gets or sets the local log file name.
-        /// </summary>
-        public int LocalLogFileName { get; set; }
-
-        /// <summary>
         /// initialize a logger
         /// </summary>
         /// <param name="logFileName">
@@ -341,12 +354,12 @@ namespace Stf.Utilities.TestResultHtmlLogger
                 FileName = Configuration.LogFileName;
             }
 
-            if (this.logFileHandle.Initialized)
+            if (this.LogFileHandle.Initialized)
             {
                 this.CloseLogFile();
             }
 
-            if (!this.logFileHandle.Open(logFileName))
+            if (!this.LogFileHandle.Open(logFileName))
             {
                 return false;
             }
@@ -396,7 +409,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         public bool CloseLogFile()
         {
             EndHtmlLogFile();
-            return this.logFileHandle.Close();
+            return this.LogFileHandle.Close();
         }
 
         /// <summary>

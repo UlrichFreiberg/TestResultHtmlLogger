@@ -277,7 +277,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine += string.Format("   <div class=\"el msg\">{0}</div>\n", message);
             htmlLine += string.Format("</div>\n");
 
-            this.logFileHandle.Write(htmlLine);
+            this.LogFileHandle.Write(htmlLine);
             return htmlLine.Length;
         }
 
@@ -344,7 +344,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
                     break;
             }
 
-            this.logFileHandle.Write(htmlLine);
+            this.LogFileHandle.Write(htmlLine);
             return htmlLine.Length;
         }
     }
