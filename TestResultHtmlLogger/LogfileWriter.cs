@@ -3,8 +3,10 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Stf.Utilities.TestResultHtmlLogger
 {
+    using System;
     using System.IO;
 
     /// <summary>
@@ -21,6 +23,11 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// Gets a value indicating whether or not the logfile is initialized.
         /// </summary>
         public bool Initialized { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether or not an existing logfile should be truncated
+        /// </summary>
+        public bool OverwriteLogFile { get; set; }
 
         /// <summary>
         /// Gets or sets the stream.
@@ -70,17 +77,35 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </returns>
         public bool Open()
         {
+            /* 
+             * Normalize value filename
+             * if new file, then close the old file 
+             * open new file - respect the overwritefileflag
+            */
             if (this.Initialized)
             {
                 this.Close();
             }
 
-            /*       LogToFile = False */
+            this.Stream = null;
+            this.Initialized = false;
 
-            /* Normalize value filename
-             * if new file, then close the old file 
-             * open new file - respect the overwritefileflag
-            */
+            if (File.Exists(this.LogFileName))
+            {
+                if (OverwriteLogFile)
+                {
+                    Console.WriteLine(@"File [{0}] exists and OverwriteLogFile is false", LogFileName);
+                    return false;
+                }
+
+                File.Delete(this.LogFileName);
+                if (File.Exists(this.LogFileName))
+                {
+                    Console.WriteLine(@"File [{0}] exists and couldn't be deleted", LogFileName);
+                    return false;
+                }
+            }
+
             this.Stream = new StreamWriter(this.LogFileName) { AutoFlush = true };
             this.Initialized = true;
             return true;
