@@ -158,5 +158,20 @@ namespace WinFormsApp
             this.Mylogger.LogFunctionExit(LogLevel.Debug, "callStackDemoL2");
             return retVal;
         }
+
+        private void BtnAssertStringEquals_Click(object sender, EventArgs e)
+        {
+            this.MyAssert.StringEquals("DemoApp", this.TxtAssertArg1.Text, this.TxtAssertArg2.Text);
+        }
+
+        private void BtnAssertStringMatches_Click(object sender, EventArgs e)
+        {
+            this.MyAssert.StringMatches("DemoApp", this.TxtAssertArg1.Text, this.TxtAssertArg2.Text);
+        }
+
+        private void BtnAssertStringContains_Click(object sender, EventArgs e)
+        {
+            this.MyAssert.StringContains("DemoApp", this.TxtAssertArg1.Text, this.TxtAssertArg2.Text);
+        }
     }
 }

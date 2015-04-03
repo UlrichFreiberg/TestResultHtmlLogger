@@ -9,7 +9,7 @@ namespace Stf.Utilities.StfAssert.Interfaces
     /// <summary>
     /// The StfStringAssert interface.
     /// </summary>
-    interface IStfStringAssert
+    public interface IStfStringAssert
     {
 #region Some wrapping of https://msdn.microsoft.com/en-us/library/microsoft.visualstudio.testtools.unittesting.stringassert.aspx
 
