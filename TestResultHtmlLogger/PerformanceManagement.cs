@@ -20,6 +20,11 @@ namespace Stf.Utilities.TestResultHtmlLogger
         private DateTime timeOfLastMessage;
 
         /// <summary>
+        /// Gets or sets a value indicating how many seconds should pass, before isuueing a logWarning.
+        /// </summary>
+        public int AlertLongInterval { get; set; }
+
+        /// <summary>
         /// The check for performance alert.
         /// </summary>
         public void CheckForPerformanceAlert()
@@ -27,7 +32,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             var elapsedTime = DateTime.Now - this.timeOfLastMessage;
             this.timeOfLastMessage = DateTime.Now;
 
-            if (elapsedTime.Seconds > Configuration.AlertLongInterval)
+            if (elapsedTime.Seconds > AlertLongInterval)
             {
                 LogPerformanceAlert(elapsedTime.TotalSeconds);
             }

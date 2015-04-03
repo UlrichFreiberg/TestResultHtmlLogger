@@ -62,11 +62,8 @@ namespace Stf.Utilities.TestResultHtmlLogger
             this.OverwriteLogFile = Configuration.OverwriteLogFile;
             this.LogToFile = Configuration.LogToFile;
             this.LogTitle = Configuration.LogTitle;
-
-            /* 
-             * this.AlertLongInterval = Settings.Setting<int>("AlertLongInterval", 30000);
-             * this.PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
-            */
+            this.AlertLongInterval = Configuration.AlertLongInterval;
+            this.PathToLogoImageFile = Configuration.PathToLogoImageFile;
         }
 
         /// <summary>
@@ -171,12 +168,16 @@ namespace Stf.Utilities.TestResultHtmlLogger
                     case LogLevel.Internal:
                         break;
                     default:
-
-                        // logError
+                        Console.WriteLine(@"Internal Error: Unknown loglevel meet");
                         break;
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating the path to the Logo file.
+        /// </summary>
+        public string PathToLogoImageFile { get; set; }
 
         /// <summary>
         /// Gets or sets the directory for the logfile to be archived - to where should it be archived
