@@ -1,4 +1,10 @@
-﻿namespace UnitTest
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UnitTest_StfAssert.cs" company="Foobar">
+//   2015
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace UnitTest
 {
     using System;
 
@@ -7,9 +13,15 @@
     using Stf.Utilities.StfAssert;
     using Stf.Utilities.TestResultHtmlLogger;
 
+    /// <summary>
+    /// The unit test stf asserts.
+    /// </summary>
     [TestClass]
     public class UnitTestStfAsserts
     {
+        /// <summary>
+        /// The test method assert equals.
+        /// </summary>
         [TestMethod]
         public void TestMethodAssertEquals()
         {
@@ -23,9 +35,9 @@
             Assert.IsFalse(myAsserts.AssertEquals("1 = \"1\"", 1, "1"));
             Assert.IsFalse(myAsserts.AssertEquals("1 = \"1.0\"", 1, "1.0"));
 
-            Assert.IsTrue(myAsserts.AssertEquals("\"\" == \"\"", "", ""));
-            Assert.IsFalse(myAsserts.AssertEquals("\"\" == \" \"", "", " "));
-            Assert.IsFalse(myAsserts.AssertEquals("\" \" == \" \"", " ", ""));
+            Assert.IsTrue(myAsserts.AssertEquals("\"\" == \"\"", string.Empty, string.Empty));
+            Assert.IsFalse(myAsserts.AssertEquals("\"\" == \" \"", string.Empty, " "));
+            Assert.IsFalse(myAsserts.AssertEquals("\" \" == \" \"", " ", string.Empty));
             Assert.IsFalse(myAsserts.AssertEquals("\"A\" == \"a\"", "A", "a"));
             Assert.IsTrue(myAsserts.AssertEquals("\"string\" == \"string\"", "string", "string"));
 
@@ -37,6 +49,9 @@
             Assert.IsFalse(myAsserts.AssertEquals("obj1 = \"string\"", obj1, "string"));
         }
 
+        /// <summary>
+        /// The test method assert strings.
+        /// </summary>
         [TestMethod]
         public void TestMethodAssertStrings()
         {

@@ -3,6 +3,7 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Stf.Utilities.StfAssert
 {
     using System;
@@ -17,21 +18,34 @@ namespace Stf.Utilities.StfAssert
     /// </summary>
     public partial class StfAssert : IStfAssert
     {
+        /// <summary>
+        /// The m enable negative testing.
+        /// </summary>
+        private bool enableNegativeTesting;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfAssert"/> class.
+        /// </summary>
+        /// <param name="logger">
+        /// The logger.
+        /// </param>
         public StfAssert(TestResultHtmlLogger logger)
         {
             AssertLogger = logger;
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StfAssert"/> class.
+        /// </summary>
         public StfAssert()
         {
             AssertLogger = null;
         }
 
-        TestResultHtmlLogger AssertLogger { get; set; }
-
         /// <summary>
-        /// The m enable negative testing.
+        /// Gets or sets the assert logger.
         /// </summary>
-        private bool enableNegativeTesting;
+        public TestResultHtmlLogger AssertLogger { get; set; }
 
         /// <summary>
         /// Gets or sets the logger.
@@ -67,6 +81,10 @@ namespace Stf.Utilities.StfAssert
         /// <summary>
         /// Assert if two values are the same. Values and objects can be compared.
         /// </summary>
+        /// <typeparam name="T1">
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// </typeparam>
         /// <param name="testStep">
         /// Name of the test step in the test script
         /// </param>
@@ -97,6 +115,25 @@ namespace Stf.Utilities.StfAssert
             return retVal;
         }
 
+        /// <summary>
+        /// The wrapper assert equals.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="expected">
+        /// The expected.
+        /// </param>
+        /// <param name="actual">
+        /// The actual.
+        /// </param>
+        /// <typeparam name="T1">
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
         public bool WrapperAssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
         {
             bool retVal = true;
@@ -110,60 +147,6 @@ namespace Stf.Utilities.StfAssert
             }
 
             return retVal;
-        }
-
-        private bool WrapperAssertEqualsOld<T1, T2>(string testStep, T1 expected, T2 actual)
-        {
-            var expectedTypeInfo = expected.GetType();
-            var actualTypeInfo = actual.GetType();
-
-            if (expectedTypeInfo.IsPrimitive && actualTypeInfo.IsPrimitive)
-            {
-                return CompareTo(expected, actual);
-            }
-
-            if (actualTypeInfo != expectedTypeInfo)
-            {
-                Console.WriteLine("Different type of objects are different");
-                return false;
-            }
-
-            if (expected is IConvertible)
-            {
-                return CompareTo(expected, actual);
-            }
-
-            switch (actualTypeInfo.FullName)
-            {
-                case "System.String":
-                    var orgStringActual = (string)(Convert.ChangeType(actual, actualTypeInfo));
-                    var orgStringExpected = (string)(Convert.ChangeType(expected, expectedTypeInfo));
-                    var retVal = String.CompareOrdinal(orgStringExpected, orgStringActual);
-                    return (retVal == 0);
-            }
-
-            return false;
-        }
-
-        private bool CompareTo<T1, T2>(T1 obj1, T2 obj2)
-        {
-            if ((obj1 is IConvertible) && (obj2 is IConvertible))
-            {
-                return ValueEquality(obj1, obj2);
-            }
-
-            return false;
-        }
-
-        private bool ValueEquality<T1, T2>(T1 val1, T2 val2)
-        //where T1 : IConvertible
-        //where T2 : IConvertible
-        {
-            // convert val2 to type of val1.
-            T1 boxed2 = (T1)Convert.ChangeType(val2, typeof(T1));
-
-            // compare now that same type.
-            return val1.Equals(boxed2);
         }
 
         /// <summary>
@@ -460,6 +443,34 @@ namespace Stf.Utilities.StfAssert
         }
 
         /// <summary>
+        /// The value equality.
+        /// </summary>
+        /// <param name="val1">
+        /// The val 1.
+        /// </param>
+        /// <param name="val2">
+        /// The val 2.
+        /// </param>
+        /// <typeparam name="T1">
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool ValueEquality<T1, T2>(T1 val1, T2 val2)
+
+            // where T1 : IConvertible
+        {
+            // where T2 : IConvertible
+            // convert val2 to type of val1.
+            T1 boxed2 = (T1)Convert.ChangeType(val2, typeof(T1));
+
+            // compare now that same type.
+            return val1.Equals(boxed2);
+        }
+
+        /// <summary>
         /// The check has value.
         /// </summary>
         /// <param name="actual">
@@ -547,6 +558,84 @@ namespace Stf.Utilities.StfAssert
         {
             this.Logger.LogFail(testStep, message);
             return true;
+        }
+
+        /// <summary>
+        /// The wrapper assert equals old.
+        /// </summary>
+        /// <param name="testStep">
+        /// The test step.
+        /// </param>
+        /// <param name="expected">
+        /// The expected.
+        /// </param>
+        /// <param name="actual">
+        /// The actual.
+        /// </param>
+        /// <typeparam name="T1">
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool WrapperAssertEqualsOld<T1, T2>(string testStep, T1 expected, T2 actual)
+        {
+            var expectedTypeInfo = expected.GetType();
+            var actualTypeInfo = actual.GetType();
+
+            if (expectedTypeInfo.IsPrimitive && actualTypeInfo.IsPrimitive)
+            {
+                return CompareTo(expected, actual);
+            }
+
+            if (actualTypeInfo != expectedTypeInfo)
+            {
+                Console.WriteLine("Different type of objects are different");
+                return false;
+            }
+
+            if (expected is IConvertible)
+            {
+                return CompareTo(expected, actual);
+            }
+
+            switch (actualTypeInfo.FullName)
+            {
+                case "System.String":
+                    var orgStringActual = (string)Convert.ChangeType(actual, actualTypeInfo);
+                    var orgStringExpected = (string)Convert.ChangeType(expected, expectedTypeInfo);
+                    var retVal = string.CompareOrdinal(orgStringExpected, orgStringActual);
+                    return retVal == 0;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// The compare to.
+        /// </summary>
+        /// <param name="obj1">
+        /// The obj 1.
+        /// </param>
+        /// <param name="obj2">
+        /// The obj 2.
+        /// </param>
+        /// <typeparam name="T1">
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// </typeparam>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private bool CompareTo<T1, T2>(T1 obj1, T2 obj2)
+        {
+            if ((obj1 is IConvertible) && (obj2 is IConvertible))
+            {
+                return ValueEquality(obj1, obj2);
+            }
+
+            return false;
         }
     }
 }

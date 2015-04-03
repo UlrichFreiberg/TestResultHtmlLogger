@@ -3,9 +3,9 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace Stf.Utilities.StfAssert
 {
-    using System;
     using System.Text.RegularExpressions;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -457,7 +457,7 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool StringNotEmpty(string testStep, string actual)
         {
-            var retVal = ! string.IsNullOrEmpty(actual);
+            var retVal = !string.IsNullOrEmpty(actual);
 
             if (retVal)
             {
