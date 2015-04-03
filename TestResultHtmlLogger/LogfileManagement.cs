@@ -280,6 +280,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             else
             {
                 retVal = openBody.ToString();
+                retVal = retVal.Replace("LOGFILETITLE", LogTitle);
             }
 
             return retVal;
@@ -322,7 +323,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             htmlLine = "<!DOCTYPE html>\n";
             htmlLine += "<html>\n";
             htmlLine += "  <head>\n";
-            htmlLine += "    <title>Ulrich Og Kasper</title>\n";
+            htmlLine += string.Format("    <title>{0}</title>\n", LogTitle);
             htmlLine += "    <style type=\"text/css\">\n";
             htmlLine += GetStyleSheet();
             htmlLine += "    </style>\n<script type=\"text/javascript\">";

@@ -45,7 +45,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         public int LogAllWindows(LogLevel logLevel, string message)
         {
             // TODO: Duplicate code, fix this with some proper logic
-            if (!this.addLoglevelToRunReport[logLevel])
+            if (!this.AddLoglevelToRunReport[logLevel])
             {
                 return -1;
             }
@@ -119,7 +119,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// </returns>
         private int LogOneImage(LogLevel logLevel, string imageFile, string message)
         {
-            if (!this.addLoglevelToRunReport[logLevel])
+            if (!this.AddLoglevelToRunReport[logLevel])
             {
                 return -1;
             }
