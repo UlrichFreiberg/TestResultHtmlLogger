@@ -7,6 +7,7 @@
 namespace Stf.Utilities.StfAssert
 {
     using System;
+    using System.IO;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -94,51 +95,20 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
         {
-            bool retVal;
-
-            retVal = WrapperAssertEquals(testStep, expected, actual);
-
-            if (retVal)
-            {
-                AssertLogger.LogPass(testStep, "Pass");
-            }
-            else
-            {
-                AssertLogger.LogFail(testStep, "Fail");
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// The wrapper assert equals.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        /// <param name="actual">
-        /// The actual.
-        /// </param>
-        /// <typeparam name="T1">
-        /// </typeparam>
-        /// <typeparam name="T2">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool WrapperAssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
-        {
             bool retVal = true;
+            string msg; 
+
             try
             {
+                msg = string.Format("AssertEquals: [{0}] Are Equal to [{1}]", expected, actual);
                 Assert.AreEqual(expected, actual);
+                this.AssertPass(testStep, msg);
             }
             catch (AssertFailedException ex)
             {
+                msg = ex.Message;
                 retVal = false;
+                this.AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -161,7 +131,23 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertNotEquals(string testStep, object expected, object actual)
         {
-            throw new NotImplementedException();
+            var retVal = true;
+            string msg;
+
+            try
+            {
+                Assert.AreNotEqual(expected, actual);
+                msg = string.Format("AssertNotEquals: [{0}] Not Equal to [{1}]", expected, actual);
+                retVal = this.AssertPass(testStep, msg);
+            }
+            catch (AssertFailedException ex)
+            {
+                msg = ex.Message;
+                retVal = false;
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -196,9 +182,25 @@ namespace Stf.Utilities.StfAssert
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertIsInstanceOf(string testStep, object value, string expectedTypeName)
+        public bool AssertIsInstanceOf(string testStep, object value, Type expectedType)
         {
-            throw new NotImplementedException();
+            var retVal = true;
+            string msg;
+
+            try
+            {
+                Assert.IsInstanceOfType(value, expectedType);
+                msg = string.Format("AssertNotEquals: [{0}] is of type [{1}]", value, expectedType.ToString());
+                retVal = this.AssertPass(testStep, msg);
+            }
+            catch (AssertFailedException ex)
+            {
+                retVal = false;
+                msg = ex.Message;
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -232,18 +234,18 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertNull(string testStep, object actual)
         {
-            bool retVal;
+            bool retVal = actual == null;
             string msg;
 
-            if (actual == null)
+            if (retVal)
             {
-                msg = string.Format("TestStep:'{0}' Is null", testStep);
-                retVal = this.AssertPass(testStep, msg);
+                msg = string.Format("AssertNull: object Is null");
+                this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("TestStep:'{0}' Is not null", testStep);
-                retVal = this.AssertFail(testStep, msg);
+                msg = string.Format("AssertNull:'{0}' Is not null", actual.ToString());
+                this.AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -263,21 +265,18 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertHasValue(string testStep, object actual)
         {
-            bool retVal;
+            bool retVal = actual != null;
+            string msg;
 
-            if (actual != null)
+            if (retVal)
             {
-                string msg;
-
-                msg = string.Format("TestStep:'{0}' Has a value", testStep);
-                retVal = this.AssertPass(testStep, msg);
+                msg = string.Format("AssertHasValue: Has a value");
+                this.AssertPass(testStep, msg);
             }
             else
             {
-                string msg;
-
-                msg = string.Format("TestStep:'{0}' Has no value", testStep);
-                retVal = this.AssertFail(testStep, msg);
+                msg = string.Format("AssertHasValue: Has no value");
+                this.AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -297,7 +296,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertHasNoValue(string testStep, object actual)
         {
-            throw new NotImplementedException();
+            bool retVal = actual == null;
+            string msg;
+
+            if (retVal)
+            {
+                msg = string.Format("AssertHasNoValue: Has no value");
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertHasNoValue: Has a value");
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -354,7 +367,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertFileExists(string testStep, string filenameAndPath)
         {
-            throw new NotImplementedException();
+            var retVal = File.Exists(filenameAndPath);
+            string msg;
+
+            if (retVal)
+            {
+                msg = string.Format("AssertFileExists: [{0}] Does exist", filenameAndPath);
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertFileExists: [{0}] Does Not exist", filenameAndPath);
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -371,7 +398,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertFolderExists(string testStep, string foldernameAndPath)
         {
-            throw new NotImplementedException();
+            var retVal = Directory.Exists(foldernameAndPath);
+            string msg;
+
+            if (retVal)
+            {
+                msg = string.Format("AssertFolderExists: [{0}] Does exist", foldernameAndPath);
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertFolderExists: [{0}] Does Not exist", foldernameAndPath);
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -388,7 +429,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertFolderNotExists(string testStep, string foldernameAndPath)
         {
-            throw new NotImplementedException();
+            var retVal = !Directory.Exists(foldernameAndPath);
+            string msg; 
+
+            if (retVal)
+            {
+                msg = string.Format("AssertFolderNotExists: [{0}] Does Not exist", foldernameAndPath);
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertFolderNotExists: [{0}] Does exist", foldernameAndPath);
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -405,7 +460,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertFileNotExists(string testStep, string filenameAndPath)
         {
-            throw new NotImplementedException();
+            var retVal = !File.Exists(filenameAndPath);
+            string msg;
+
+            if (retVal)
+            {
+                msg = string.Format("AssertFileNotExists: [{0}] Does Not exist", filenameAndPath);
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertFileNotExists: [{0}] Does exist", filenameAndPath);
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -422,20 +491,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertTrue(string testStep, bool value)
         {
+            bool retVal = value;
             string msg;
 
-            if (value)
+            if (retVal)
             {
-                msg = string.Format("TestStep:'{0}' - AssertTrue - value True", testStep);
+                msg = string.Format("AssertTrue: value True");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("TestStep:'{0}' - AssertTrue - value False", testStep);
+                msg = string.Format("AssertTrue: value False");
                 this.AssertFail(testStep, msg);
             }
 
-            return true;
+            return retVal;
         }
 
         /// <summary>
@@ -452,20 +522,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertFalse(string testStep, bool value)
         {
+            bool retVal = !value;
             string msg;
 
-            if (!value)
+            if (retVal)
             {
-                msg = string.Format("TestStep:'{0}' - AssertFalse - value False", testStep);
+                msg = string.Format("AssertFalse: value False");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("TestStep:'{0}' - AssertFalse - value True", testStep);
+                msg = string.Format("AssertFalse: value True");
                 this.AssertFail(testStep, msg);
             }
 
-            return true;
+            return retVal;
         }
 
         /// <summary>
