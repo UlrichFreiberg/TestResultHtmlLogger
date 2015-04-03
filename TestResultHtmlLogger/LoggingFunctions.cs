@@ -309,7 +309,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
             string htmlLine, logLevelString;
             string messageIdString;
 
-            if (!this.addLoglevelToRunReport[logLevel])
+            if (!this.AddLoglevelToRunReport[logLevel])
             {
                 return -1;
             }

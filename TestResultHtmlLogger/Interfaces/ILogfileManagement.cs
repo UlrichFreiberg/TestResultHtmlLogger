@@ -30,8 +30,8 @@ namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
         /// Archive <c>this</c> log file.
         /// </summary>
         /// <returns>
-        /// The <see cref="int"/>.
+        /// The <see cref="bool"/>.
         /// </returns>
-        int ArchiveThisLogFile();
+        bool ArchiveThisLogFile();
     }
 }
