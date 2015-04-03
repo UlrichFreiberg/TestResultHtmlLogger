@@ -161,17 +161,32 @@ namespace WinFormsApp
 
         private void BtnAssertStringEquals_Click(object sender, EventArgs e)
         {
-            this.MyAssert.StringEquals("DemoApp", this.TxtAssertArg1.Text, this.TxtAssertArg2.Text);
+            this.MyAssert.StringEquals("DemoApp", this.TxtStringAssertArg1.Text, this.TxtStringAssertArg2.Text);
         }
 
         private void BtnAssertStringMatches_Click(object sender, EventArgs e)
         {
-            this.MyAssert.StringMatches("DemoApp", this.TxtAssertArg1.Text, this.TxtAssertArg2.Text);
+            this.MyAssert.StringMatches("DemoApp", this.TxtStringAssertArg1.Text, this.TxtStringAssertArg2.Text);
         }
 
         private void BtnAssertStringContains_Click(object sender, EventArgs e)
         {
-            this.MyAssert.StringContains("DemoApp", this.TxtAssertArg1.Text, this.TxtAssertArg2.Text);
+            this.MyAssert.StringContains("DemoApp", this.TxtStringAssertArg1.Text, this.TxtStringAssertArg2.Text);
+        }
+
+        private void BtnAssertEquals_Click(object sender, EventArgs e)
+        {
+            this.MyAssert.AssertEquals("DemoApp", this.TxtAssertArg1.Text, this.TxtAssertArg2.Text);
+        }
+
+        private void BtnAssertHasValue_Click(object sender, EventArgs e)
+        {
+            this.MyAssert.AssertHasValue("DemoApp", this.TxtAssertArg1.Text);
+        }
+
+        private void BtnAssertNull_Click(object sender, EventArgs e)
+        {
+            this.MyAssert.AssertNull("DemoApp", this.TxtAssertArg1.Text);
         }
     }
 }

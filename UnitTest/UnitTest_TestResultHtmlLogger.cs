@@ -208,7 +208,7 @@ namespace UnitTest
                                };
             var myAsserter = new StfAssert
                                  {
-                                    Logger = myLogger
+                                     AssertLogger = myLogger
                                  };
 
             myAsserter.AssertTrue("True Value for AssertTrue", true);

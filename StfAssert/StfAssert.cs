@@ -48,11 +48,6 @@ namespace Stf.Utilities.StfAssert
         public TestResultHtmlLogger AssertLogger { get; set; }
 
         /// <summary>
-        /// Gets or sets the logger.
-        /// </summary>
-        public TestResultHtmlLogger Logger { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether enable negative testing.
         /// </summary>
         public bool EnableNegativeTesting
@@ -64,7 +59,7 @@ namespace Stf.Utilities.StfAssert
 
             set
             {
-                this.Logger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value.ToString()));
+                this.AssertLogger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value.ToString()));
                 this.enableNegativeTesting = value;
             }
         }
@@ -237,7 +232,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertNull(string testStep, object actual)
         {
-            throw new NotImplementedException();
+            bool retVal;
+            string msg;
+
+            if (actual == null)
+            {
+                msg = string.Format("TestStep:'{0}' Is null", testStep);
+                retVal = this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("TestStep:'{0}' Is not null", testStep);
+                retVal = this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -254,7 +263,24 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertHasValue(string testStep, object actual)
         {
-            throw new NotImplementedException();
+            bool retVal;
+
+            if (actual != null)
+            {
+                string msg;
+
+                msg = string.Format("TestStep:'{0}' Has a value", testStep);
+                retVal = this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                string msg;
+
+                msg = string.Format("TestStep:'{0}' Has no value", testStep);
+                retVal = this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -538,7 +564,7 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         private bool AssertPass(string testStep, string message)
         {
-            this.Logger.LogPass(testStep, message);
+            this.AssertLogger.LogPass(testStep, message);
             return true;
         }
 
@@ -556,7 +582,7 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         private bool AssertFail(string testStep, string message)
         {
-            this.Logger.LogFail(testStep, message);
+            this.AssertLogger.LogFail(testStep, message);
             return true;
         }
 
