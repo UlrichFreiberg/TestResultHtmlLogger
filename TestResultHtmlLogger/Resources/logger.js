@@ -66,11 +66,27 @@ function toggleLogElements(divElement, buttonId, logElement) {
 function loadKeyValueList() {
     var logFileInfoList = document.getElementById("logfileinfo");
     var keyValueList = document.getElementsByClassName("keyvalue");
+
     for (var i = 0; i < keyValueList.length; i++) {
+        var key = keyValueList[i].children[0].innerHTML;
+        var dupKeyFound = false
+
+        // search to see if a similar key has been set after this one
+        for (var j = i+1; j < keyValueList.length; j++) {
+            thisKey = keyValueList[j].children[0].innerHTML
+            if (key == thisKey) {
+                dupKeyFound = true;
+                break;
+            }
+        }
+
+        if (dupKeyFound) {
+            continue;
+        }
+
         var logFileInfoListItem = document.createElement("li");
         var keyItem = document.createElement("b");
         var valueItem = document.createElement("em");
-        var key = keyValueList[i].children[0].innerHTML;
         var value = keyValueList[i].children[1].innerHTML;
         var keyItemText = document.createTextNode(key + ": ");
         var valueItemText = document.createTextNode(value);

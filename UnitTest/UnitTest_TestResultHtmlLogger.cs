@@ -35,7 +35,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestMethodAllLogType.html", 
+                FileName = @"c:\temp\unittestlogger_TestMethodAllLogType.html",
                 LogLevel = LogLevel.Internal
             };
 
@@ -78,7 +78,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestMethodLotsOfEntries.html", 
+                FileName = @"c:\temp\unittestlogger_TestMethodLotsOfEntries.html",
                 LogLevel = LogLevel.Internal
             };
 
@@ -96,7 +96,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestMethodCallStack.html", 
+                FileName = @"c:\temp\unittestlogger_TestMethodCallStack.html",
                 LogLevel = LogLevel.Internal
             };
 
@@ -114,15 +114,15 @@ namespace UnitTest
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L3");
             myLogger.LogInfo("NameOfFunction_L3A");
             myLogger.LogInfo("NameOfFunction_L3B");
-            
+
             myLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L3");
             myLogger.LogInfo("NameOfFunction_L2A");
             myLogger.LogInfo("NameOfFunction_L2B");
-            
+
             myLogger.LogFunctionExit(LogLevel.Info, "NameOfFunction_L2");
             myLogger.LogInfo("NameOfFunction_L1A");
             myLogger.LogInfo("NameOfFunction_L1B");
-            
+
             myLogger.LogFunctionEnter(LogLevel.Info, "Int", "NameOfFunction_L2");
             myLogger.LogInfo("NameOfFunction_L2A");
             myLogger.LogInfo("NameOfFunction_L2B");
@@ -144,7 +144,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestLogScreenshot.html", 
+                FileName = @"c:\temp\unittestlogger_TestLogScreenshot.html",
                 LogLevel = LogLevel.Internal
             };
 
@@ -161,7 +161,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestLogAllWindows.html", 
+                FileName = @"c:\temp\unittestlogger_TestLogAllWindows.html",
                 LogLevel = LogLevel.Internal
             };
 
@@ -203,7 +203,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
                                {
-                                   FileName = @"c:\temp\unittestlogger_TestMethodAsserts.html", 
+                                   FileName = @"c:\temp\unittestlogger_TestMethodAsserts.html",
                                    LogLevel = LogLevel.Internal
                                };
             var myAsserter = new StfAssert
@@ -220,6 +220,22 @@ namespace UnitTest
             myAsserter.AssertFalse("False Value for AssertFalse", false);
             myAsserter.AssertFalse("2 > 3 Value for AssertFalse", 2 > 3);
             myAsserter.AssertFalse("3 > 2 Value for AssertFalse", 3 > 2);
+        }
+
+        /// <summary>
+        /// The test for keyvalues
+        /// </summary>
+        [TestMethod]
+        public void TestMethodKeyValues()
+        {
+            var myLogger = new TestResultHtmlLogger
+            {
+                FileName = @"c:\temp\unittestlogger_TestMethodKeyValues.html",
+                LogLevel = LogLevel.Internal
+            };
+
+            myLogger.LogKeyValue("Bent", "42", "First value for Bent");
+            myLogger.LogKeyValue("Bent", "43", "Second value for Bent - this is the only one that should be shown in the list");
         }
     }
 }
