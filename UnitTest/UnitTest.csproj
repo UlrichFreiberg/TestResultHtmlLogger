@@ -50,9 +50,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="UnitTest_StfAssert.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UnitTest_StfAssert_Equality.cs" />
+    <Compile Include="UnitTest_StfAssert_FileAndFolder.cs" />
+    <Compile Include="UnitTest_StfAssert_Object.cs" />
+    <Compile Include="UnitTest_StfStringAssert.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="UnitTest_TestResultHtmlLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest_StfAssert.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StfAssert\StfAssert.csproj">
