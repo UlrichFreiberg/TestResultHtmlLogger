@@ -137,68 +137,6 @@ namespace Stf.Utilities.StfAssert
         }
 
         /// <summary>
-        /// Asserts that a expression is True
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="value">
-        /// The Value to investigate
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertTrue(string testStep, bool value)
-        {
-            bool retVal = value;
-            string msg;
-
-            if (retVal)
-            {
-                msg = string.Format("AssertTrue: value True");
-                this.AssertPass(testStep, msg);
-            }
-            else
-            {
-                msg = string.Format("AssertTrue: value False");
-                this.AssertFail(testStep, msg);
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// Asserts that a expression is True
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="value">
-        /// The Value to investigate
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertFalse(string testStep, bool value)
-        {
-            bool retVal = !value;
-            string msg;
-
-            if (retVal)
-            {
-                msg = string.Format("AssertFalse: value False");
-                this.AssertPass(testStep, msg);
-            }
-            else
-            {
-                msg = string.Format("AssertFalse: value True");
-                this.AssertFail(testStep, msg);
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
         /// The value equality.
         /// </summary>
         /// <param name="val1">
