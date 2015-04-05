@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities.TestResultHtmlLogger
+namespace Stf.Utilities
 {
     using System;
     using System.IO;

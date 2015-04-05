@@ -3,7 +3,7 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger.Utils
+namespace Stf.Utilities.Utils
 {
     using System;
     using System.Collections.Generic;

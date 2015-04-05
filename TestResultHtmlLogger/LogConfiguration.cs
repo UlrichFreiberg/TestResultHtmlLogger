@@ -3,7 +3,10 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger
+
+using Stf.Utilities.Interfaces;
+
+namespace Stf.Utilities
 {
     using System;
     using System.Configuration;
@@ -11,7 +14,7 @@ namespace Stf.Utilities.TestResultHtmlLogger
     using System.Linq;
     using System.Reflection;
 
-    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+    using Utilities.Interfaces;
 
     /// <summary>
     /// The log configuration.

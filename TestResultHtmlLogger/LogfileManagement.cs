@@ -3,13 +3,17 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger
+
+using Stf.Utilities.Interfaces;
+using Stf.Utilities.Properties;
+
+namespace Stf.Utilities
 {
     using System;
     using System.Collections.Generic;
 
-    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-    using Stf.Utilities.TestResultHtmlLogger.Properties;
+    using Utilities.Interfaces;
+    using Utilities.Properties;
 
     /// <summary>
     /// The test result html logger. the <see cref="ILogfileManagement"/> part

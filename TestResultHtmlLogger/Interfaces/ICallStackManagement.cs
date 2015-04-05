@@ -3,7 +3,7 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
+namespace Stf.Utilities.Interfaces
 {
     /// <summary>
     /// The CallStackManagement <see langword="interface"/>. If used by the logger, it will indent the logging - indicating a call stack.

@@ -10,8 +10,7 @@ namespace UnitTest
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Stf.Utilities.StfAssert;
-    using Stf.Utilities.TestResultHtmlLogger;
+    using Stf.Utilities;
     using System.IO;
 
     /// <summary>

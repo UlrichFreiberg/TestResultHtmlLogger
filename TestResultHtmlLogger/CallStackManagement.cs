@@ -3,12 +3,15 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger
+
+using Stf.Utilities.Interfaces;
+
+namespace Stf.Utilities
 {
     using System;
     using System.Collections.Generic;
 
-    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+    using Utilities.Interfaces;
 
     /// <summary>
     /// The test result html logger. The <see cref="ICallStackManagement"/> part

@@ -7,9 +7,8 @@ namespace UnitTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using Stf.Utilities.StfAssert;
-    using Stf.Utilities.TestResultHtmlLogger;
-    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
+    using Stf.Utilities;
+    using Stf.Utilities.Interfaces;
 
     /// <summary>
     /// The unit test 1.
