@@ -44,6 +44,9 @@
     <Compile Include="Interfaces\IStfStringAssert.cs" />
     <Compile Include="StfAssert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StfAssert_Equality.cs" />
+    <Compile Include="StfAssert_FileAndFolder.cs" />
+    <Compile Include="StfAssert_Object.cs" />
     <Compile Include="StfStringAssert.cs" />
   </ItemGroup>
   <ItemGroup>
