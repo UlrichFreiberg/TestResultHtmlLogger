@@ -13,6 +13,7 @@ namespace Stf.Utilities.StfAssert
 
     using Stf.Utilities.StfAssert.Interfaces;
     using Stf.Utilities.TestResultHtmlLogger;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// The stf assert.
@@ -96,7 +97,7 @@ namespace Stf.Utilities.StfAssert
         public bool AssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
         {
             bool retVal = true;
-            string msg; 
+            string msg;
 
             try
             {
@@ -385,6 +386,49 @@ namespace Stf.Utilities.StfAssert
         }
 
         /// <summary>
+        /// Asserts that a file exists
+        /// </summary>
+        /// <param name="testStep">
+        /// Name of the test step in the test script
+        /// </param>
+        /// <param name="filenameAndPath">
+        /// Absolute path to the file of interest
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        public bool AssertFileContains(string testStep, string filenameAndPath, string pattern)
+        {
+            bool retVal;
+            string msg;
+
+            if (!File.Exists(filenameAndPath))
+            {
+                msg = string.Format("AssertFileContains: [{0}] Does Not exist", filenameAndPath);
+                this.AssertFail(testStep, msg);
+                return false;
+            }
+
+            var content = File.ReadAllText(filenameAndPath);
+            Regex regex = new Regex(pattern);
+            Match match = regex.Match(content);
+            retVal = match.Success;
+
+            if (retVal)
+            {
+                msg = string.Format("AssertFileContains: [{0}] Does contain [{1}]", filenameAndPath, pattern);
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertFileContains: [{0}] Does Not contain [{1}]", filenameAndPath, pattern);
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
+        }
+
+        /// <summary>
         /// Asserts that a folder (directory) exists
         /// </summary>
         /// <param name="testStep">
@@ -430,7 +474,7 @@ namespace Stf.Utilities.StfAssert
         public bool AssertFolderNotExists(string testStep, string foldernameAndPath)
         {
             var retVal = !Directory.Exists(foldernameAndPath);
-            string msg; 
+            string msg;
 
             if (retVal)
             {

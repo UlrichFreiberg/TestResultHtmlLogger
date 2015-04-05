@@ -12,6 +12,7 @@ namespace UnitTest
 
     using Stf.Utilities.StfAssert;
     using Stf.Utilities.TestResultHtmlLogger;
+    using System.IO;
 
     /// <summary>
     /// The unit test stf asserts.
@@ -99,6 +100,25 @@ namespace UnitTest
 
             Assert.IsTrue(myAsserts.StringNotEmpty("TestStepName 27", "Hejsa"));
             Assert.IsFalse(myAsserts.StringNotEmpty("TestStepName 28", string.Empty));
+        }
+
+                /// <summary>
+        /// The test method assert strings.
+        /// </summary>
+        [TestMethod]
+        public void TestMethodAssertFileContains()
+        {
+            const string UnitTestFile = @"c:\temp\TestMethodAssertFileContains.txt";
+            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertFileContains.html" };
+            var myAsserts = new StfAssert(myLogger);
+            var testFile = File.CreateText(UnitTestFile);
+            testFile.WriteLine("one line of test data");
+            testFile.Close();
+
+            Assert.IsFalse(myAsserts.AssertFileContains("TestStepName 1", @"c:\DoNotExists.nope", "A string"));
+            Assert.IsFalse(myAsserts.AssertFileContains("TestStepName 2", UnitTestFile, "Nothing Like it"));
+            Assert.IsTrue(myAsserts.AssertFileContains("TestStepName 3", UnitTestFile, "test"));
+            Assert.IsTrue(myAsserts.AssertFileContains("TestStepName 4", UnitTestFile, "t[eE]st"));
         }
     }
 }
