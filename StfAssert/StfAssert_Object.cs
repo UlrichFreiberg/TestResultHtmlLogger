@@ -34,7 +34,32 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertIsObject(string testStep, object actual)
         {
-            throw new NotImplementedException();
+            Type typeOfActual;
+            bool retVal;
+            string msg;
+
+            if (actual == null)
+            {
+                msg = string.Format("AssertIsObject: Null is Not an object ");
+                this.AssertFail(testStep, msg);
+                return false;
+            }
+
+            typeOfActual = actual.GetType();
+            retVal = typeOfActual.IsClass;
+
+            if (retVal)
+            {
+                msg = string.Format("AssertIsObject: is an object ");
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertIsObject: is Not an object ");
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -87,7 +112,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertNotNull(string testStep, object actual)
         {
-            throw new NotImplementedException();
+            bool retVal = actual != null;
+            string msg;
+
+            if (retVal)
+            {
+                msg = string.Format("AssertNotNull: object Is not null");
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertNotNull:'{0}' Is null", actual.ToString());
+                this.AssertFail(testStep, msg);
+            }
+
+            return retVal;
         }
 
         /// <summary>
