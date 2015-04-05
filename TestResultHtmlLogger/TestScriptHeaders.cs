@@ -8,8 +8,6 @@ using Stf.Utilities.Interfaces;
 
 namespace Stf.Utilities
 {
-    using Utilities.Interfaces;
-
     /// <summary>
     /// The test result html logger.
     /// </summary>

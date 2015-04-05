@@ -3,13 +3,13 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Stf.Utilities;
+using Stf.Utilities.Interfaces;
+
 namespace UnitTest
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Stf.Utilities;
-    using Stf.Utilities.Interfaces;
-
     /// <summary>
     /// The unit test 1.
     /// </summary>

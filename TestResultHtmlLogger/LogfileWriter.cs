@@ -4,11 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.IO;
+
 namespace Stf.Utilities
 {
-    using System;
-    using System.IO;
-
     /// <summary>
     /// The logfile writer.
     /// </summary>

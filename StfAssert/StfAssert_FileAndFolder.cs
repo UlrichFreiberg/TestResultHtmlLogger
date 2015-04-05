@@ -4,19 +4,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.IO;
+using System.Text.RegularExpressions;
 using Stf.Utilities.Interfaces;
 
 namespace Stf.Utilities
 {
-    using System;
-    using System.IO;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Utilities.Interfaces;
-    using Utilities;
-    using System.Text.RegularExpressions;
-
     /// <summary>
     /// The stf assert.
     /// </summary>

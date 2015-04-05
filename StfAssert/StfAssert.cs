@@ -4,19 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using Stf.Utilities.Interfaces;
 
 namespace Stf.Utilities
 {
-    using System;
-    using System.IO;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Utilities.Interfaces;
-    using Utilities;
-    using System.Text.RegularExpressions;
-
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -33,7 +25,7 @@ namespace Stf.Utilities
         /// <param name="logger">
         /// The logger.
         /// </param>
-        public StfAssert(Utilities.TestResultHtmlLogger logger)
+        public StfAssert(TestResultHtmlLogger logger)
         {
             AssertLogger = logger;
         }
@@ -49,7 +41,7 @@ namespace Stf.Utilities
         /// <summary>
         /// Gets or sets the assert logger.
         /// </summary>
-        public Utilities.TestResultHtmlLogger AssertLogger { get; set; }
+        public TestResultHtmlLogger AssertLogger { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether enable negative testing.

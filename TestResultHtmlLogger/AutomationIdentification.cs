@@ -4,14 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using Stf.Utilities.Interfaces;
 
 namespace Stf.Utilities
 {
-    using System;
-
-    using Utilities.Interfaces;
-
     /// <summary>
     /// The test result logger. The <see cref="IAutomationIdentification"/> part.
     /// </summary>

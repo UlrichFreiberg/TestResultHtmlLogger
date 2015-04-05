@@ -4,17 +4,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
 using Stf.Utilities.Interfaces;
 using Stf.Utilities.Properties;
 
 namespace Stf.Utilities
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Utilities.Interfaces;
-    using Utilities.Properties;
-
     /// <summary>
     /// The test result html logger. the <see cref="ILogfileManagement"/> part
     /// </summary>

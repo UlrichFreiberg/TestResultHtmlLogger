@@ -4,18 +4,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Linq;
+using System.Windows.Forms;
 using Stf.Utilities.Interfaces;
 using Stf.Utilities.Utils;
 
 namespace Stf.Utilities
 {
-    using System;
-    using System.Linq;
-    using System.Windows.Forms;
-
-    using Utilities.Interfaces;
-    using Utilities.Utils;
-
     /// <summary>
     /// The test result html logger.
     /// </summary>

@@ -4,18 +4,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using System.Configuration;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
 using Stf.Utilities.Interfaces;
 
 namespace Stf.Utilities
 {
-    using System;
-    using System.Configuration;
-    using System.Globalization;
-    using System.Linq;
-    using System.Reflection;
-
-    using Utilities.Interfaces;
-
     /// <summary>
     /// The log configuration.
     /// </summary>
@@ -95,14 +92,18 @@ namespace Stf.Utilities
             try
             {
                 LogLevel LogLevelValue = (LogLevel)Enum.Parse(typeof(LogLevel), loglevelString);
-                if (Enum.IsDefined(typeof(LogLevel), LogLevelValue) | LogLevelValue.ToString().Contains(","))
+                if (Enum.IsDefined(typeof (LogLevel), LogLevelValue) | LogLevelValue.ToString().Contains(","))
+                {
                     retVal = LogLevelValue;
+                }
                 else
-                    Console.WriteLine("{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
+                {
+                    Console.WriteLine(@"{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
+                }
             }
             catch (ArgumentException)
             {
-                Console.WriteLine("{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
+                Console.WriteLine(@"{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
             }
 
             return retVal;

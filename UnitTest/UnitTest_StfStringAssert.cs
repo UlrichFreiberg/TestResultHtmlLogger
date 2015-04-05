@@ -4,15 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Stf.Utilities;
+
 namespace UnitTest
 {
-    using System;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Stf.Utilities;
-    using System.IO;
-
     /// <summary>
     /// The unit test stf asserts.
     /// </summary>
