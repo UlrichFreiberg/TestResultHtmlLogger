@@ -72,7 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LogConfiguration.cs" />
-    <Compile Include="LogfileWriter.cs" />
+    <Compile Include="Utils\LogfileWriter.cs" />
     <Compile Include="LogfileManagement.cs">
       <SubType>Code</SubType>
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>

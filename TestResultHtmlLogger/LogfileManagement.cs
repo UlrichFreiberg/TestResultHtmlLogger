@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using Stf.Utilities.Interfaces;
 using Stf.Utilities.Properties;
+using Stf.Utilities.Utils;
 
 namespace Stf.Utilities
 {

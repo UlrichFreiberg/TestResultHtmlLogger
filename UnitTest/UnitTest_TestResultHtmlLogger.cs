@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Stf.Utilities;
 using Stf.Utilities.Interfaces;
@@ -155,7 +156,7 @@ namespace UnitTest
         /// <summary>
         /// The test log all windows.
         /// </summary>
-        [TestMethod]
+        [TestMethod, ExpectedException(typeof(NotImplementedException))]
         public void TestLogAllWindows()
         {
             var myLogger = new TestResultHtmlLogger

@@ -33,7 +33,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log all windows.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="level">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -42,23 +42,15 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogAllWindows(LogLevel logLevel, string message)
+        public int LogAllWindows(LogLevel level, string message)
         {
-            // TODO: Duplicate code, fix this with some proper logic
-            if (!this.AddLoglevelToRunReport[logLevel])
-            {
-                return -1;
-            }
-
-            var allWindows = Utilities.GetImagesOfAllWindows();
-
-            return allWindows.Sum(window => LogOneImage(logLevel, window.Value, message));
+            throw new NotImplementedException();
         }
 
         /// <summary>
         /// The log screenshot.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="level">
         /// The log level.
         /// </param>
         /// <param name="message">
@@ -67,12 +59,12 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogScreenshot(LogLevel logLevel, string message)
+        public int LogScreenshot(LogLevel level, string message)
         {
             var length = 0;
             foreach (var screen in Screen.AllScreens)
             {
-                length += LogOneImage(logLevel, Utilities.DoScreenshot(screen.Bounds), message);
+                length += LogOneImage(level, Utilities.DoScreenshot(screen.Bounds), message);
                 if (length < 0)
                 {
                     break;
@@ -85,7 +77,7 @@ namespace Stf.Utilities
         /// <summary>
         /// The log image.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="level">
         /// The log level.
         /// </param>
         /// <param name="imageFile">
@@ -97,15 +89,15 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        public int LogImage(LogLevel logLevel, string imageFile, string message)
+        public int LogImage(LogLevel level, string imageFile, string message)
         {
-            return LogOneImage(logLevel, imageFile, message);
+            return LogOneImage(level, imageFile, message);
         }
 
         /// <summary>
         /// The log one image.
         /// </summary>
-        /// <param name="logLevel">
+        /// <param name="level">
         /// The log level.
         /// </param>
         /// <param name="imageFile">
@@ -117,15 +109,15 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>
-        private int LogOneImage(LogLevel logLevel, string imageFile, string message)
+        private int LogOneImage(LogLevel level, string imageFile, string message)
         {
-            if (!this.AddLoglevelToRunReport[logLevel])
+            if (!this.AddLoglevelToRunReport[level])
             {
                 return -1;
             }
 
             var messageIdString = GetNextMessageId();
-            var logLevelString = Enum.GetName(typeof(LogLevel), logLevel);
+            var logLevelString = Enum.GetName(typeof(LogLevel), level);
 
             var html = string.Format("<div onclick=\"sa('{0}')\" id=\"{0}\" class=\"line info image\">", messageIdString);
             html += string.Format("    <div class=\"el time\">{0}</div>", DateTime.Now.ToString("HH:mm:ss"));

@@ -7,7 +7,7 @@
 using System;
 using System.IO;
 
-namespace Stf.Utilities
+namespace Stf.Utilities.Utils
 {
     /// <summary>
     /// The logfile writer.
