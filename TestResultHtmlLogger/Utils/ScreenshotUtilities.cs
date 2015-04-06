@@ -80,14 +80,16 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
         public Dictionary<string, string> GetImagesOfAllWindows()
         {
             var windowImages = new Dictionary<string, string>();
+            var imageNo = 1;
 
             try
             {
-                var procsWithWindows = Process.GetProcesses().Where(p => p.MainWindowHandle != IntPtr.Zero);
+                var procsWithWindows = Process.GetProcesses().Where(p => p.MainWindowHandle != IntPtr.Zero && !string.IsNullOrEmpty(p.MainWindowTitle));
                 foreach (var process in procsWithWindows)
                 {
                     var base64Image = GetWindowImage(process.MainWindowHandle);
-                    windowImages.Add(process.MainWindowTitle, base64Image);
+                    windowImages.Add(string.Format("{0}: {1}", imageNo, process.MainWindowTitle), base64Image);
+                    imageNo++;
                 }
             }
             catch (Exception exception)
@@ -117,7 +119,7 @@ namespace Stf.Utilities.TestResultHtmlLogger.Utils
                 RECT rectangle;
                 GetWindowRect(handle, out rectangle);
 
-                using (var bitmap = new Bitmap(rectangle.Width, rectangle.Height, PixelFormat.Format16bppRgb565))
+                using (var bitmap = new Bitmap(rectangle.Width, rectangle.Height, PixelFormat.DontCare))
                 {
                     using (var graphics = Graphics.FromImage(bitmap))
                     {
