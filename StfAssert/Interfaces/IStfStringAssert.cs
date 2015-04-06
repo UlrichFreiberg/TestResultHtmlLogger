@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities.StfAssert.Interfaces
+namespace Stf.Utilities.Interfaces
 {
     /// <summary>
     /// The StfStringAssert interface.

@@ -3,15 +3,15 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger
+
+using System;
+using System.Linq;
+using System.Windows.Forms;
+using Stf.Utilities.Interfaces;
+using Stf.Utilities.Utils;
+
+namespace Stf.Utilities
 {
-    using System;
-    using System.Linq;
-    using System.Windows.Forms;
-
-    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-    using Stf.Utilities.TestResultHtmlLogger.Utils;
-
     /// <summary>
     /// The test result html logger.
     /// </summary>

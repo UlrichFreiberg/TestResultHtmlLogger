@@ -3,12 +3,12 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger
+
+using System;
+using Stf.Utilities.Interfaces;
+
+namespace Stf.Utilities
 {
-    using System;
-
-    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-
     /// <summary>
     /// The test result logger. The <see cref="IAutomationIdentification"/> part.
     /// </summary>

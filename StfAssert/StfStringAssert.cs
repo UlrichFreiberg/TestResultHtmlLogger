@@ -4,14 +4,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities.StfAssert
+using System.Text.RegularExpressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Stf.Utilities.Interfaces;
+
+namespace Stf.Utilities
 {
-    using System.Text.RegularExpressions;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Stf.Utilities.StfAssert.Interfaces;
-
     /// <summary>
     /// The stf assert.
     /// </summary>

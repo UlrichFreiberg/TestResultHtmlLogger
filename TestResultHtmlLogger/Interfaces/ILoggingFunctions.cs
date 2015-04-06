@@ -3,7 +3,7 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger.Interfaces
+namespace Stf.Utilities.Interfaces
 {
     /// <summary>
     /// The LoggingFunctions <c>interface</c>.

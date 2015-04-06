@@ -3,16 +3,16 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.TestResultHtmlLogger
+
+using System;
+using System.Configuration;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
+using Stf.Utilities.Interfaces;
+
+namespace Stf.Utilities
 {
-    using System;
-    using System.Configuration;
-    using System.Globalization;
-    using System.Linq;
-    using System.Reflection;
-
-    using Stf.Utilities.TestResultHtmlLogger.Interfaces;
-
     /// <summary>
     /// The log configuration.
     /// </summary>
@@ -29,8 +29,17 @@ namespace Stf.Utilities.TestResultHtmlLogger
             LogTitle = Settings.Setting<string>("LogTitle", "Ovid LogTitle");
             LogFileName = Settings.Setting<string>("LogFileName", @"c:\temp\Ovid_defaultlog.html");
             AlertLongInterval = Settings.Setting<int>("AlertLongInterval", 30000);
-            LogLevel = LogLevel.Info; // TODO: Settings.Setting<LogLevel>("LogLevel");
             PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
+
+            const LogLevel defaultLoglevel = LogLevel.Info;
+            var LogLevelString = Settings.Setting<string>("LogLevel", defaultLoglevel.ToString());
+            var ConvertedLoglevel = StringToLogLevel(LogLevelString);
+
+            if (ConvertedLoglevel == null) {
+                LogLevel = defaultLoglevel;
+            } else {
+                LogLevel = (LogLevel)ConvertedLoglevel;
+            }
         }
 
         /// <summary>
@@ -67,6 +76,38 @@ namespace Stf.Utilities.TestResultHtmlLogger
         /// Gets or sets the path to logo image file.
         /// </summary>
         public string PathToLogoImageFile { get; set; }
+
+        internal LogLevel? StringToLogLevel(string loglevelString)
+        {
+            LogLevel? retVal = null;
+
+            if (String.IsNullOrEmpty(loglevelString))
+            {
+                return null;
+            }
+
+            // make sure the first letter is upper case and the rest is lower case
+            loglevelString = loglevelString.First().ToString().ToUpper() + loglevelString.Substring(1).ToLower();
+
+            try
+            {
+                LogLevel LogLevelValue = (LogLevel)Enum.Parse(typeof(LogLevel), loglevelString);
+                if (Enum.IsDefined(typeof (LogLevel), LogLevelValue) | LogLevelValue.ToString().Contains(","))
+                {
+                    retVal = LogLevelValue;
+                }
+                else
+                {
+                    Console.WriteLine(@"{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
+                }
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine(@"{0} is not an underlying value of the LogLevel enumeration.", loglevelString);
+            }
+
+            return retVal;
+        }
 
         /// <summary>
         /// The settings.

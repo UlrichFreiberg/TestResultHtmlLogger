@@ -4,8 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities.StfAssert.Interfaces
+namespace Stf.Utilities.Interfaces
 {
+    using System;
+
     /// <summary>
     /// The <see cref="StfAssert"/> interface.
     /// </summary>
@@ -79,13 +81,13 @@ namespace Stf.Utilities.StfAssert.Interfaces
         /// <param name="value">
         /// The variable to investigate
         /// </param>
-        /// <param name="expectedTypeName">
+        /// <param name="expectedType">
         /// The expected type of the variable
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertIsInstanceOf(string testStep, object value, string expectedTypeName);
+        bool AssertIsInstanceOf(string testStep, object value, Type expectedType);
 
         /// <summary>
         /// Asserts whether a variable is Null

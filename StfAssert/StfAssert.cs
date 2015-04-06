@@ -4,15 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities.StfAssert
+using System;
+using Stf.Utilities.Interfaces;
+
+namespace Stf.Utilities
 {
-    using System;
-
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-    using Stf.Utilities.StfAssert.Interfaces;
-    using Stf.Utilities.TestResultHtmlLogger;
-
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -74,341 +70,6 @@ namespace Stf.Utilities.StfAssert
         }
 
         /// <summary>
-        /// Assert if two values are the same. Values and objects can be compared.
-        /// </summary>
-        /// <typeparam name="T1">
-        /// </typeparam>
-        /// <typeparam name="T2">
-        /// </typeparam>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="expected">
-        /// Value <c>expected</c> for the assert
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
-        {
-            bool retVal;
-
-            retVal = WrapperAssertEquals(testStep, expected, actual);
-
-            if (retVal)
-            {
-                AssertLogger.LogPass(testStep, "Pass");
-            }
-            else
-            {
-                AssertLogger.LogFail(testStep, "Fail");
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// The wrapper assert equals.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        /// <param name="actual">
-        /// The actual.
-        /// </param>
-        /// <typeparam name="T1">
-        /// </typeparam>
-        /// <typeparam name="T2">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool WrapperAssertEquals<T1, T2>(string testStep, T1 expected, T2 actual)
-        {
-            bool retVal = true;
-            try
-            {
-                Assert.AreEqual(expected, actual);
-            }
-            catch (AssertFailedException ex)
-            {
-                retVal = false;
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// Asserts that two values are the same. Values and objects can be compared.
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="expected">
-        /// Value <c>expected</c> for the assert
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertNotEquals(string testStep, object expected, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts that a value is a Object type and not a reference type
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertIsObject(string testStep, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts a variable is of a specific type
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="value">
-        /// The variable to investigate
-        /// </param>
-        /// <param name="expectedTypeName">
-        /// The expected type of the variable
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertIsInstanceOf(string testStep, object value, string expectedTypeName)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts whether a variable is NOT Null
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertNotNull(string testStep, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts whether a variable is Null
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertNull(string testStep, object actual)
-        {
-            bool retVal;
-            string msg;
-
-            if (actual == null)
-            {
-                msg = string.Format("TestStep:'{0}' Is null", testStep);
-                retVal = this.AssertPass(testStep, msg);
-            }
-            else
-            {
-                msg = string.Format("TestStep:'{0}' Is not null", testStep);
-                retVal = this.AssertFail(testStep, msg);
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// Asserts whether a variable has a value - e.g. not Null or Empty
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertHasValue(string testStep, object actual)
-        {
-            bool retVal;
-
-            if (actual != null)
-            {
-                string msg;
-
-                msg = string.Format("TestStep:'{0}' Has a value", testStep);
-                retVal = this.AssertPass(testStep, msg);
-            }
-            else
-            {
-                string msg;
-
-                msg = string.Format("TestStep:'{0}' Has no value", testStep);
-                retVal = this.AssertFail(testStep, msg);
-            }
-
-            return retVal;
-        }
-
-        /// <summary>
-        /// Asserts whether a variable has NO value - e.g. Null or Empty
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="actual">
-        /// Value that was actually experienced
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertHasNoValue(string testStep, object actual)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts whether the left hand side is greater than the right hand side
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="leftHandSide">
-        /// The value to the left in a compare expression
-        /// </param>
-        /// <param name="rightHandSide">
-        /// The value to the right in a compare expression
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertGreaterThan(string testStep, object leftHandSide, object rightHandSide)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts whether the left hand side is less than the right hand side
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="leftHandSide">
-        /// The value to the left in a compare expression
-        /// </param>
-        /// <param name="rightHandSide">
-        /// The value to the right in a compare expression
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertLessThan(string testStep, object leftHandSide, object rightHandSide)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts that a file exists
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="filenameAndPath">
-        /// Absolute path to the file of interest
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertFileExists(string testStep, string filenameAndPath)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts that a folder (directory) exists
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="foldernameAndPath">
-        /// Path to the folder
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertFolderExists(string testStep, string foldernameAndPath)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts that a folder (directory) does NOT exists
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="foldernameAndPath">
-        /// Path to the folder
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertFolderNotExists(string testStep, string foldernameAndPath)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Asserts that a file doesn't exists
-        /// </summary>
-        /// <param name="testStep">
-        /// Name of the test step in the test script
-        /// </param>
-        /// <param name="filenameAndPath">
-        /// Absolute path to the file of interest
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        public bool AssertFileNotExists(string testStep, string filenameAndPath)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Asserts that a expression is True
         /// </summary>
         /// <param name="testStep">
@@ -422,20 +83,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertTrue(string testStep, bool value)
         {
+            bool retVal = value;
             string msg;
 
-            if (value)
+            if (retVal)
             {
-                msg = string.Format("TestStep:'{0}' - AssertTrue - value True", testStep);
+                msg = string.Format("AssertTrue: value True");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("TestStep:'{0}' - AssertTrue - value False", testStep);
+                msg = string.Format("AssertTrue: value False");
                 this.AssertFail(testStep, msg);
             }
 
-            return true;
+            return retVal;
         }
 
         /// <summary>
@@ -452,102 +114,21 @@ namespace Stf.Utilities.StfAssert
         /// </returns>
         public bool AssertFalse(string testStep, bool value)
         {
+            bool retVal = !value;
             string msg;
 
-            if (!value)
+            if (retVal)
             {
-                msg = string.Format("TestStep:'{0}' - AssertFalse - value False", testStep);
+                msg = string.Format("AssertFalse: value False");
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("TestStep:'{0}' - AssertFalse - value True", testStep);
+                msg = string.Format("AssertFalse: value True");
                 this.AssertFail(testStep, msg);
             }
 
-            return true;
-        }
-
-        /// <summary>
-        /// The value equality.
-        /// </summary>
-        /// <param name="val1">
-        /// The val 1.
-        /// </param>
-        /// <param name="val2">
-        /// The val 2.
-        /// </param>
-        /// <typeparam name="T1">
-        /// </typeparam>
-        /// <typeparam name="T2">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool ValueEquality<T1, T2>(T1 val1, T2 val2)
-
-            // where T1 : IConvertible
-        {
-            // where T2 : IConvertible
-            // convert val2 to type of val1.
-            T1 boxed2 = (T1)Convert.ChangeType(val2, typeof(T1));
-
-            // compare now that same type.
-            return val1.Equals(boxed2);
-        }
-
-        /// <summary>
-        /// The check has value.
-        /// </summary>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <param name="message">
-        /// The Message.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool CheckHasValue(object actual, ref string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// The equals.
-        /// </summary>
-        /// <param name="expected">
-        /// The Expected.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced
-        /// </param>
-        /// <param name="message">
-        /// The Message.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool Equals(object expected, object actual, ref string message)
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// The comparable.
-        /// </summary>
-        /// <param name="expected">
-        /// The Expected.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool Comparable(object expected, object actual)
-        {
-            return true;
+            return retVal;
         }
 
         /// <summary>
@@ -584,84 +165,6 @@ namespace Stf.Utilities.StfAssert
         {
             this.AssertLogger.LogFail(testStep, message);
             return true;
-        }
-
-        /// <summary>
-        /// The wrapper assert equals old.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        /// <param name="actual">
-        /// The actual.
-        /// </param>
-        /// <typeparam name="T1">
-        /// </typeparam>
-        /// <typeparam name="T2">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool WrapperAssertEqualsOld<T1, T2>(string testStep, T1 expected, T2 actual)
-        {
-            var expectedTypeInfo = expected.GetType();
-            var actualTypeInfo = actual.GetType();
-
-            if (expectedTypeInfo.IsPrimitive && actualTypeInfo.IsPrimitive)
-            {
-                return CompareTo(expected, actual);
-            }
-
-            if (actualTypeInfo != expectedTypeInfo)
-            {
-                Console.WriteLine("Different type of objects are different");
-                return false;
-            }
-
-            if (expected is IConvertible)
-            {
-                return CompareTo(expected, actual);
-            }
-
-            switch (actualTypeInfo.FullName)
-            {
-                case "System.String":
-                    var orgStringActual = (string)Convert.ChangeType(actual, actualTypeInfo);
-                    var orgStringExpected = (string)Convert.ChangeType(expected, expectedTypeInfo);
-                    var retVal = string.CompareOrdinal(orgStringExpected, orgStringActual);
-                    return retVal == 0;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// The compare to.
-        /// </summary>
-        /// <param name="obj1">
-        /// The obj 1.
-        /// </param>
-        /// <param name="obj2">
-        /// The obj 2.
-        /// </param>
-        /// <typeparam name="T1">
-        /// </typeparam>
-        /// <typeparam name="T2">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool CompareTo<T1, T2>(T1 obj1, T2 obj2)
-        {
-            if ((obj1 is IConvertible) && (obj2 is IConvertible))
-            {
-                return ValueEquality(obj1, obj2);
-            }
-
-            return false;
         }
     }
 }

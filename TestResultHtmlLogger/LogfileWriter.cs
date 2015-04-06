@@ -4,11 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Stf.Utilities.TestResultHtmlLogger
-{
-    using System;
-    using System.IO;
+using System;
+using System.IO;
 
+namespace Stf.Utilities
+{
     /// <summary>
     /// The logfile writer.
     /// </summary>
