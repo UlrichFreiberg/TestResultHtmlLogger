@@ -140,7 +140,13 @@ namespace Stf.Utilities
         /// </returns>
         public int LogGet(LogLevel logLevel, string callingProperty, object getValue)
         {
-            throw new NotImplementedException();
+            string message;
+            string valueString;
+
+            valueString = getValue == null ? "null" : getValue.ToString();
+
+            message = string.Format("Property {0} Get value [{1}]", callingProperty, valueString);
+            return LogOneHtmlMessage(logLevel, message);
         }
 
         /// <summary>
@@ -160,7 +166,13 @@ namespace Stf.Utilities
         /// </returns>
         public int LogSet(LogLevel logLevel, string callingProperty, object setValue)
         {
-            throw new NotImplementedException();
+            string message;
+            string valueString;
+
+            valueString = setValue == null ? "null" : setValue.ToString();
+
+            message = string.Format("Property {0} Set value [{1}]", callingProperty, valueString);
+            return LogOneHtmlMessage(logLevel, message);
         }
 
         /// <summary>
