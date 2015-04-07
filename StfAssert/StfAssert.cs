@@ -25,7 +25,7 @@ namespace Stf.Utilities
         /// <param name="logger">
         /// The logger.
         /// </param>
-        public StfAssert(TestResultHtmlLogger logger)
+        public StfAssert(TestResultHtmlLogger logger) : this()
         {
             AssertLogger = logger;
         }
@@ -36,6 +36,7 @@ namespace Stf.Utilities
         public StfAssert()
         {
             AssertLogger = null;
+            LastMessage = "Not Initialized";
         }
 
         /// <summary>
@@ -63,11 +64,7 @@ namespace Stf.Utilities
         /// <summary>
         /// Gets the last message.
         /// </summary>
-        public string LastMessage
-        {
-            get { throw new NotImplementedException(); }
-            private set { throw new NotImplementedException(); }
-        }
+        public string LastMessage { get; private set; }
 
         /// <summary>
         /// Asserts that a expression is True
