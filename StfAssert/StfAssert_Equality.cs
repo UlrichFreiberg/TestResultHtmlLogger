@@ -106,9 +106,42 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertGreaterThan(string testStep, object leftHandSide, object rightHandSide)
+        public bool AssertGreaterThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+            where T1 : IConvertible,IComparable
+            where T2 : IConvertible,IComparable
         {
-            throw new NotImplementedException();
+            T1 rhsAsLhs ;
+            bool retVal;
+            string msg;
+
+            try
+            {
+                // convert val2 to type of val1.
+                rhsAsLhs = (T1)Convert.ChangeType(rightHandSide, typeof(T1));
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+                retVal = false;
+                this.AssertFail(testStep, msg);
+                return false;
+            }
+
+            int compareVal = leftHandSide.CompareTo(rhsAsLhs);
+            retVal = compareVal > 0;
+
+            if (retVal)
+            {
+                msg = string.Format("AssertGreaterThan: [{0}] is greater then [{1}]", leftHandSide.ToString(), rightHandSide.ToString());
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertGreaterThan: [{0}] is Not greater then [{1}]", leftHandSide.ToString(), rightHandSide.ToString());
+                this.AssertFail(testStep, msg);                
+            }
+
+            return retVal;
         }
 
         /// <summary>
@@ -148,10 +181,7 @@ namespace Stf.Utilities
         /// The <see cref="bool"/>.
         /// </returns>
         private bool ValueEquality<T1, T2>(T1 val1, T2 val2)
-
-            // where T1 : IConvertible
         {
-            // where T2 : IConvertible
             // convert val2 to type of val1.
             T1 boxed2 = (T1)Convert.ChangeType(val2, typeof(T1));
 
@@ -210,30 +240,6 @@ namespace Stf.Utilities
         /// </returns>
         private bool Comparable(object expected, object actual)
         {
-            return true;
-        }
-
-        /// <summary>
-        /// The wrapper assert equals old.
-        /// </summary>
-        /// <param name="testStep">
-        /// The test step.
-        /// </param>
-        /// <param name="expected">
-        /// The expected.
-        /// </param>
-        /// <param name="actual">
-        /// The actual.
-        /// </param>
-        /// <typeparam name="T1">
-        /// </typeparam>
-        /// <typeparam name="T2">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool WrapperAssertEqualsOld<T1, T2>(string testStep, T1 expected, T2 actual)
-        {
             var expectedTypeInfo = expected.GetType();
             var actualTypeInfo = actual.GetType();
 
@@ -251,15 +257,6 @@ namespace Stf.Utilities
             if (expected is IConvertible)
             {
                 return CompareTo(expected, actual);
-            }
-
-            switch (actualTypeInfo.FullName)
-            {
-                case "System.String":
-                    var orgStringActual = (string)Convert.ChangeType(actual, actualTypeInfo);
-                    var orgStringExpected = (string)Convert.ChangeType(expected, expectedTypeInfo);
-                    var retVal = string.CompareOrdinal(orgStringExpected, orgStringActual);
-                    return retVal == 0;
             }
 
             return false;

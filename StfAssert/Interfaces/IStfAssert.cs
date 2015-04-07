@@ -160,7 +160,9 @@ namespace Stf.Utilities.Interfaces
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        bool AssertGreaterThan(string testStep, object leftHandSide, object rightHandSide);
+        bool AssertGreaterThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+            where T1 : IConvertible, IComparable where T2 : IConvertible, IComparable;
+
 
         /// <summary>
         /// Asserts whether the left hand side is less than the right hand side
