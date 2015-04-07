@@ -65,6 +65,10 @@ namespace Stf.Utilities
             this.LogTitle = Configuration.LogTitle;
             this.AlertLongInterval = Configuration.AlertLongInterval;
             this.PathToLogoImageFile = Configuration.PathToLogoImageFile;
+
+            // setting the default AID logging function
+            LogAutomationIdObjectUserFunction =
+                (level, obj, message) => LogOneHtmlMessage(level, string.Format("AutomationId: [{0}] - Message: [{1}]", obj.ToString(), message));
         }
 
         /// <summary>
