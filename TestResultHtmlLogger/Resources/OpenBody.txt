@@ -1,6 +1,8 @@
 <body onload="loadKeyValueList()">
 	<div id="header">
-		<div id="logo"></div>
+        <aside>
+            <div id="logo" style="float: right">Ovid</div>
+        </aside>
 		<h1 id="logtitle">LOGFILETITLE</h1>
 		<p id="generatedbypOvid">Leveret til dig af Ovid</p>
 		<div id="buttons">
