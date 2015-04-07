@@ -64,6 +64,11 @@ namespace UnitTest
 
             myLogger.LogKeyValue("SomeKey", "SomeValue", "LogKeyValue");
 
+            myLogger.LogGet(LogLevel.Info, "MyTestProperty", myLogger);
+            myLogger.LogSet(LogLevel.Info, "MyTestProperty", myLogger);
+
+            myLogger.LogAutomationIdObject(LogLevel.Internal, myLogger, "Using myLogger as AID for test");
+
             myLogger.LogInfo("Ovid TRACE: Nu kommer der en PASSING TestRunStatus");
             myLogger.SetRunStatus(true);
             myLogger.LogInfo("Ovid TRACE: Nu kommer der en FALING TestRunStatus");
