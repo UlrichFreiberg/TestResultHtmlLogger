@@ -1,7 +1,10 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StfAssert.cs" company="Foobar">
+// <copyright file="StfAssert_Equality.cs" company="Foobar">
 //   2015
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
@@ -19,8 +22,10 @@ namespace Stf.Utilities
         /// Assert if two values are the same. Values and objects can be compared.
         /// </summary>
         /// <typeparam name="T1">
+        /// Type of expected
         /// </typeparam>
         /// <typeparam name="T2">
+        /// Type of actual
         /// </typeparam>
         /// <param name="testStep">
         /// Name of the test step in the test script
@@ -72,7 +77,7 @@ namespace Stf.Utilities
         /// </returns>
         public bool AssertNotEquals(string testStep, object expected, object actual)
         {
-            var retVal = true;
+            bool retVal;
             string msg;
 
             try
@@ -94,6 +99,12 @@ namespace Stf.Utilities
         /// <summary>
         /// Asserts whether the left hand side is greater than the right hand side
         /// </summary>
+        /// <typeparam name="T1">
+        /// The type of the left value in a compare expression
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// The type of the right value in a compare expression
+        /// </typeparam>
         /// <param name="testStep">
         /// Name of the test step in the test script
         /// </param>
@@ -107,38 +118,30 @@ namespace Stf.Utilities
         /// The <see cref="bool"/>.
         /// </returns>
         public bool AssertGreaterThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
-            where T1 : IConvertible,IComparable
-            where T2 : IConvertible,IComparable
+            where T1 : IConvertible, IComparable
+            where T2 : IConvertible, IComparable
         {
-            T1 rhsAsLhs ;
             bool retVal;
-            string msg;
+            var msg = string.Empty;
+            var compareVal = 0;
 
-            try
+            // TODO:what to return if we cannot compare the objects?
+            if (!this.AssertComareTo(leftHandSide, rightHandSide, ref msg, ref compareVal))
             {
-                // convert val2 to type of val1.
-                rhsAsLhs = (T1)Convert.ChangeType(rightHandSide, typeof(T1));
-            }
-            catch (Exception ex)
-            {
-                msg = ex.Message;
-                retVal = false;
-                this.AssertFail(testStep, msg);
                 return false;
             }
 
-            int compareVal = leftHandSide.CompareTo(rhsAsLhs);
             retVal = compareVal > 0;
 
             if (retVal)
             {
-                msg = string.Format("AssertGreaterThan: [{0}] is greater then [{1}]", leftHandSide.ToString(), rightHandSide.ToString());
+                msg = string.Format("AssertGreaterThan: [{0}] is greater then [{1}]", leftHandSide, rightHandSide);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertGreaterThan: [{0}] is Not greater then [{1}]", leftHandSide.ToString(), rightHandSide.ToString());
-                this.AssertFail(testStep, msg);                
+                msg = string.Format("AssertGreaterThan: [{0}] is Not greater then [{1}]", leftHandSide, rightHandSide);
+                this.AssertFail(testStep, msg);
             }
 
             return retVal;
@@ -147,6 +150,12 @@ namespace Stf.Utilities
         /// <summary>
         /// Asserts whether the left hand side is less than the right hand side
         /// </summary>
+        /// <typeparam name="T1">
+        /// The type of the left value in a compare expression
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// The type of the right value in a compare expression
+        /// </typeparam>
         /// <param name="testStep">
         /// Name of the test step in the test script
         /// </param>
@@ -159,130 +168,96 @@ namespace Stf.Utilities
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        public bool AssertLessThan(string testStep, object leftHandSide, object rightHandSide)
+        public bool AssertLessThan<T1, T2>(string testStep, T1 leftHandSide, T2 rightHandSide)
+            where T1 : IConvertible, IComparable
+            where T2 : IConvertible, IComparable
         {
-            throw new NotImplementedException();
-        }
+            bool retVal;
+            var msg = string.Empty;
+            var compareVal = 0;
 
-        /// <summary>
-        /// The value equality.
-        /// </summary>
-        /// <param name="val1">
-        /// The val 1.
-        /// </param>
-        /// <param name="val2">
-        /// The val 2.
-        /// </param>
-        /// <typeparam name="T1">
-        /// </typeparam>
-        /// <typeparam name="T2">
-        /// </typeparam>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool ValueEquality<T1, T2>(T1 val1, T2 val2)
-        {
-            // convert val2 to type of val1.
-            T1 boxed2 = (T1)Convert.ChangeType(val2, typeof(T1));
-
-            // compare now that same type.
-            return val1.Equals(boxed2);
-        }
-
-        /// <summary>
-        /// The check has value.
-        /// </summary>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <param name="message">
-        /// The Message.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool CheckHasValue(object actual, ref string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// The equals.
-        /// </summary>
-        /// <param name="expected">
-        /// The Expected.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced
-        /// </param>
-        /// <param name="message">
-        /// The Message.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool Equals(object expected, object actual, ref string message)
-        {
-            return true;
-        }
-
-        /// <summary>
-        /// The comparable.
-        /// </summary>
-        /// <param name="expected">
-        /// The Expected.
-        /// </param>
-        /// <param name="actual">
-        /// The value actually experienced.
-        /// </param>
-        /// <returns>
-        /// The <see cref="bool"/>.
-        /// </returns>
-        private bool Comparable(object expected, object actual)
-        {
-            var expectedTypeInfo = expected.GetType();
-            var actualTypeInfo = actual.GetType();
-
-            if (expectedTypeInfo.IsPrimitive && actualTypeInfo.IsPrimitive)
+            // TODO:what to return if we cannot compare the objects?
+            if (!this.AssertComareTo(leftHandSide, rightHandSide, ref msg, ref compareVal))
             {
-                return CompareTo(expected, actual);
-            }
-
-            if (actualTypeInfo != expectedTypeInfo)
-            {
-                Console.WriteLine("Different type of objects are different");
                 return false;
             }
 
-            if (expected is IConvertible)
+            retVal = compareVal < 0;
+
+            if (retVal)
             {
-                return CompareTo(expected, actual);
+                msg = string.Format("AssertLessThan: [{0}] is greater then [{1}]", leftHandSide, rightHandSide);
+                this.AssertPass(testStep, msg);
+            }
+            else
+            {
+                msg = string.Format("AssertLessThan: [{0}] is Not greater then [{1}]", leftHandSide, rightHandSide);
+                this.AssertFail(testStep, msg);
             }
 
-            return false;
+            return retVal;
         }
 
         /// <summary>
-        /// The compare to.
+        /// The assert comare to.
         /// </summary>
-        /// <param name="obj1">
-        /// The obj 1.
+        /// <param name="leftHandSide">
+        /// The left hand side.
         /// </param>
-        /// <param name="obj2">
-        /// The obj 2.
+        /// <param name="rightHandSide">
+        /// The right hand side.
+        /// </param>
+        /// <param name="msg">
+        /// The msg.
+        /// </param>
+        /// <param name="compareVal">
+        /// The compare val.
         /// </param>
         /// <typeparam name="T1">
+        /// Type of the lefthandside
         /// </typeparam>
         /// <typeparam name="T2">
+        /// Type of the righthandside
         /// </typeparam>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool CompareTo<T1, T2>(T1 obj1, T2 obj2)
+        private bool AssertComareTo<T1, T2>(T1 leftHandSide, T2 rightHandSide, ref string msg, ref int compareVal)
+            where T1 : IConvertible, IComparable
+            where T2 : IConvertible, IComparable
         {
-            if ((obj1 is IConvertible) && (obj2 is IConvertible))
+            if (msg == null)
             {
-                return ValueEquality(obj1, obj2);
+                return false;
+            }
+
+            try
+            {
+                // convert val2 to type of val1.
+                var rhsAsLhs = (T1)Convert.ChangeType(rightHandSide, typeof(T1));
+
+                compareVal = leftHandSide.CompareTo(rhsAsLhs);
+                msg = string.Empty;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+
+            // if T2 cant convert to T1 perhaps T1 can convert to T2
+            try
+            {
+                // convert val1 to type of val2.
+                var lhsAsRhs = (T2)Convert.ChangeType(leftHandSide, typeof(T2));
+
+                compareVal = rightHandSide.CompareTo(lhsAsRhs);
+                msg = string.Empty;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
             }
 
             return false;
