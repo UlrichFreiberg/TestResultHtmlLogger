@@ -3,13 +3,14 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities;
-
 namespace UnitTest
 {
+    using System;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities;
+
     /// <summary>
     /// The unit test stf asserts.
     /// </summary>
@@ -24,6 +25,8 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertIsObject.html" };
             var myAsserts = new StfAssert(myLogger);
+
+            myAsserts.EnableNegativeTesting = true;
 
             Assert.IsFalse(myAsserts.AssertIsObject("An integer", 1));
             Assert.IsTrue(myAsserts.AssertIsObject("A string", "1"));
@@ -40,6 +43,8 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertIsInstanceOf.html" };
             var myAsserts = new StfAssert(myLogger);
+
+            myAsserts.EnableNegativeTesting = true;
 
             Assert.IsFalse(myAsserts.AssertIsInstanceOf("An integer", 1, Type.GetType("int")));
             Assert.IsTrue(myAsserts.AssertIsInstanceOf("A string", "1", Type.GetType(typeof(string).FullName)));

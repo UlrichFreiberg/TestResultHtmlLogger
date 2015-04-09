@@ -3,19 +3,19 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities;
-using Stf.Utilities.Interfaces;
-
 namespace UnitTest
 {
+    using System;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities;
+
     /// <summary>
     /// The unit test 1.
     /// </summary>
     [TestClass]
-    public class UnitTestTestResultHtmlLogger
+    public class StfLogger
     {
         /// <summary>
         /// The test method_ init.
@@ -35,7 +35,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestMethodAllLogType.html",
+                FileName = @"c:\temp\unittestlogger_TestMethodAllLogType.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -83,7 +83,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestMethodLotsOfEntries.html",
+                FileName = @"c:\temp\unittestlogger_TestMethodLotsOfEntries.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -101,7 +101,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestMethodCallStack.html",
+                FileName = @"c:\temp\unittestlogger_TestMethodCallStack.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -149,7 +149,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestLogScreenshot.html",
+                FileName = @"c:\temp\unittestlogger_TestLogScreenshot.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -166,7 +166,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestLogAllWindows.html",
+                FileName = @"c:\temp\unittestlogger_TestLogAllWindows.html", 
                 LogLevel = LogLevel.Internal
             };
 
@@ -208,12 +208,13 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
                                {
-                                   FileName = @"c:\temp\unittestlogger_TestMethodAsserts.html",
+                                   FileName = @"c:\temp\unittestlogger_TestMethodAsserts.html", 
                                    LogLevel = LogLevel.Internal
                                };
             var myAsserter = new StfAssert
                                  {
-                                     AssertLogger = myLogger
+                                     AssertLogger = myLogger, 
+                                     EnableNegativeTesting = true
                                  };
 
             myAsserter.AssertTrue("True Value for AssertTrue", true);
@@ -235,7 +236,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger
             {
-                FileName = @"c:\temp\unittestlogger_TestMethodKeyValues.html",
+                FileName = @"c:\temp\unittestlogger_TestMethodKeyValues.html", 
                 LogLevel = LogLevel.Internal
             };
 

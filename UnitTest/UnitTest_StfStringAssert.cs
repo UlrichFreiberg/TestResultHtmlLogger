@@ -3,12 +3,12 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities;
-
 namespace UnitTest
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities;
+
     /// <summary>
     /// The unit test stf asserts.
     /// </summary>

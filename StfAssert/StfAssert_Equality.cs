@@ -2,17 +2,15 @@
 // <copyright file="StfAssert_Equality.cs" company="Foobar">
 //   2015
 // </copyright>
-// <summary>
-//   
-// </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities.Interfaces;
-
 namespace Stf.Utilities
 {
+    using System;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities.Interfaces;
+
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -186,12 +184,12 @@ namespace Stf.Utilities
 
             if (retVal)
             {
-                msg = string.Format("AssertLessThan: [{0}] is greater then [{1}]", leftHandSide, rightHandSide);
+                msg = string.Format("AssertLessThan: [{0}] is less than [{1}]", leftHandSide, rightHandSide);
                 this.AssertPass(testStep, msg);
             }
             else
             {
-                msg = string.Format("AssertLessThan: [{0}] is Not greater then [{1}]", leftHandSide, rightHandSide);
+                msg = string.Format("AssertLessThan: [{0}] is Not less than [{1}]", leftHandSide, rightHandSide);
                 this.AssertFail(testStep, msg);
             }
 

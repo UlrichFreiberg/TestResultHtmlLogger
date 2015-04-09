@@ -3,13 +3,9 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using Stf.Utilities.Interfaces;
-
 namespace Stf.Utilities
 {
-    using System.Windows.Forms;
+    using Stf.Utilities.Interfaces;
 
     /// <summary>
     /// The test result logger. The <see cref="IAutomationIdentification"/> part.

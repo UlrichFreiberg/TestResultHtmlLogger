@@ -3,13 +3,13 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System.IO;
-using System.Text.RegularExpressions;
-using Stf.Utilities.Interfaces;
-
 namespace Stf.Utilities
 {
+    using System.IO;
+    using System.Text.RegularExpressions;
+
+    using Stf.Utilities.Interfaces;
+
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -54,6 +54,9 @@ namespace Stf.Utilities
         /// </param>
         /// <param name="filenameAndPath">
         /// Absolute path to the file of interest
+        /// </param>
+        /// <param name="pattern">
+        /// The pattern.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.

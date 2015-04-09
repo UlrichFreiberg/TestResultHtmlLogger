@@ -3,16 +3,14 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using System.Configuration;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using Stf.Utilities.Interfaces;
-
 namespace Stf.Utilities
 {
+    using System;
+    using System.Configuration;
+    using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+
     /// <summary>
     /// The log configuration.
     /// </summary>
@@ -24,15 +22,15 @@ namespace Stf.Utilities
         /// </summary>
         public LogConfiguration()
         {
-            OverwriteLogFile = Settings.Setting<bool>("OverwriteLogFile", true);
-            LogToFile = Settings.Setting<bool>("LogToFile", false);
-            LogTitle = Settings.Setting<string>("LogTitle", "Ovid LogTitle");
-            LogFileName = Settings.Setting<string>("LogFileName", @"c:\temp\Ovid_defaultlog.html");
-            AlertLongInterval = Settings.Setting<int>("AlertLongInterval", 30000);
+            OverwriteLogFile = Settings.Setting("OverwriteLogFile", true);
+            LogToFile = Settings.Setting("LogToFile", false);
+            LogTitle = Settings.Setting("LogTitle", "Ovid LogTitle");
+            LogFileName = Settings.Setting("LogFileName", @"c:\temp\Ovid_defaultlog.html");
+            AlertLongInterval = Settings.Setting("AlertLongInterval", 30000);
             PathToLogoImageFile = Settings.Setting<string>("PathToLogoImageFile", null);
 
             const LogLevel defaultLoglevel = LogLevel.Info;
-            var LogLevelString = Settings.Setting<string>("LogLevel", defaultLoglevel.ToString());
+            var LogLevelString = Settings.Setting("LogLevel", defaultLoglevel.ToString());
             var ConvertedLoglevel = StringToLogLevel(LogLevelString);
 
             if (ConvertedLoglevel == null) {
@@ -77,11 +75,20 @@ namespace Stf.Utilities
         /// </summary>
         public string PathToLogoImageFile { get; set; }
 
+        /// <summary>
+        /// The string to log level.
+        /// </summary>
+        /// <param name="loglevelString">
+        /// The loglevel string.
+        /// </param>
+        /// <returns>
+        /// The <see cref="LogLevel?"/>.
+        /// </returns>
         internal LogLevel? StringToLogLevel(string loglevelString)
         {
             LogLevel? retVal = null;
 
-            if (String.IsNullOrEmpty(loglevelString))
+            if (string.IsNullOrEmpty(loglevelString))
             {
                 return null;
             }
@@ -132,8 +139,7 @@ namespace Stf.Utilities
             /// <summary>
             /// The nfi.
             /// </summary>
-            private static readonly NumberFormatInfo Nfi = new NumberFormatInfo()
-            {
+            private static readonly NumberFormatInfo Nfi = new NumberFormatInfo {
                 NumberGroupSeparator = string.Empty, 
                 CurrencyDecimalSeparator = "."
             };
@@ -146,6 +152,9 @@ namespace Stf.Utilities
             /// </typeparam>
             /// <param name="name">
             /// The name of the configuration file entry.
+            /// </param>
+            /// <param name="defaultValue">
+            /// The default Value.
             /// </param>
             /// <returns>
             /// The <see cref="T"/>.

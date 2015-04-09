@@ -3,13 +3,14 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities.Interfaces;
-
 namespace Stf.Utilities
 {
+    using System;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities.Interfaces;
+
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -66,8 +67,8 @@ namespace Stf.Utilities
         /// <param name="value">
         /// The variable to investigate
         /// </param>
-        /// <param name="expectedTypeName">
-        /// The expected type of the variable
+        /// <param name="expectedType">
+        /// The expected Type.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
@@ -80,7 +81,7 @@ namespace Stf.Utilities
             try
             {
                 Assert.IsInstanceOfType(value, expectedType);
-                msg = string.Format("AssertIsInstanceOf: [{0}] is of type [{1}]", value, expectedType.ToString());
+                msg = string.Format("AssertIsInstanceOf: [{0}] is of type [{1}]", value, expectedType);
                 retVal = this.AssertPass(testStep, msg);
             }
             catch (AssertFailedException ex)
@@ -117,7 +118,7 @@ namespace Stf.Utilities
             }
             else
             {
-                msg = string.Format("AssertNotNull:'{0}' Is null", actual.ToString());
+                msg = string.Format("AssertNotNull:'{0}' Is null", actual);
                 this.AssertFail(testStep, msg);
             }
 
@@ -148,7 +149,7 @@ namespace Stf.Utilities
             }
             else
             {
-                msg = string.Format("AssertNull:'{0}' Is not null", actual.ToString());
+                msg = string.Format("AssertNull:'{0}' Is not null", actual);
                 this.AssertFail(testStep, msg);
             }
 

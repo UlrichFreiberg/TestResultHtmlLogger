@@ -3,13 +3,14 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System.Text.RegularExpressions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities.Interfaces;
-
 namespace Stf.Utilities
 {
+    using System.Text.RegularExpressions;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities.Interfaces;
+
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -338,6 +339,7 @@ namespace Stf.Utilities
             return retVal;
         }
         
+
         /// <summary>
         /// Asserts that two strings are equal - Case Insignificant
         /// </summary>

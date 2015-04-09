@@ -3,13 +3,14 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities;
-
 namespace UnitTest
 {
+    using System.IO;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities;
+
     /// <summary>
     /// The unit test stf asserts.
     /// </summary>
@@ -26,6 +27,9 @@ namespace UnitTest
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertFileContains.html" };
             var myAsserts = new StfAssert(myLogger);
             var testFile = File.CreateText(UnitTestFile);
+
+            myAsserts.EnableNegativeTesting = true;
+
             testFile.WriteLine("one line of test data");
             testFile.Close();
 
@@ -47,6 +51,8 @@ namespace UnitTest
             const string UnitTestFile = @"c:\temp\TestMethodAssertFileContains.txt";
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertFileExists.html" };
             var myAsserts = new StfAssert(myLogger);
+
+            myAsserts.EnableNegativeTesting = true;
 
             if (File.Exists(UnitTestFile))
             {
@@ -73,6 +79,8 @@ namespace UnitTest
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertFileNotExists.html" };
             var myAsserts = new StfAssert(myLogger);
 
+            myAsserts.EnableNegativeTesting = true;
+
             if (File.Exists(UnitTestFile))
             {
                 File.Delete(UnitTestFile);
@@ -98,6 +106,8 @@ namespace UnitTest
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertFolderExists.html" };
             var myAsserts = new StfAssert(myLogger);
 
+            myAsserts.EnableNegativeTesting = true;
+
             if (Directory.Exists(UnitTestDir))
             {
                 Directory.Delete(UnitTestDir);
@@ -118,6 +128,8 @@ namespace UnitTest
             const string UnitTestDir = @"c:\temp\TestMethodAssertFolderNotExists";
             var myLogger = new TestResultHtmlLogger {FileName = @"c:\temp\unittestlogger_AssertFolderNotExists.html"};
             var myAsserts = new StfAssert(myLogger);
+
+            myAsserts.EnableNegativeTesting = true;
 
             if (Directory.Exists(UnitTestDir))
             {

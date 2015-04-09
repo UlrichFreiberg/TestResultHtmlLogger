@@ -3,11 +3,10 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using Stf.Utilities.Interfaces;
-
 namespace Stf.Utilities
 {
+    using Stf.Utilities.Interfaces;
+
     /// <summary>
     /// The test result html logger.
     /// </summary>

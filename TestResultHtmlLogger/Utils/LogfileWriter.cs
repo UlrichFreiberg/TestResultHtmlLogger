@@ -3,12 +3,11 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using System.IO;
-
 namespace Stf.Utilities.Utils
 {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// The logfile writer.
     /// </summary>

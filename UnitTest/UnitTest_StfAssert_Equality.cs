@@ -3,13 +3,14 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities;
-
 namespace UnitTest
 {
+    using System;
+
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities;
+
     /// <summary>
     /// The unit test stf asserts.
     /// </summary>
@@ -26,6 +27,8 @@ namespace UnitTest
             var myAsserts = new StfAssert(myLogger);
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);
+
+            myAsserts.EnableNegativeTesting = true;
 
             Assert.IsTrue(myAsserts.AssertEquals("1 = 1", 1, 1));
             Assert.IsFalse(myAsserts.AssertEquals("1 = 1.0", 1, 1.0));
@@ -56,6 +59,8 @@ namespace UnitTest
             var myAsserts = new StfAssert(myLogger);
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);
+
+            myAsserts.EnableNegativeTesting = true;
 
             Assert.IsTrue(myAsserts.AssertGreaterThan("2 > 1", 2, 1));
             Assert.IsTrue(myAsserts.AssertGreaterThan("2.0 > 1", 2.0, 1));
@@ -90,6 +95,8 @@ namespace UnitTest
             var myAsserts = new StfAssert(myLogger);
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);
+
+            myAsserts.EnableNegativeTesting = true;
 
             Assert.IsFalse(myAsserts.AssertLessThan("2 < 1", 2, 1));
             Assert.IsFalse(myAsserts.AssertLessThan("2.0 < 1", 2.0, 1));

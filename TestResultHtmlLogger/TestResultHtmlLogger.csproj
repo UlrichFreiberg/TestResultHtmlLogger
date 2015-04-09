@@ -65,7 +65,7 @@
     <Compile Include="Interfaces\IScreenShots.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\LogLevel.cs">
+    <Compile Include="LogLevel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\ITestScriptHeaders.cs">

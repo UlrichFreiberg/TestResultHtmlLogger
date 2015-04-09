@@ -3,12 +3,12 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stf.Utilities;
-
 namespace UnitTest
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities;
+
     /// <summary>
     /// The unit test stf asserts.
     /// </summary>
@@ -23,6 +23,7 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertTrue.html" };
             var myAsserts = new StfAssert(myLogger);
+            myAsserts.EnableNegativeTesting = true;
 
             Assert.IsTrue(myAsserts.AssertTrue("true", true));
             Assert.IsFalse(myAsserts.AssertTrue("false", false));
@@ -36,6 +37,8 @@ namespace UnitTest
         {
             var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertFalse.html" };
             var myAsserts = new StfAssert(myLogger);
+
+            myAsserts.EnableNegativeTesting = true;
 
             Assert.IsFalse(myAsserts.AssertFalse("true", true));
             Assert.IsTrue(myAsserts.AssertFalse("false", false));

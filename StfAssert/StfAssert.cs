@@ -3,12 +3,12 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using Stf.Utilities.Interfaces;
-
 namespace Stf.Utilities
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Stf.Utilities.Interfaces;
+
     /// <summary>
     /// The stf assert.
     /// </summary>
@@ -56,7 +56,7 @@ namespace Stf.Utilities
 
             set
             {
-                this.AssertLogger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value.ToString()));
+                this.AssertLogger.LogTrace(string.Format("EnableNegativeTesting set to [{0}]", value));
                 this.enableNegativeTesting = value;
             }
         }
@@ -161,6 +161,12 @@ namespace Stf.Utilities
         private bool AssertFail(string testStep, string message)
         {
             this.AssertLogger.LogFail(testStep, message);
+
+            if (!enableNegativeTesting)
+            {
+                throw new AssertFailedException("Nix");
+            }
+
             return true;
         }
     }

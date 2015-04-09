@@ -3,15 +3,15 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
-using System;
-using System.Collections.Generic;
-using Stf.Utilities.Interfaces;
-using Stf.Utilities.Properties;
-using Stf.Utilities.Utils;
-
 namespace Stf.Utilities
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Stf.Utilities.Interfaces;
+    using Stf.Utilities.Properties;
+    using Stf.Utilities.Utils;
+
     /// <summary>
     /// The test result html logger. the <see cref="ILogfileManagement"/> part
     /// </summary>
