@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Program.cs" company="Foobar">
+//   2015
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace WinFormsApp
 {
+    using System;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// The program.
+    /// </summary>
     static class Program
     {
         /// <summary>

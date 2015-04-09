@@ -3,7 +3,6 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace WinFormsApp
 {
     using System;
@@ -11,7 +10,6 @@ namespace WinFormsApp
     using System.Windows.Forms;
 
     using Stf.Utilities;
-    using Stf.Utilities.Interfaces;
 
     /// <summary>
     /// The form 1.
@@ -30,7 +28,7 @@ namespace WinFormsApp
         {
             this.InitializeComponent();
 
-            this.Mylogger = new TestResultHtmlLogger(LogfileName);
+            this.Mylogger = new StfLogger(LogfileName);
             this.MyAssert = new StfAssert(this.Mylogger);
             this.Mylogger.LogLevel = LogLevel.Trace;
  
@@ -46,7 +44,7 @@ namespace WinFormsApp
         /// <summary>
         /// Gets The mylogger.
         /// </summary>
-        public TestResultHtmlLogger Mylogger { get; private set; }
+        public StfLogger Mylogger { get; private set; }
 
         /// <summary>
         /// Gets The my assert.
