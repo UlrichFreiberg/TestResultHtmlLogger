@@ -73,10 +73,7 @@ namespace UnitTest
 
             myLogger.LogAutomationIdObject(LogLevel.Internal, myLogger, "Using myLogger as AID for test");
 
-            myLogger.LogInfo("Ovid TRACE: Nu kommer der en PASSING TestRunStatus");
-            myLogger.SetRunStatus(true);
-            myLogger.LogInfo("Ovid TRACE: Nu kommer der en FALING TestRunStatus");
-            myLogger.SetRunStatus(false);
+            myLogger.SetRunStatus();
         }
 
         /// <summary>
@@ -95,6 +92,8 @@ namespace UnitTest
             {
                 myLogger.LogInfo(string.Format("LogInfo Nr {0}", i));
             }
+
+            myLogger.CloseLogFile();
         }
 
         /// <summary>

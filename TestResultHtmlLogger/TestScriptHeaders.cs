@@ -24,39 +24,35 @@ namespace Stf.Utilities
         /// <summary>
         /// The set run status.
         /// </summary>
-        /// <param name="runStatusAllPassed">
-        /// The run status all passed.
-        /// </param>
         /// <returns>
-        /// The <see cref="int"/>.
+        /// The <see cref="bool"/>.
         /// </returns>
-        public int SetRunStatus(bool runStatusAllPassed)
+        public bool SetRunStatus()
         {
-            int retVal;
+            var statusMsg = string.Empty;
+            string retVal;
+            LogLevel logLevel;
 
-            LogHeader("Test status");
-            if (runStatusAllPassed)
+            if (NumberOfLoglevelMessages[LogLevel.Warning] > 0)
             {
-                retVal = LogPass("Test status", "Test Completed with errors");
+                statusMsg += " - Test showed warnings";
+                logLevel = LogLevel.Warning;
+            }
+
+            if (this.ErrorOrFail() > 0)
+            {
+                statusMsg += "Test showed errors";
+                logLevel = LogLevel.Error;
             }
             else
             {
-                retVal = LogFail("Test status", "Test Completed with errors");
+                statusMsg += "Test showed no errors";
+                logLevel = LogLevel.Pass;
             }
 
-            return retVal;
-        }
-
-        /// <summary>
-        /// The set run status.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="int"/>.
-        /// </returns>
-        public int SetRunStatus()
-        {
-            // Figure out if there is a failing test or not, and then call 
-            return SetRunStatus(true);
+            retVal = string.Format(@"<span id=""runstatus"">{0}</span>", statusMsg);
+            LogOneHtmlMessage(logLevel, retVal);
+            return true;
         }
     }
 }

@@ -234,6 +234,8 @@ namespace Stf.Utilities
         /// </returns>
         public bool CloseLogFile()
         {
+            SetRunStatus();
+
             EndHtmlLogFile();
             return this.LogFileHandle.Close();
         }

@@ -4,7 +4,7 @@
             <div id="logo" style="float: right">Ovid</div>
         </aside>
 		<h1 id="logtitle">LOGFILETITLE</h1>
-		<p id="generatedbypOvid">Leveret til dig af Ovid</p>
+		<p id="generatedbyOvid">Leveret til dig af Ovid</p>
 		<div id="buttons">
 			<button id="passBtn"          value="Hide" type="button" onclick="toggleLogElements('.pass',  'passBtn',  'Pass')" >Hide Pass</button>
 			<button id="failBtn"          value="Hide" type="button" onclick="toggleLogElements('.fail',  'failBtn',  'Fail')" >Hide Fail</button>

@@ -228,8 +228,8 @@ function hideButtonByDisplayCount(buttonSelector, displayCount) {
 
 function updateHeaderWithStatus() {
     var statusText = document.getElementById("runstatus").innerHTML;
-    var currentGenereatedBy = document.getElementById("generatedbyovid").innerHTML;
-    document.getElementById("generatedbyovid").innerHTML = statusText + " - " + currentGenereatedBy;
+    var currentGenereatedBy = document.getElementById("generatedbyOvid").innerHTML;
+    document.getElementById("generatedbyOvid").innerHTML = statusText + " - " + currentGenereatedBy;
 }
 
 function initButtonCount(className) {

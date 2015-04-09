@@ -15,8 +15,8 @@ namespace Stf.Utilities.Interfaces
         /// The set run status. When closing down the logfile, <c>this</c> gives an overall status for the tests performed so far.
         /// </summary>
         /// <returns>
-        /// The <see cref="int"/>.
+        /// The <see cref="bool"/>.
         /// </returns>
-        int SetRunStatus();
+        bool SetRunStatus();
     }
 }
