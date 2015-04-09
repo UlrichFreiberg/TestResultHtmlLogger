@@ -3,7 +3,8 @@
 //   2015
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Stf.Utilities.Interfaces
+
+namespace Stf.Utilities
 {
     /// <summary>
     /// The log level.
