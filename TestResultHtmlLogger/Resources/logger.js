@@ -1,4 +1,4 @@
-var lastAnchor = '';
+var lastAnchor = "";
 
 /* Hide buttons if no messages are present - good idea, not implemented fully yet */
 var PassCount = 1;
@@ -11,36 +11,37 @@ var TraceCount = 1;
 var InternalCount = 1;
 
 function getURLParameter(name) {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [, ""])[1].replace(/\+/g, '%20')) || null;
+    return decodeURIComponent((new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(location.search) || [, ""])[1].replace(/\+/g, "%20")) || null;
 }
 
 function toggleKeyValues() {
-    if (document.getElementById("toggleKeyValues").value == "Hide") {
-        css('ul#logfileinfo', 'display', 'none');
+    if (document.getElementById("toggleKeyValues").value === "Hide") {
+        css("ul#logfileinfo", "display", "none");
         toggleButton("toggleKeyValues", "Show", "Show KeyValues");
-    } else if (document.getElementById("toggleKeyValues").value == "Show") {
+    } else if (document.getElementById("toggleKeyValues").value === "Show") {
         var headerHeight = getHeaderHeight();
         document.getElementById("logfileinfo").style.top = headerHeight + "px";
-        css('ul#logfileinfo', 'display', 'Block');
+        css("ul#logfileinfo", "display", "Block");
         setKeyValuesCenter();
         toggleButton("toggleKeyValues", "Hide", "Hide KeyValues");
     }
 }
 
-(function (d, g) {
-    d[g] || (d[g] = function (g) {
-        return this.querySelectorAll("." + g);
-    }, Element.prototype[g] = d[g]);
-})(document, "getElementsByClassName");
-
+// as per http://stackoverflow.com/questions/7410949/javascript-document-getelementsbyclassname-compatibility-with-ie
+if (!document.getElementsByClassName) {
+    document.getElementsByClassName = function (className) {
+        return this.querySelectorAll("." + className);
+    };
+    Element.prototype.getElementsByClassName = document.getElementsByClassName;
+}
 
 function css(selector, property, value) {
     for (var i = 0; i < document.styleSheets.length; i++) { //Loop through all styles
         try {
-            document.styleSheets[i].insertRule(selector + ' {' + property + ':' + value + '}', document.styleSheets[i].cssRules.length);
+            document.styleSheets[i].insertRule(selector + " {" + property + ":" + value + "}", document.styleSheets[i].cssRules.length);
         } catch (err) {
             try {
-                document.styleSheets[i].addRule(selector, property + ':' + value);
+                document.styleSheets[i].addRule(selector, property + ":" + value);
             } catch (err) { }
         } //IE 
     }
@@ -52,11 +53,11 @@ function toggleButton(buttonId, value, text) {
 }
 
 function toggleLogElements(divElement, buttonId, logElement) {
-    if (document.getElementById(buttonId).value == "Hide") {
-        css(divElement, 'display', 'none');
+    if (document.getElementById(buttonId).value === "Hide") {
+        css(divElement, "display", "none");
         toggleButton(buttonId, "Show", "Show " + logElement);
-    } else if (document.getElementById(buttonId).value == "Show") {
-        css(divElement, 'display', 'Block');
+    } else if (document.getElementById(buttonId).value === "Show") {
+        css(divElement, "display", "Block");
         toggleButton(buttonId, "Hide", "Hide " + logElement);
     }
 
@@ -69,12 +70,12 @@ function loadKeyValueList() {
 
     for (var i = 0; i < keyValueList.length; i++) {
         var key = keyValueList[i].children[0].innerHTML;
-        var dupKeyFound = false
+        var dupKeyFound = false;
 
         // search to see if a similar key has been set after this one
         for (var j = i+1; j < keyValueList.length; j++) {
-            thisKey = keyValueList[j].children[0].innerHTML
-            if (key == thisKey) {
+            var thisKey = keyValueList[j].children[0].innerHTML;
+            if (key === thisKey) {
                 dupKeyFound = true;
                 break;
             }
@@ -91,10 +92,9 @@ function loadKeyValueList() {
         var keyItemText = document.createTextNode(key + ": ");
         var valueItemText = document.createTextNode(value);
 
-        if ((value.indexOf("http") == 0) || (value.indexOf("td://") == 0)) {
-
-            var link = document.createElement('a');
-            link.setAttribute('href', value);
+        if ((value.indexOf("http") === 0) || (value.indexOf("td://") === 0)) {
+            var link = document.createElement("a");
+            link.setAttribute("href", value);
             link.textContent = value;
             valueItemText = link;
         }
@@ -113,18 +113,18 @@ function loadKeyValueList() {
 function displayAllElements(blockOrNone) {
     //css('.pass', 'display', blockOrNone);  
     //css('.fail', 'display', blockOrNone);   
-    css('.error', 'display', blockOrNone);
-    css('.warning', 'display', blockOrNone);
-    css('.info', 'display', blockOrNone);
-    css('.debug', 'display', blockOrNone);
-    css('.trace', 'display', blockOrNone);
-    css('.internal', 'display', blockOrNone);
+    css(".error", "display", blockOrNone);
+    css(".warning", "display", blockOrNone);
+    css(".info", "display", blockOrNone);
+    css(".debug", "display", blockOrNone);
+    css(".trace", "display", blockOrNone);
+    css(".internal", "display", blockOrNone);
 }
 
 function toggleAll() {
     var buttonId = "toggleAllBtn";
-    if (document.getElementById(buttonId).value == "Hide") {
-        displayAllElements('none');
+    if (document.getElementById(buttonId).value === "Hide") {
+        displayAllElements("none");
         toggleButton(buttonId, "Show", "Show All");
         //toggleButton("passBtn", "Show", "Show Pass") 
         //toggleButton("failBtn", "Show", "Show Fail") 
@@ -134,8 +134,8 @@ function toggleAll() {
         toggleButton("debugBtn", "Show", "Show Debug");
         toggleButton("traceBtn", "Show", "Show Trace");
         toggleButton("internalBtn", "Show", "Show Internal");
-    } else if (document.getElementById(buttonId).value == "Show") {
-        displayAllElements('block');
+    } else if (document.getElementById(buttonId).value === "Show") {
+        displayAllElements("block");
         toggleButton(buttonId, "Hide", "Hide All");
         toggleButton("passBtn", "Hide", "Hide Pass");
         toggleButton("failBtn", "Hide", "Hide Fail");
@@ -150,17 +150,17 @@ function toggleAll() {
 
 function toggleIndent() {
     var buttonId = "toggleIndent";
-    if (document.getElementById(buttonId).value == "Hide") {
+    if (document.getElementById(buttonId).value === "Hide") {
         toggleButton(buttonId, "Show", "Show Depth");
-        css('div.pad', 'display', 'none');
-    } else if (document.getElementById(buttonId).value == "Show") {
+        css("div.pad", "display", "none");
+    } else if (document.getElementById(buttonId).value === "Show") {
         toggleButton(buttonId, "Hide", "Hide Depth");
-        css('div.pad', 'display', 'Block');
+        css("div.pad", "display", "Block");
     }
 }
 
 function getHeaderHeight() {
-    var headerHeight = document.getElementById('header').clientHeight;
+    var headerHeight = document.getElementById("header").clientHeight;
     return headerHeight;
 }
 
@@ -172,16 +172,16 @@ function pushDownLogElements() {
 }
 
 function setKeyValuesCenter() {
-    var widthOfHeader = document.getElementById('header').clientWidth;
-    var widthOfKeyValues = document.getElementById('logfileinfo').clientWidth;
+    var widthOfHeader = document.getElementById("header").clientWidth;
+    var widthOfKeyValues = document.getElementById("logfileinfo").clientWidth;
     var marginLeftKeyValues = (widthOfHeader - widthOfKeyValues) / 2;
 
     document.getElementById("logfileinfo").style.marginLeft = marginLeftKeyValues + "px";
 }
 
 function showImage(image) {
-    var url = image.getAttribute('src');
-    window.open(url, 'Image', 'resizable=1');
+    var url = image.getAttribute("src");
+    window.open(url, "Image", "resizable=1");
 }
 
 function initLogFile() {
@@ -209,11 +209,11 @@ function sa(anchorName) {
 function getScrollingPosition() {
     var position = [0, 0];
 
-    if (typeof window.pageYOffset != 'undefined') {
+    if (typeof window.pageYOffset != "undefined") {
         position = [window.pageXOffset, window.pageYOffset];
-    } else if (typeof document.documentElement.scrollTop != 'undefined' && document.documentElement.scrollTop > 0) {
+    } else if (typeof document.documentElement.scrollTop != "undefined" && document.documentElement.scrollTop > 0) {
         position = [document.documentElement.scrollLeft, document.documentElement.scrollTop];
-    } else if (typeof document.body.scrollTop != 'undefined') {
+    } else if (typeof document.body.scrollTop != "undefined") {
         position = [document.body.scrollLeft, document.body.scrollTop];
     }
 
@@ -221,23 +221,36 @@ function getScrollingPosition() {
 }
 
 function hideButtonByDisplayCount(buttonSelector, displayCount) {
-    if (displayCount == 0) {
+    if (displayCount === 0) {
         document.getElementById(buttonSelector).disabled = true;
     }
 }
 
 function updateHeaderWithStatus() {
-    var statusText = document.getElementById('runstatus').innerHTML;
-    var currentGenereatedBy = document.getElementById('generatedbyovid').innerHTML;
-    document.getElementById('generatedbyovid').innerHTML = statusText + " - " + currentGenereatedBy;
+    var statusText = document.getElementById("runstatus").innerHTML;
+    var currentGenereatedBy = document.getElementById("generatedbyovid").innerHTML;
+    document.getElementById("generatedbyovid").innerHTML = statusText + " - " + currentGenereatedBy;
+}
+
+function initButtonCount(className) {
+    return document.getElementsByClassName("line " + className).length;
 }
 
 function initButtons() {
-    if (getURLParameter("hidebuttons") == "1") {
-        css('div#buttons', 'display', 'none');
+    if (getURLParameter("hidebuttons") === "1") {
+        css("div#buttons", "display", "none");
     } else {
-        css('siv#buttons', 'display', 'block');
+        css("siv#buttons", "display", "block");
     }
+
+    PassCount = initButtonCount("pass");
+    FailCount = initButtonCount("fail")
+    ErrorCount = initButtonCount("error")
+    WarnCount = initButtonCount("warn")
+    InfoCount = initButtonCount("info")
+    DebugCount = initButtonCount("debug")
+    TraceCount = initButtonCount("trace")
+    InternalCount = initButtonCount("internal")
 
     hideButtonByDisplayCount("passBtn", PassCount);
     hideButtonByDisplayCount("failBtn", FailCount);
