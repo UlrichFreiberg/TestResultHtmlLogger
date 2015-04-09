@@ -23,7 +23,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertIsObject()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertIsObject.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertIsObject.html" };
             var myAsserts = new StfAssert(myLogger);
 
             myAsserts.EnableNegativeTesting = true;
@@ -41,7 +41,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertIsInstanceOf()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertIsInstanceOf.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertIsInstanceOf.html" };
             var myAsserts = new StfAssert(myLogger);
 
             myAsserts.EnableNegativeTesting = true;

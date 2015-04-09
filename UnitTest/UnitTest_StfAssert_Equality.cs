@@ -23,7 +23,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertEquals()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertEquals.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertEquals.html" };
             var myAsserts = new StfAssert(myLogger);
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);
@@ -55,7 +55,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertGreaterThan()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertGreaterThan.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertGreaterThan.html" };
             var myAsserts = new StfAssert(myLogger);
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);
@@ -91,7 +91,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertLessThan()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertLessThan.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertLessThan.html" };
             var myAsserts = new StfAssert(myLogger);
             var obj1 = new DateTime(42);
             var obj2 = new DateTime(4242);

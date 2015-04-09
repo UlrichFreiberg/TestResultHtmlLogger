@@ -25,7 +25,7 @@ namespace Stf.Utilities
         /// <param name="logger">
         /// The logger.
         /// </param>
-        public StfAssert(TestResultHtmlLogger logger) : this()
+        public StfAssert(StfLogger logger) : this()
         {
             AssertLogger = logger;
         }
@@ -42,7 +42,7 @@ namespace Stf.Utilities
         /// <summary>
         /// Gets or sets the assert logger.
         /// </summary>
-        public TestResultHtmlLogger AssertLogger { get; set; }
+        public StfLogger AssertLogger { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether enable negative testing.

@@ -12,7 +12,7 @@ namespace Stf.Utilities
     /// <summary>
     /// The test result html logger. The <see cref="ILoggingFunctions"/> part.
     /// </summary>
-    public partial class TestResultHtmlLogger : ILoggingFunctions
+    public partial class StfLogger : ILoggingFunctions
     {
         /// <summary>
         /// The _message id.

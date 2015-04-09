@@ -15,7 +15,7 @@ namespace Stf.Utilities
     /// <summary>
     /// The test result html logger. the <see cref="ILogfileManagement"/> part
     /// </summary>
-    public partial class TestResultHtmlLogger : ILogfileManagement
+    public partial class StfLogger : ILogfileManagement
     {
         /// <summary>
         /// The _m file name.
@@ -28,21 +28,21 @@ namespace Stf.Utilities
         private LogLevel logLevel;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestResultHtmlLogger"/> class.
+        /// Initializes a new instance of the <see cref="StfLogger"/> class.
         /// </summary>
         /// <param name="logfileName">
         /// The archive log file.
         /// </param>
-        public TestResultHtmlLogger(string logfileName)
+        public StfLogger(string logfileName)
             : this()
         {
             this.FileName = logfileName;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestResultHtmlLogger"/> class.
+        /// Initializes a new instance of the <see cref="StfLogger"/> class.
         /// </summary>
-        public TestResultHtmlLogger()
+        public StfLogger()
         {
             this.LogInfoDetails = new Dictionary<string, string>();
             this.AddLoglevelToRunReport = new Dictionary<LogLevel, bool>();

@@ -10,7 +10,7 @@ namespace Stf.Utilities
     /// <summary>
     /// The test result html logger.
     /// </summary>
-    public partial class TestResultHtmlLogger : ITestScriptHeaders
+    public partial class StfLogger : ITestScriptHeaders
     {
         /// <summary>
         /// Gets or sets the name of Current Test

@@ -30,7 +30,7 @@ namespace Stf.Utilities.Interfaces
         /// <param name="message">
         /// The message.
         /// </param>
-        /// C:\Users\Ulrich\Documents\GitHub\TestResultHtmlLogger\TestResultHtmlLogger\Interfaces\ILoggingFunctions.cs
+        /// C:\Users\Ulrich\Documents\GitHub\StfLogger\StfLogger\Interfaces\ILoggingFunctions.cs
         /// <returns>
         /// The <see cref="int"/>.
         /// </returns>

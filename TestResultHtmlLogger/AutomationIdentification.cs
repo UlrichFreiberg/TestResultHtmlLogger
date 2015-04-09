@@ -10,7 +10,7 @@ namespace Stf.Utilities
     /// <summary>
     /// The test result logger. The <see cref="IAutomationIdentification"/> part.
     /// </summary>
-    public partial class TestResultHtmlLogger : IAutomationIdentification
+    public partial class StfLogger : IAutomationIdentification
     {
         /// <summary>
         /// The log automation id object func.

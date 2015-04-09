@@ -12,7 +12,7 @@ namespace Stf.Utilities
     /// <summary>
     /// The test result html logger. The <see cref="ICallStackManagement"/> part
     /// </summary>
-    public partial class TestResultHtmlLogger : ICallStackManagement
+    public partial class StfLogger : ICallStackManagement
     {
         /// <summary>
         /// The _call stack.

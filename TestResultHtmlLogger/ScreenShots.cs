@@ -14,7 +14,7 @@ namespace Stf.Utilities
     /// <summary>
     /// The test result html logger.
     /// </summary>
-    public partial class TestResultHtmlLogger : IScreenshots
+    public partial class StfLogger : IScreenshots
     {
         /// <summary>
         /// The utilities.

@@ -1,8 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnitTest1.cs" company="Foobar">
+// <copyright file="UnitTest_TestResultHtmlLogger.cs" company="Foobar">
 //   2015
 // </copyright>
+// <summary>
+//   
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace UnitTest
 {
     using System;
@@ -23,7 +27,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodInit()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodInit.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodInit.html" };
             myLogger.CloseLogFile();
         }
 
@@ -33,7 +37,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAllLogType()
         {
-            var myLogger = new TestResultHtmlLogger
+            var myLogger = new Stf.Utilities.StfLogger
             {
                 FileName = @"c:\temp\unittestlogger_TestMethodAllLogType.html", 
                 LogLevel = LogLevel.Internal
@@ -81,7 +85,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodLotsOfEntries()
         {
-            var myLogger = new TestResultHtmlLogger
+            var myLogger = new Stf.Utilities.StfLogger
             {
                 FileName = @"c:\temp\unittestlogger_TestMethodLotsOfEntries.html", 
                 LogLevel = LogLevel.Internal
@@ -99,7 +103,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodCallStack()
         {
-            var myLogger = new TestResultHtmlLogger
+            var myLogger = new Stf.Utilities.StfLogger
             {
                 FileName = @"c:\temp\unittestlogger_TestMethodCallStack.html", 
                 LogLevel = LogLevel.Internal
@@ -147,7 +151,7 @@ namespace UnitTest
         [TestMethod]
         public void TestLogScreenshot()
         {
-            var myLogger = new TestResultHtmlLogger
+            var myLogger = new Stf.Utilities.StfLogger
             {
                 FileName = @"c:\temp\unittestlogger_TestLogScreenshot.html", 
                 LogLevel = LogLevel.Internal
@@ -164,7 +168,7 @@ namespace UnitTest
         [TestMethod, ExpectedException(typeof(NotImplementedException))]
         public void TestLogAllWindows()
         {
-            var myLogger = new TestResultHtmlLogger
+            var myLogger = new Stf.Utilities.StfLogger
             {
                 FileName = @"c:\temp\unittestlogger_TestLogAllWindows.html", 
                 LogLevel = LogLevel.Internal
@@ -181,7 +185,7 @@ namespace UnitTest
         [TestMethod]
         public void TestConstructor()
         {
-            var myLoggerByConstructor = new TestResultHtmlLogger(@"c:\temp\unittestlogger_TestLogFileWriterByConstructor.html");
+            var myLoggerByConstructor = new Stf.Utilities.StfLogger(@"c:\temp\unittestlogger_TestLogFileWriterByConstructor.html");
             myLoggerByConstructor.CloseLogFile();
         }
 
@@ -191,7 +195,7 @@ namespace UnitTest
         [TestMethod]
         public void TestLogFileWriter()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestLogFileWriter.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestLogFileWriter.html" };
 
             myLogger.FileName = @"c:\temp\unittestlogger.html";
             myLogger.FileName = @"c:\temp\unittestlogger2.html";
@@ -206,7 +210,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAsserts()
         {
-            var myLogger = new TestResultHtmlLogger
+            var myLogger = new Stf.Utilities.StfLogger
                                {
                                    FileName = @"c:\temp\unittestlogger_TestMethodAsserts.html", 
                                    LogLevel = LogLevel.Internal
@@ -234,7 +238,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodKeyValues()
         {
-            var myLogger = new TestResultHtmlLogger
+            var myLogger = new Stf.Utilities.StfLogger
             {
                 FileName = @"c:\temp\unittestlogger_TestMethodKeyValues.html", 
                 LogLevel = LogLevel.Internal

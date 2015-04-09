@@ -21,7 +21,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertStrings()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertStrings.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_TestMethodAssertStrings.html" };
             var myAsserts = new StfAssert(myLogger);
 
             Assert.IsTrue(myAsserts.StringContains("TestStepName 1", "Hejsa", "Hej"));

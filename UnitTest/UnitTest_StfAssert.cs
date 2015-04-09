@@ -21,7 +21,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertTrue()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertTrue.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_AssertTrue.html" };
             var myAsserts = new StfAssert(myLogger);
             myAsserts.EnableNegativeTesting = true;
 
@@ -35,7 +35,7 @@ namespace UnitTest
         [TestMethod]
         public void TestMethodAssertFalse()
         {
-            var myLogger = new TestResultHtmlLogger { FileName = @"c:\temp\unittestlogger_AssertFalse.html" };
+            var myLogger = new Stf.Utilities.StfLogger { FileName = @"c:\temp\unittestlogger_AssertFalse.html" };
             var myAsserts = new StfAssert(myLogger);
 
             myAsserts.EnableNegativeTesting = true;

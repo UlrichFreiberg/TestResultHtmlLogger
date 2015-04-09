@@ -27,7 +27,7 @@ namespace Stf.Utilities.Utils
         /// <param name="logger">
         /// The logger.
         /// </param>
-        public ScreenshotUtilities(TestResultHtmlLogger logger)
+        public ScreenshotUtilities(StfLogger logger)
         {
             Logger = logger;
         }
@@ -35,7 +35,7 @@ namespace Stf.Utilities.Utils
         /// <summary>
         /// Gets or sets the logger.
         /// </summary>
-        public TestResultHtmlLogger Logger { get; set; }
+        public StfLogger Logger { get; set; }
 
         /// <summary>
         /// The get window rect.

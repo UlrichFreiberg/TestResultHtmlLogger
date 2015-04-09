@@ -12,7 +12,7 @@ namespace Stf.Utilities
     /// <summary>
     /// The test result html logger. The <c>IPerformanceManagement</c> part.
     /// </summary>
-    public partial class TestResultHtmlLogger : IPerformanceManagement
+    public partial class StfLogger : IPerformanceManagement
     {
         /// <summary>
         /// Used for indicating performance issues - if not logging, then something takes a long time:-)
